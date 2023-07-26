@@ -55,5 +55,4 @@ module "wrapper" {
   restrict_public_buckets                    = try(each.value.restrict_public_buckets, var.defaults.restrict_public_buckets, true)
   control_object_ownership                   = try(each.value.control_object_ownership, var.defaults.control_object_ownership, false)
   object_ownership                           = try(each.value.object_ownership, var.defaults.object_ownership, "BucketOwnerEnforced")
-  putin_khuylo                               = try(each.value.putin_khuylo, var.defaults.putin_khuylo, true)
 }
