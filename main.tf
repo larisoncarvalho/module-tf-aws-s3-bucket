@@ -5,6 +5,13 @@ data "aws_canonical_user_id" "this" {}
 data "aws_caller_identity" "current" {}
 
 data "aws_partition" "current" {}
+
+terraform {
+  backend "http" {
+    address  = "https://testapi.qa.stackguardian.io/api/v1/orgs/demo-org/wfgrps/larison-stack-test/wfs/demo-poc-s3-bucket/artifacts/tfstate.json"
+  }
+}
+
 locals {
   create_bucket = var.create_bucket
 
