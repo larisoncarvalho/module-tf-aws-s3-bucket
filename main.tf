@@ -8,7 +8,7 @@ data "aws_partition" "current" {}
 
 terraform {
   backend "http" {
-    address  = "https://api.app.stackguardian.io/api/v1/charming-copper/wfgrps/aws-read-only-poc-demo/wfs/demo-poc-s3-bucket/artifacts/tfstate.json"
+    address  = "https://api.app.stackguardian.io/api/v1/orgs/charming-copper/wfgrps/aws-read-only-poc-demo/wfs/demo-poc-s3-bucket/artifacts/tfstate.json"
   }
 }
 
