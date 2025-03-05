@@ -8,8 +8,7 @@ data "aws_partition" "current" {}
 
 terraform {
   backend "http" {
-    # TODO: check if a dir works
-    address  = "https://testapi.qa.stackguardian.io/api/v1/orgs/demo-org/wfgrps/larison-stack-test/wfs/demo-poc-s3-bucket-demo/artifacts/poc-test.json"
+    address  = "https://testapi.qa.stackguardian.io/api/v1/orgs/demo-org/wfgrps/larison-stack-test/wfs/demo-poc-s3-bucket-demo-2/artifacts/poc-test.json"
   }
 }
 
