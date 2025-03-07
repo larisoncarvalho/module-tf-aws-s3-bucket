@@ -6,11 +6,11 @@ data "aws_caller_identity" "current" {}
 
 data "aws_partition" "current" {}
 
-terraform {
-  backend "http" {
-    address  = "https://api.app.stackguardian.io/api/v1/orgs/charming-copper/wfgrps/aws-read-only-poc-demo/wfs/demo-poc-s3-bucket/artifacts/tfstate.json"
-  }
-}
+# terraform {
+#   backend "http" {
+#     address  = "https://api.app.stackguardian.io/api/v1/orgs/charming-copper/wfgrps/aws-read-only-poc-demo-2/wfs/demo-poc-s3-bucket/artifacts/tfstate.json"
+#   }
+# }
 
 locals {
   create_bucket = var.create_bucket
