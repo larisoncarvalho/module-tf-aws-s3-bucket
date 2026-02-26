@@ -1,29 +1,24 @@
-variable "acm_certificate_arn" {
-  description = "ACM certificate ARN"
-  type        = string
+variable "nonprod_euc1_enabled" {
+  description = "Enable non-prod-euc1 distribution"
+  type        = bool
 }
 
-variable "logging_bucket" {
-  description = "S3 bucket for CloudFront logs"
-  type        = string
-}
-
-variable "logging_prefix" {
-  description = "Prefix for CloudFront log files"
-  type        = string
-}
-
-variable "non_prod_euc1_aliases" {
-  description = "Domain aliases for non-prod-euc1 distribution"
-  type        = list(string)
-}
-
-variable "non_prod_euc1_comment" {
+variable "nonprod_euc1_comment" {
   description = "Comment for non-prod-euc1 distribution"
   type        = string
 }
 
-variable "non_prod_euc1_origins" {
+variable "nonprod_euc1_aliases" {
+  description = "Aliases for non-prod-euc1 distribution"
+  type        = list(string)
+}
+
+variable "nonprod_euc1_default_root_object" {
+  description = "Default root object for non-prod-euc1"
+  type        = string
+}
+
+variable "nonprod_euc1_origins" {
   description = "Origins for non-prod-euc1 distribution"
   type = list(object({
     domain_name = string
@@ -34,28 +29,48 @@ variable "non_prod_euc1_origins" {
   }))
 }
 
-variable "non_prod_euc1_cache_policy_id" {
+variable "nonprod_euc1_cache_policy_id" {
   description = "Cache policy ID for non-prod-euc1"
   type        = string
 }
 
-variable "non_prod_euc1_response_headers_policy_id" {
+variable "nonprod_euc1_response_headers_policy_id" {
   description = "Response headers policy ID for non-prod-euc1"
   type        = string
 }
 
-variable "non_prod_euc1_target_origin_id" {
-  description = "Target origin ID for non-prod-euc1 default cache behavior"
+variable "nonprod_euc1_custom_error_responses" {
+  description = "Custom error responses for non-prod-euc1"
+  type = list(object({
+    error_code            = number
+    error_caching_min_ttl = number
+    response_code         = number
+    response_page_path    = string
+  }))
+}
+
+variable "nonprod_euc1_logging_prefix" {
+  description = "Logging prefix for non-prod-euc1"
   type        = string
 }
 
-variable "nonprod_euw2_aliases" {
-  description = "Domain aliases for nonprod-euw2 distribution"
-  type        = list(string)
+variable "nonprod_euw2_enabled" {
+  description = "Enable nonprod-euw2 distribution"
+  type        = bool
 }
 
 variable "nonprod_euw2_comment" {
   description = "Comment for nonprod-euw2 distribution"
+  type        = string
+}
+
+variable "nonprod_euw2_aliases" {
+  description = "Aliases for nonprod-euw2 distribution"
+  type        = list(string)
+}
+
+variable "nonprod_euw2_default_root_object" {
+  description = "Default root object for nonprod-euw2"
   type        = string
 }
 
@@ -80,7 +95,27 @@ variable "nonprod_euw2_response_headers_policy_id" {
   type        = string
 }
 
-variable "nonprod_euw2_target_origin_id" {
-  description = "Target origin ID for nonprod-euw2 default cache behavior"
+variable "nonprod_euw2_custom_error_responses" {
+  description = "Custom error responses for nonprod-euw2"
+  type = list(object({
+    error_code            = number
+    error_caching_min_ttl = number
+    response_code         = number
+    response_page_path    = string
+  }))
+}
+
+variable "nonprod_euw2_logging_prefix" {
+  description = "Logging prefix for nonprod-euw2"
+  type        = string
+}
+
+variable "logging_bucket" {
+  description = "S3 bucket for CloudFront access logs"
+  type        = string
+}
+
+variable "acm_certificate_arn" {
+  description = "ACM certificate ARN for SSL/TLS"
   type        = string
 }
