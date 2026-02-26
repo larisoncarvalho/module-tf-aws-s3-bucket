@@ -1,19 +1,29 @@
-output "non_prod_euc1_distribution_id" {
-  description = "Non-prod EUC1 distribution ID"
-  value       = module.non_prod_euc1_distribution.distribution_id
+output "nonprod_euc1_distribution_id" {
+  description = "CloudFront distribution ID for non-prod-euc1"
+  value       = module.nonprod_euc1_distribution.distribution_id
 }
 
-output "non_prod_euc1_distribution_domain" {
-  description = "Non-prod EUC1 distribution domain name"
-  value       = module.non_prod_euc1_distribution.distribution_domain_name
+output "nonprod_euc1_distribution_domain" {
+  description = "CloudFront domain name for non-prod-euc1"
+  value       = module.nonprod_euc1_distribution.domain_name
+}
+
+output "nonprod_euc1_distribution_arn" {
+  description = "CloudFront distribution ARN for non-prod-euc1"
+  value       = module.nonprod_euc1_distribution.distribution_arn
 }
 
 output "nonprod_euw2_distribution_id" {
-  description = "Nonprod EUW2 distribution ID"
+  description = "CloudFront distribution ID for nonprod-euw2"
   value       = module.nonprod_euw2_distribution.distribution_id
 }
 
 output "nonprod_euw2_distribution_domain" {
-  description = "Nonprod EUW2 distribution domain name"
-  value       = module.nonprod_euw2_distribution.distribution_domain_name
+  description = "CloudFront domain name for nonprod-euw2"
+  value       = module.nonprod_euw2_distribution.domain_name
+}
+
+output "nonprod_euw2_distribution_arn" {
+  description = "CloudFront distribution ARN for nonprod-euw2"
+  value       = module.nonprod_euw2_distribution.distribution_arn
 }
