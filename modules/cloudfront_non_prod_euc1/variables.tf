@@ -29,6 +29,11 @@ variable "response_headers_policy_id" {
   type        = string
 }
 
+variable "target_origin_id" {
+  description = "Target origin ID for default cache behavior"
+  type        = string
+}
+
 variable "acm_certificate_arn" {
   description = "ACM certificate ARN"
   type        = string
