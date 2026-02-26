@@ -1,4 +1,5 @@
 module "non_prod_euc1_distribution" {
+  #comment new code
   source = "./modules/cloudfront_non_prod_euc1"
 
   acm_certificate_arn        = var.acm_certificate_arn
@@ -9,7 +10,6 @@ module "non_prod_euc1_distribution" {
   logging_prefix             = var.logging_prefix
   origins                    = var.non_prod_euc1_origins
   response_headers_policy_id = var.non_prod_euc1_response_headers_policy_id
-  target_origin_id           = var.non_prod_euc1_target_origin_id
 }
 
 module "nonprod_euw2_distribution" {
@@ -23,5 +23,4 @@ module "nonprod_euw2_distribution" {
   logging_prefix             = var.logging_prefix
   origins                    = var.nonprod_euw2_origins
   response_headers_policy_id = var.nonprod_euw2_response_headers_policy_id
-  target_origin_id           = var.nonprod_euw2_target_origin_id
 }
