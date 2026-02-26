@@ -10,17 +10,11 @@ resource "aws_cloudfront_distribution" "nonprod_euw2" {
   dynamic "origin" {
     for_each = var.origins
     content {
-      connection_attempts = 3
-      connection_timeout  = 10
-      domain_name         = origin.value.domain_name
-      origin_id           = origin.value.origin_id
+      domain_name = origin.value.domain_name
+      origin_id   = origin.value.origin_id
 
       s3_origin_config {
         origin_access_identity = origin.value.s3_origin_config.origin_access_identity
-      }
-
-      origin_shield {
-        enabled = false
       }
     }
   }
@@ -59,20 +53,15 @@ resource "aws_cloudfront_distribution" "nonprod_euw2" {
   }
 
   viewer_certificate {
-    acm_certificate_arn      = var.acm_certificate_arn
+    acm_certificate_arn            = var.acm_certificate_arn
     cloudfront_default_certificate = false
-    minimum_protocol_version = "TLSv1.2_2021"
-    ssl_support_method       = "sni-only"
+    minimum_protocol_version       = "TLSv1.2_2021"
+    ssl_support_method             = "sni-only"
   }
 
   logging_config {
     bucket          = var.logging_bucket
     include_cookies = true
     prefix          = var.logging_prefix
-  }
-
-  tags = {
-    Environment = "qa"
-    Name        = var.comment
   }
 }
