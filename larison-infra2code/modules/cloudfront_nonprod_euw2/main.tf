@@ -18,10 +18,6 @@ resource "aws_cloudfront_distribution" "nonprod_euw2" {
       s3_origin_config {
         origin_access_identity = origin.value.s3_origin_config.origin_access_identity
       }
-
-      origin_shield {
-        enabled = false
-      }
     }
   }
 
