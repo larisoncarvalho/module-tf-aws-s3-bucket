@@ -10,8 +10,10 @@ resource "aws_cloudfront_distribution" "non_prod_euc1" {
   dynamic "origin" {
     for_each = var.origins
     content {
-      domain_name = origin.value.domain_name
-      origin_id   = origin.value.origin_id
+      domain_name         = origin.value.domain_name
+      origin_id           = origin.value.origin_id
+      connection_attempts = 3
+      connection_timeout  = 10
 
       s3_origin_config {
         origin_access_identity = origin.value.s3_origin_config.origin_access_identity
