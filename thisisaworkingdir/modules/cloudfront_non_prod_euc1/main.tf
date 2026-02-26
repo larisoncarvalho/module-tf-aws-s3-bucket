@@ -26,7 +26,7 @@ resource "aws_cloudfront_distribution" "non_prod_euc1" {
     compress                   = true
     response_headers_policy_id = var.response_headers_policy_id
     smooth_streaming           = false
-    target_origin_id           = var.origins[0].origin_id
+    target_origin_id           = var.target_origin_id
     trusted_key_groups         = []
     trusted_signers            = []
     viewer_protocol_policy     = "redirect-to-https"
