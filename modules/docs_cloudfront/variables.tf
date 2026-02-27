@@ -1,9 +1,9 @@
-variable "distribution_aliases" {
+variable "aliases" {
   description = "Domain aliases for the CloudFront distribution"
   type        = list(string)
 }
 
-variable "distribution_comment" {
+variable "comment" {
   description = "Comment for the distribution"
   type        = string
 }
@@ -26,6 +26,7 @@ variable "origin_access_identity" {
 variable "default_root_object" {
   description = "Default root object for the distribution"
   type        = string
+  default     = "/index.html"
 }
 
 variable "acm_certificate_arn" {
@@ -33,7 +34,7 @@ variable "acm_certificate_arn" {
   type        = string
 }
 
-variable "cloudfront_function_arn" {
+variable "function_arn" {
   description = "ARN of CloudFront function for viewer requests"
   type        = string
 }
@@ -46,14 +47,16 @@ variable "cache_policy_id" {
 variable "price_class" {
   description = "Price class for the distribution"
   type        = string
+  default     = "PriceClass_All"
 }
 
 variable "custom_error_responses" {
   description = "Custom error response configurations"
   type = list(object({
-    error_code            = number
-    response_code         = number
-    response_page_path    = string
-    error_caching_min_ttl = number
+    error_code             = number
+    response_code          = number
+    response_page_path     = string
+    error_caching_min_ttl  = number
   }))
+  default = []
 }
