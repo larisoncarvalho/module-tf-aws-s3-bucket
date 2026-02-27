@@ -17,4 +17,5 @@ module "docs_distribution" {
   minimum_protocol_version     = var.minimum_protocol_version
   custom_error_responses       = var.custom_error_responses
   tags                         = var.distribution_tags
+  
 }
