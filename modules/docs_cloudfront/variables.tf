@@ -1,9 +1,9 @@
-variable "cloudfront_aliases" {
+variable "aliases" {
   description = "Domain aliases for the CloudFront distribution"
   type        = list(string)
 }
 
-variable "distribution_comment" {
+variable "comment" {
   description = "Comment to describe the distribution"
   type        = string
 }
