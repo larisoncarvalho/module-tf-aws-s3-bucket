@@ -1,9 +1,8 @@
 resource "aws_launch_template" "runner" {
+  name          = var.name
   image_id      = var.ami_id
   instance_type = var.instance_type
   key_name      = var.key_name
-  name_prefix   = "SG_RUNNER_new-private-runner-"
-  user_data     = var.user_data
 
   iam_instance_profile {
     name = var.iam_instance_profile_name

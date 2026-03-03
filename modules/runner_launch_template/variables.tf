@@ -1,3 +1,8 @@
+variable "name" {
+  description = "Launch template name"
+  type        = string
+}
+
 variable "ami_id" {
   description = "AMI ID for instances"
   type        = string
@@ -21,11 +26,6 @@ variable "iam_instance_profile_name" {
 variable "security_group_ids" {
   description = "Security group IDs"
   type        = list(string)
-}
-
-variable "user_data" {
-  description = "User data script (base64 encoded)"
-  type        = string
 }
 
 variable "instance_name_tag" {

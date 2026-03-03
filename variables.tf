@@ -51,6 +51,11 @@ variable "subnet_tags" {
   default     = {}
 }
 
+variable "launch_template_name" {
+  description = "Launch template name"
+  type        = string
+}
+
 variable "ami_id" {
   description = "AMI ID for instances"
   type        = string
@@ -63,11 +68,6 @@ variable "instance_type" {
 
 variable "key_name" {
   description = "SSH key pair name"
-  type        = string
-}
-
-variable "user_data" {
-  description = "User data script (base64 encoded)"
   type        = string
 }
 
