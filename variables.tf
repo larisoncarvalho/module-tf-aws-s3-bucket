@@ -3,6 +3,12 @@ variable "vpc_cidr_block" {
   type        = string
 }
 
+variable "vpc_tags" {
+  description = "Tags for VPC"
+  type        = map(string)
+  default     = {}
+}
+
 variable "iam_role_name" {
   description = "Name of IAM role"
   type        = string
@@ -37,6 +43,12 @@ variable "subnet_cidr_block" {
 variable "subnet_availability_zone" {
   description = "Availability zone for subnet"
   type        = string
+}
+
+variable "subnet_tags" {
+  description = "Tags for subnet"
+  type        = map(string)
+  default     = {}
 }
 
 variable "ami_id" {

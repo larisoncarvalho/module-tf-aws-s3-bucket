@@ -12,3 +12,9 @@ variable "availability_zone" {
   description = "Availability zone for subnet"
   type        = string
 }
+
+variable "tags" {
+  description = "Tags for subnet"
+  type        = map(string)
+  default     = {}
+}
