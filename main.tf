@@ -2,7 +2,6 @@ module "vpc" {
   source = "./modules/runner_vpc"
 
   cidr_block = var.vpc_cidr_block
-  name       = var.vpc_name
 }
 
 module "iam_profile" {
@@ -32,12 +31,13 @@ module "subnet" {
 module "launch_template" {
   source = "./modules/runner_launch_template"
 
-  ami_id                   = var.ami_id
-  iam_instance_profile_arn = module.iam_profile.instance_profile_arn
-  instance_type            = var.instance_type
-  key_name                 = var.key_name
-  security_group_ids       = [module.security_group.security_group_id]
-  subnet_id                = module.subnet.subnet_id
+  ami_id                     = var.ami_id
+  iam_instance_profile_name  = module.iam_profile.instance_profile_name
+  instance_type              = var.instance_type
+  key_name                   = var.key_name
+  security_group_ids         = [module.security_group.security_group_id]
+  user_data                  = var.user_data
+  instance_name_tag          = var.instance_name_tag
 }
 
 module "asg" {

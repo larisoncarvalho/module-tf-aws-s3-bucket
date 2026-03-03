@@ -13,18 +13,22 @@ variable "key_name" {
   type        = string
 }
 
-variable "iam_instance_profile_arn" {
-  description = "IAM instance profile ARN"
+variable "iam_instance_profile_name" {
+  description = "IAM instance profile name"
   type        = string
 }
 
 variable "security_group_ids" {
   description = "Security group IDs"
   type        = list(string)
-  default     = []
 }
 
-variable "subnet_id" {
-  description = "Subnet ID for network interface"
+variable "user_data" {
+  description = "User data script (base64 encoded)"
+  type        = string
+}
+
+variable "instance_name_tag" {
+  description = "Name tag for instances"
   type        = string
 }

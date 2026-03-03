@@ -3,11 +3,6 @@ variable "vpc_cidr_block" {
   type        = string
 }
 
-variable "vpc_name" {
-  description = "Name tag for VPC"
-  type        = string
-}
-
 variable "iam_role_name" {
   description = "Name of IAM role"
   type        = string
@@ -56,6 +51,16 @@ variable "instance_type" {
 
 variable "key_name" {
   description = "SSH key pair name"
+  type        = string
+}
+
+variable "user_data" {
+  description = "User data script (base64 encoded)"
+  type        = string
+}
+
+variable "instance_name_tag" {
+  description = "Name tag for instances"
   type        = string
 }
 

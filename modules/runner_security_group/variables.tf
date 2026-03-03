@@ -11,5 +11,4 @@ variable "vpc_id" {
 variable "description" {
   description = "Security group description"
   type        = string
-  default     = "Security group for runner instances"
 }
