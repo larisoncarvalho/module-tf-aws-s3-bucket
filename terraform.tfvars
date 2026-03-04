@@ -1,0 +1,15 @@
+vpc_cidr              = "10.0.0.0/16"
+vpc_name              = "vpc_name"
+public_subnet_cidr    = "10.0.0.0/24"
+availability_zone     = "eu-central-1a"
+security_group_name   = "SG_RUNNER_new-private-runner"
+ssh_cidr_blocks       = ["115.96.62.109/32"]
+iam_role_name         = "SG_RUNNER_new-ec2-private-runner-role"
+instance_profile_name = "SG_RUNNER_new-runner-instance-profile"
+key_pair_name         = "clara-sg-privaterunner"
+public_key_material   = ""
+ami_id                = "ami-0c954b75beb1d9bc1"
+instance_type         = "t3.medium"
+instance_private_ip   = "10.0.0.237"
+root_volume_size      = 50
+data_volume_size      = 100
