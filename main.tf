@@ -22,3 +22,4 @@ module "cloudfront_distributions" {
   logging_include_cookies        = each.value.logging_include_cookies
   logging_prefix                 = each.value.logging_prefix
 }
+#comment
