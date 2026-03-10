@@ -3,7 +3,7 @@ resource "aws_cloudfront_distribution" "this" {
   comment             = var.comment
   default_root_object = var.default_root_object
   enabled             = var.enabled
-  http_version        = var.http_version
+  http_version        = lower(var.http_version)
   is_ipv6_enabled     = var.is_ipv6_enabled
   price_class         = var.price_class
 
