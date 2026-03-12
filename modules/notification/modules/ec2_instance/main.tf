@@ -5,7 +5,6 @@ resource "aws_instance" "this" {
   ebs_optimized          = var.ebs_optimized
   key_name               = var.key_name
   monitoring             = var.monitoring
-  source_dest_check      = var.source_dest_check
   subnet_id              = var.subnet_id
   tenancy                = var.tenancy
   vpc_security_group_ids = var.vpc_security_group_ids

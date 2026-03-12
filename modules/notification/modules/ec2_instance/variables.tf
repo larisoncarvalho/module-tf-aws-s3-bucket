@@ -31,6 +31,7 @@ variable "subnet_id" {
 variable "source_dest_check" {
   description = "Enable source/destination checking"
   type        = bool
+  default     = true
 }
 
 variable "ebs_optimized" {
