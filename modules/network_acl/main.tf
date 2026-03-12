@@ -1,17 +1,31 @@
-resource "aws_network_acl" "this" {
-  subnet_ids = var.subnet_ids
-  tags       = var.tags
-  vpc_id     = var.vpc_id
-}
+resource "aws_default_network_acl" "this" {
+  default_network_acl_id = var.default_network_acl_id
+  subnet_ids             = var.subnet_ids
+  tags                   = var.tags
 
-resource "aws_network_acl_rule" "this" {
-  for_each = var.acl_rules
+  dynamic "egress" {
+    for_each = { for k, v in var.acl_rules : k => v if v.egress }
+    content {
+      action          = egress.value.rule_action
+      cidr_block      = egress.value.cidr_block
+      from_port       = 0
+      ipv6_cidr_block = egress.value.ipv6_cidr_block
+      protocol        = egress.value.protocol
+      rule_no         = egress.value.rule_number
+      to_port         = 0
+    }
+  }
 
-  cidr_block      = each.value.cidr_block
-  egress          = each.value.egress
-  ipv6_cidr_block = each.value.ipv6_cidr_block
-  network_acl_id  = aws_network_acl.this.id
-  protocol        = each.value.protocol
-  rule_action     = each.value.rule_action
-  rule_number     = each.value.rule_number
+  dynamic "ingress" {
+    for_each = { for k, v in var.acl_rules : k => v if !v.egress }
+    content {
+      action          = ingress.value.rule_action
+      cidr_block      = ingress.value.cidr_block
+      from_port       = 0
+      ipv6_cidr_block = ingress.value.ipv6_cidr_block
+      protocol        = ingress.value.protocol
+      rule_no         = ingress.value.rule_number
+      to_port         = 0
+    }
+  }
 }

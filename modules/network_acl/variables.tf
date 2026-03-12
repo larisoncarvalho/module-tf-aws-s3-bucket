@@ -1,5 +1,5 @@
-variable "vpc_id" {
-  description = "VPC ID for the network ACL"
+variable "default_network_acl_id" {
+  description = "The ID of the default network ACL"
   type        = string
 }
 
@@ -11,12 +11,12 @@ variable "subnet_ids" {
 variable "acl_rules" {
   description = "Network ACL rules to create"
   type = map(object({
-    rule_number      = number
-    egress           = bool
-    protocol         = string
-    rule_action      = string
-    cidr_block       = optional(string)
-    ipv6_cidr_block  = optional(string)
+    rule_number     = number
+    egress          = bool
+    protocol        = string
+    rule_action     = string
+    cidr_block      = optional(string)
+    ipv6_cidr_block = optional(string)
   }))
   default = {}
 }

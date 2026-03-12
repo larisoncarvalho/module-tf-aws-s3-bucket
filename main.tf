@@ -47,8 +47,8 @@ module "default_security_group" {
 module "do_not_delete_default_nacl" {
   source = "./modules/network_acl"
 
-  acl_rules  = var.do_not_delete_default_nacl.acl_rules
-  subnet_ids = var.do_not_delete_default_nacl.subnet_ids
-  tags       = var.do_not_delete_default_nacl.tags
-  vpc_id     = module.do_not_delete_vpc.vpc_id
+  acl_rules              = var.do_not_delete_default_nacl.acl_rules
+  default_network_acl_id = module.do_not_delete_vpc.default_network_acl_id
+  subnet_ids             = var.do_not_delete_default_nacl.subnet_ids
+  tags                   = var.do_not_delete_default_nacl.tags
 }
