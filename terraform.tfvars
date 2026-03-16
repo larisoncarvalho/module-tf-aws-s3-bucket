@@ -12,7 +12,7 @@ route_table_vpc_name_private_eu_central_1a = {
     }
   }
   associations = {
-    private_subnet_1a = {
+    private_1a = {
       subnet_id = "subnet-0bb6693f2b6859278"
     }
   }

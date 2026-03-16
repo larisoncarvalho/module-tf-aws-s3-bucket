@@ -6,9 +6,10 @@ resource "aws_route_table" "this" {
 resource "aws_route" "this" {
   for_each = var.routes
 
+  route_table_id             = aws_route_table.this.id
+  destination_cidr_block     = each.value.destination_cidr_block
   destination_prefix_list_id = each.value.destination_prefix_list_id
   gateway_id                 = each.value.gateway_id
-  route_table_id             = aws_route_table.this.id
 }
 
 resource "aws_route_table_association" "this" {

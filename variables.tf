@@ -9,6 +9,7 @@ variable "route_table_vpc_name_private_eu_central_1a" {
     vpc_id = string
     tags   = map(string)
     routes = optional(map(object({
+      destination_cidr_block     = optional(string)
       destination_prefix_list_id = optional(string)
       gateway_id                 = optional(string)
     })), {})
