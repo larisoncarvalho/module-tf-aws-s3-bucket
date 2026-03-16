@@ -4,13 +4,14 @@ variable "vpc_id" {
 }
 
 variable "tags" {
-  description = "Tags to apply to the route table"
+  description = "Resource tags"
   type        = map(string)
 }
 
 variable "routes" {
-  description = "Routes to create in the route table (excluding local route)"
+  description = "Routes to create (excluding local routes)"
   type = map(object({
+    destination_cidr_block     = optional(string)
     destination_prefix_list_id = optional(string)
     gateway_id                 = optional(string)
   }))
