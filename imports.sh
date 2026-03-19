@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+terraform import -var-file=environments/terraform.tfvars module.aksljdfhlkjasdhflkjashdflhasdlkjf_count_0.aws_s3_bucket.this aksljdfhlkjasdhflkjashdflhasdlkjf-count-0
+terraform import -var-file=environments/terraform.tfvars module.aksljdfhlkjasdhflkjashdflhasdlkjf_count_0.aws_s3_bucket_versioning.this aksljdfhlkjasdhflkjashdflhasdlkjf-count-0
+terraform import -var-file=environments/terraform.tfvars module.aksljdfhlkjasdhflkjashdflhasdlkjf_count_0.aws_s3_bucket_server_side_encryption_configuration.this aksljdfhlkjasdhflkjashdflhasdlkjf-count-0
+terraform import -var-file=environments/terraform.tfvars module.aksljdfhlkjasdhflkjashdflhasdlkjf_count_0.aws_s3_bucket_public_access_block.this aksljdfhlkjasdhflkjashdflhasdlkjf-count-0
+terraform import -var-file=environments/terraform.tfvars module.aksljdfhlkjasdhflkjashdflhasdlkjf_count_0.aws_s3_bucket_ownership_controls.this aksljdfhlkjasdhflkjashdflhasdlkjf-count-0
