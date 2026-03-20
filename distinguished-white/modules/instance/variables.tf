@@ -23,9 +23,9 @@ variable "security_group_ids" {
   description = "Security group IDs to attach to instance"
 }
 
-variable "iam_instance_profile_arn" {
+variable "iam_instance_profile_name" {
   type        = string
-  description = "IAM instance profile ARN"
+  description = "IAM instance profile name"
 }
 
 variable "key_name" {

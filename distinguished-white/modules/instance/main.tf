@@ -1,11 +1,12 @@
 resource "aws_instance" "this" {
-  ami                  = var.ami_id
-  instance_type        = var.instance_type
-  availability_zone    = var.availability_zone
-  subnet_id            = var.subnet_id
-  vpc_security_group_ids = var.security_group_ids
-  iam_instance_profile = var.iam_instance_profile_arn
-  key_name             = var.key_name
+  ami                         = var.ami_id
+  instance_type               = var.instance_type
+  availability_zone           = var.availability_zone
+  subnet_id                   = var.subnet_id
+  vpc_security_group_ids      = var.security_group_ids
+  iam_instance_profile        = var.iam_instance_profile_name
+  key_name                    = var.key_name
+  user_data_replace_on_change = false
 
   cpu_core_count       = var.cpu_core_count
   cpu_threads_per_core = var.cpu_threads_per_core

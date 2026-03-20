@@ -16,8 +16,8 @@ variable "security_group_ids" {
   default     = []
 }
 
-variable "iam_instance_profile_arn" {
+variable "iam_instance_profile_name" {
   type        = string
-  description = "IAM instance profile ARN"
+  description = "IAM instance profile name"
   default     = ""
 }
