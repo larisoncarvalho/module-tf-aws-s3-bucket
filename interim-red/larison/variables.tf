@@ -1,0 +1,1 @@
+# No root-level variables required - all values are hardcoded in main.tf
