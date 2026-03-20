@@ -35,6 +35,6 @@ module "route_table" {
 module "network_acl" {
   source = "./modules/network_acl"
 
-  default_network_acl_id = var.default_network_acl_id
-  subnet_ids             = var.network_acl_subnet_ids
+  default_network_acl_id = var.default_network_acl_id != null ? var.default_network_acl_id : module.vpc.default_network_acl_id
+  subnet_ids             = length(var.network_acl_subnet_ids) > 0 ? var.network_acl_subnet_ids : [module.subnet.subnet_id]
 }
