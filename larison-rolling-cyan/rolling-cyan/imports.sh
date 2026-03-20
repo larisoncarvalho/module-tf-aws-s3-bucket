@@ -1,5 +1,7 @@
 #!/bin/sh
 set -e
 
-# Only import route tables that actually exist in AWS
-terraform import module.sg_vpc_2_default.aws_route_table.this rtb-0072093ae36ed4bb8
+# No imports needed - creating new route tables
+# If you need to import existing route tables, verify they exist first:
+# terraform import module.sg_vpc_2_default.aws_route_table.this rtb-ACTUAL-ID
+echo "No imports configured - will create new resources"
