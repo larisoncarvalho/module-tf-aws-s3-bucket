@@ -1,0 +1,1 @@
+# No variables to configure - all values are hardcoded in main.tf
