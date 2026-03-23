@@ -8,11 +8,6 @@ variable "instance_type" {
   description = "EC2 instance type"
 }
 
-variable "availability_zone" {
-  type        = string
-  description = "Availability zone for instance placement"
-}
-
 variable "key_name" {
   type        = string
   description = "SSH key pair name"

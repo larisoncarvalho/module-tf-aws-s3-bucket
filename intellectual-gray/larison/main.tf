@@ -3,7 +3,6 @@ module "ubuntu_debugging" {
 
   ami_id                         = var.ami_id
   instance_type                  = "t2.large"
-  availability_zone              = "eu-central-1a"
   key_name                       = "nonprod-euc1"
   subnet_id                      = var.subnet_id
   security_group_ids             = var.security_group_ids

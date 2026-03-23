@@ -1,6 +1,5 @@
 resource "aws_instance" "this" {
   ami                         = var.ami_id
-  availability_zone           = var.availability_zone
   ebs_optimized              = var.ebs_optimized
   instance_type              = var.instance_type
   key_name                   = var.key_name
@@ -33,6 +32,6 @@ resource "aws_instance" "this" {
 
   root_block_device {
     delete_on_termination = true
-    volume_type          = "gp2"
+    volume_type          = "gp3"
   }
 }
