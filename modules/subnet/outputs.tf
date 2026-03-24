@@ -1,9 +1,9 @@
 output "subnet_id" {
-  value       = module.subnet_0040994dc4624807c.subnet_id
+  value       = aws_subnet.this.id
   description = "The ID of the subnet"
 }
 
 output "subnet_arn" {
-  value       = module.subnet_0040994dc4624807c.subnet_arn
+  value       = aws_subnet.this.arn
   description = "The ARN of the subnet"
 }
