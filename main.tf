@@ -3,4 +3,5 @@ module "subnets" {
 
   vpc_id  = var.vpc_id
   subnets = var.subnets
+  test = var.test
 }
