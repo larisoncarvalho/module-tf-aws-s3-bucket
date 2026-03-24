@@ -1,0 +1,14 @@
+output "instance_id" {
+  value       = aws_instance.this.id
+  description = "EC2 instance ID"
+}
+
+output "private_ip" {
+  value       = aws_instance.this.private_ip
+  description = "Private IP address of the instance"
+}
+
+output "availability_zone" {
+  value       = aws_instance.this.availability_zone
+  description = "Availability zone of the instance"
+}
