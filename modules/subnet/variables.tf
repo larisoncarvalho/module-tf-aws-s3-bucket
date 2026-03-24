@@ -1,8 +1,3 @@
-variable "region" {
-  type        = string
-  description = "AWS region"
-}
-
 variable "vpc_id" {
   type        = string
   description = "VPC ID for the subnets"
@@ -13,7 +8,8 @@ variable "subnets" {
     availability_zone           = string
     cidr_block                  = string
     map_public_ip_on_launch     = bool
-    tags                        = optional(any, {})
+    tags                        = map(string)
   }))
   description = "Map of subnets to create"
+  default     = {}
 }
