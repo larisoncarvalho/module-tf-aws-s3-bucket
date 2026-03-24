@@ -13,9 +13,9 @@ variable "availability_zone" {
   description = "Availability zone for instance placement"
 }
 
-variable "iam_instance_profile_arn" {
+variable "iam_instance_profile" {
   type        = string
-  description = "ARN of IAM instance profile to attach"
+  description = "Name of IAM instance profile to attach"
 }
 
 variable "subnet_id" {

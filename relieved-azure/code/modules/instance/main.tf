@@ -2,7 +2,7 @@ resource "aws_instance" "this" {
   ami                         = var.ami_id
   instance_type               = var.instance_type
   availability_zone           = var.availability_zone
-  iam_instance_profile        = var.iam_instance_profile_arn
+  iam_instance_profile        = var.iam_instance_profile
   subnet_id                   = var.subnet_id
   vpc_security_group_ids      = var.security_group_ids
   associate_public_ip_address = var.associate_public_ip_address
