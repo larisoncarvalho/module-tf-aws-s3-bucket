@@ -1,6 +1,6 @@
 variable "bucket" {
   type        = string
-  description = "S3 bucket name"
+  description = "Name of the S3 bucket"
 }
 
 variable "sse_algorithm" {
@@ -10,7 +10,7 @@ variable "sse_algorithm" {
 
 variable "bucket_key_enabled" {
   type        = bool
-  description = "Whether S3 bucket key is enabled for SSE"
+  description = "Whether S3 Bucket Key is enabled"
 }
 
 variable "block_public_acls" {
