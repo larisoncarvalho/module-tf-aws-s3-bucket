@@ -3,7 +3,7 @@ variable "region" {
   description = "AWS region"
 }
 
-variable "s3_private_runner_storage_backend" {
+variable "s3_private_runner_storage" {
   type = object({
     bucket                  = string
     sse_algorithm           = string
@@ -14,5 +14,5 @@ variable "s3_private_runner_storage_backend" {
     restrict_public_buckets = bool
     object_ownership        = string
   })
-  description = "Configuration for the private runner storage backend S3 bucket"
+  description = "Configuration for the private runner storage S3 bucket"
 }
