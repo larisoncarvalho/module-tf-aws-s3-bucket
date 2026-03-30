@@ -29,3 +29,11 @@ resource "aws_s3_bucket_ownership_controls" "this" {
     object_ownership = var.object_ownership
   }
 }
+
+resource "aws_s3_bucket_versioning" "this" {
+  bucket = aws_s3_bucket.this.id
+
+  versioning_configuration {
+    status = var.versioning_status
+  }
+}

@@ -1,39 +1,44 @@
 variable "bucket" {
-  type        = string
   description = "Name of the S3 bucket"
+  type        = string
 }
 
 variable "sse_algorithm" {
-  type        = string
   description = "Server-side encryption algorithm"
+  type        = string
 }
 
 variable "bucket_key_enabled" {
+  description = "Whether S3 Bucket Key is enabled"
   type        = bool
-  description = "Whether S3 bucket key is enabled for SSE"
 }
 
 variable "block_public_acls" {
-  type        = bool
   description = "Whether to block public ACLs"
+  type        = bool
 }
 
 variable "block_public_policy" {
-  type        = bool
   description = "Whether to block public bucket policies"
+  type        = bool
 }
 
 variable "ignore_public_acls" {
-  type        = bool
   description = "Whether to ignore public ACLs"
+  type        = bool
 }
 
 variable "restrict_public_buckets" {
-  type        = bool
   description = "Whether to restrict public bucket policies"
+  type        = bool
 }
 
 variable "object_ownership" {
+  description = "Object ownership control setting"
   type        = string
-  description = "Object ownership setting for the bucket"
+}
+
+variable "versioning_status" {
+  description = "Versioning status (Enabled, Suspended, or Disabled)"
+  type        = string
 }

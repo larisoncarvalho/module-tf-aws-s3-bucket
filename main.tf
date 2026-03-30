@@ -9,4 +9,5 @@ module "private_runner_storage_backend" {
   ignore_public_acls      = var.private_runner_storage_backend.ignore_public_acls
   restrict_public_buckets = var.private_runner_storage_backend.restrict_public_buckets
   object_ownership        = var.private_runner_storage_backend.object_ownership
+  versioning_status       = var.private_runner_storage_backend.versioning_status
 }
