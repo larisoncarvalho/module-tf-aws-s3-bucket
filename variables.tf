@@ -1,4 +1,5 @@
 variable "region" {
   type        = string
-  description = "Azure region for the stack"
+  description = "AWS region for the stack"
+  default     = "us-east-1"
 }
