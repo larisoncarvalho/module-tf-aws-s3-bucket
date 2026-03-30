@@ -34,11 +34,6 @@ variable "restrict_public_buckets" {
 }
 
 variable "object_ownership" {
-  description = "Object ownership control setting"
-  type        = string
-}
-
-variable "versioning_status" {
-  description = "Versioning status (Enabled, Suspended, or Disabled)"
+  description = "Object ownership setting for the bucket"
   type        = string
 }

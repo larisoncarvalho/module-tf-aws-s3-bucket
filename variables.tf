@@ -1,11 +1,10 @@
 variable "region" {
   description = "AWS region"
   type        = string
-  default     = "eu-central-1"
 }
 
-variable "private_runner_storage_backend" {
-  description = "Configuration for private runner storage backend S3 bucket"
+variable "s3_private_runner_storage_backend" {
+  description = "Configuration for S3 private runner storage backend"
   type = object({
     bucket                  = string
     sse_algorithm           = string
@@ -15,6 +14,5 @@ variable "private_runner_storage_backend" {
     ignore_public_acls      = bool
     restrict_public_buckets = bool
     object_ownership        = string
-    versioning_status       = string
   })
 }

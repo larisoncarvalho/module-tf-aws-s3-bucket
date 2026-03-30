@@ -1,6 +1,6 @@
 region = "eu-central-1"
 
-private_runner_storage_backend = {
+s3_private_runner_storage_backend = {
   bucket                  = "7ungwu6v-private-runner-storage-backend"
   sse_algorithm           = "AES256"
   bucket_key_enabled      = false
@@ -9,5 +9,4 @@ private_runner_storage_backend = {
   ignore_public_acls      = true
   restrict_public_buckets = true
   object_ownership        = "BucketOwnerEnforced"
-  versioning_status       = "Disabled"
 }
