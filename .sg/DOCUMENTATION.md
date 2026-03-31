@@ -2,60 +2,46 @@
 
 ## Overview
 
-This Terraform stack manages an Azure resource group for network infrastructure in the eastus region.
+This Terraform stack manages an Azure resource group for network resources in the East US region.
 
-## Architecture
+## Stack Information
 
-The stack consists of a single module that creates and manages an Azure resource group with configurable name, location, and tags.
+- **Name**: azure-network-resource-group
+- **Description**: Azure resource group for network resources
+- **Region**: eastus
 
-### Modules
+## Modules
 
-#### resource_group
+### resource_group
 
-Manages Azure resource group lifecycle.
+Manages Azure resource group.
 
-**Resources:**
+**Location**: `modules/resource_group/`
+
+**Resources**:
 - `azurerm_resource_group.this` - Azure resource group
 
-**Inputs:**
-| Name | Type | Description | Default |
-|------|------|-------------|---------|
-| name | string | Resource group name | - |
-| location | string | Azure region for the resource group | - |
-| tags | map(string) | Tags to apply to the resource group | {} |
-
-**Outputs:**
-| Name | Description |
-|------|-------------|
-| id | Resource group ID |
-| name | Resource group name |
-
-## Root Configuration
-
-### Module Calls
-
-- **azurenetwork**: Creates the resource group with name "azurenetwork" in eastus region with default tags
-
-### Variables
+## Variables
 
 | Name | Type | Description | Default |
 |------|------|-------------|---------|
-| region | string | Azure region | eastus |
+| region | string | Azure region for resources | eastus |
+| subscription_id | string | Azure subscription ID | - |
 
-### Outputs
+## Outputs
 
 | Name | Description |
 |------|-------------|
-| resource_group_id | Resource group ID |
-| resource_group_name | Resource group name |
+| resource_group_id | ID of the resource group |
+| resource_group_name | Name of the resource group |
 
 ## Usage
 
 ### Prerequisites
 
-- Terraform >= 0.13
-- Azure CLI configured with appropriate credentials
-- Appropriate Azure permissions to manage resource groups
+- Terraform installed (latest version)
+- Azure CLI installed and authenticated
+- Valid Azure subscription
 
 ### Deployment Steps
 
@@ -80,14 +66,24 @@ Manages Azure resource group lifecycle.
    terraform apply -var-file=environments/terraform.tfvars
    ```
 
-### Importing Existing Resources
+### Configuration
 
-This stack is designed to import an existing Azure resource group. The import script will attach the existing resource group "azurenetwork" to Terraform state management without making any changes to the actual infrastructure.
+Edit `environments/terraform.tfvars` to customize:
+- Azure region
+- Azure subscription ID
 
-After running the import script, `terraform plan` should show zero changes, confirming that the Terraform configuration matches the existing infrastructure.
+### Resource Details
+
+The stack creates:
+- 1 Azure resource group named "azurenetwork"
+- Tags: app=azurenetwork, creator=stackgurdian, environment=default
+
+## Import
+
+This stack is designed to import an existing Azure resource group. The import script will attach the existing resource to Terraform state management without modifying it.
 
 ## Notes
 
-- The resource group is configured with fixed values for name, location, and tags in the root module call
-- The stack uses the AzureRM provider with default features
-- All resources are tagged with app, creator, and environment metadata
+- Ensure the resource group "azurenetwork" exists in your Azure subscription before running imports
+- The subscription_id must be set in terraform.tfvars
+- After import, terraform plan should show zero changes if the configuration matches the existing resource

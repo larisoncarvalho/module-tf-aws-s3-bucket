@@ -1,4 +1,4 @@
 variable "region" {
-  description = "Azure region"
   type        = string
+  description = "Azure region for resources"
 }

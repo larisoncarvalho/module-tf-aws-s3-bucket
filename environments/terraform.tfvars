@@ -1,1 +1,2 @@
-region = "eastus"
+region          = "eastus"
+subscription_id = "YOUR_AZURE_SUBSCRIPTION_ID"

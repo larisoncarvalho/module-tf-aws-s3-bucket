@@ -1,8 +1,8 @@
 module "azurenetwork" {
   source = "./modules/resource_group"
 
-  location = "eastus"
   name     = "azurenetwork"
+  location = var.region
   tags = {
     app         = "azurenetwork"
     creator     = "stackgurdian"

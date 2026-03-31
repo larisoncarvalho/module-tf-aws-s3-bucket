@@ -1,9 +1,9 @@
 output "id" {
-  description = "Resource group ID"
+  description = "ID of the resource group"
   value       = azurerm_resource_group.this.id
 }
 
 output "name" {
-  description = "Resource group name"
+  description = "Name of the resource group"
   value       = azurerm_resource_group.this.name
 }

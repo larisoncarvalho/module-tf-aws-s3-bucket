@@ -1,9 +1,9 @@
 output "resource_group_id" {
-  description = "Resource group ID"
+  description = "ID of the resource group"
   value       = module.azurenetwork.id
 }
 
 output "resource_group_name" {
-  description = "Resource group name"
+  description = "Name of the resource group"
   value       = module.azurenetwork.name
 }
