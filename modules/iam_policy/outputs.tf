@@ -1,9 +1,9 @@
 output "policy_arns" {
   description = "ARNs of created IAM policies"
-  value       = module.iam_policies.policy_arns
+  value       = { for k, v in aws_iam_policy.this : k => v.arn }
 }
 
 output "policy_ids" {
   description = "IDs of created IAM policies"
-  value       = module.iam_policies.policy_ids
+  value       = { for k, v in aws_iam_policy.this : k => v.id }
 }
