@@ -1,89 +1,76 @@
-# Azure Network Resource Group Stack
+# Azure Network Terraform Configuration
 
 ## Overview
+This Terraform configuration manages an Azure resource group for network resources.
 
-This Terraform stack manages an Azure resource group for network resources in the East US region.
+## Prerequisites
 
-## Stack Information
+### Azure Authentication
+This configuration requires Azure authentication. You must have one of the following:
 
-- **Name**: azure-network-resource-group
-- **Description**: Azure resource group for network resources
-- **Region**: eastus
+1. **Azure CLI** (Recommended for local development)
+   - Install Azure CLI: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
+   - Login: `az login`
+   - Set subscription: `az account set --subscription <subscription-id>`
 
-## Modules
+2. **Service Principal** (Recommended for CI/CD)
+   - Set environment variables:
+     - `ARM_CLIENT_ID`
+     - `ARM_CLIENT_SECRET`
+     - `ARM_TENANT_ID`
+     - `ARM_SUBSCRIPTION_ID`
 
-### resource_group
+3. **Managed Identity** (For Azure resources)
+   - Enable system-assigned or user-assigned managed identity
+   - Set `ARM_USE_MSI=true`
 
-Manages Azure resource group.
-
-**Location**: `modules/resource_group/`
-
-**Resources**:
-- `azurerm_resource_group.this` - Azure resource group
-
-## Variables
-
-| Name | Type | Description | Default |
-|------|------|-------------|---------|
-| region | string | Azure region for resources | eastus |
-| subscription_id | string | Azure subscription ID | - |
-
-## Outputs
-
-| Name | Description |
-|------|-------------|
-| resource_group_id | ID of the resource group |
-| resource_group_name | Name of the resource group |
+### Required Variables
+Update `environments/terraform.tfvars` with your values:
+- `region`: Azure region (e.g., "eastus", "westus2")
+- `subscription_id`: Your Azure subscription ID
 
 ## Usage
 
-### Prerequisites
+### Initialize Terraform
+```bash
+terraform init
+```
 
-- Terraform installed (latest version)
-- Azure CLI installed and authenticated
-- Valid Azure subscription
+### Plan Changes
+```bash
+terraform plan -var-file=environments/terraform.tfvars
+```
 
-### Deployment Steps
+### Apply Changes
+```bash
+terraform apply -var-file=environments/terraform.tfvars
+```
 
-1. **Initialize Terraform**
-   ```bash
-   terraform init
-   ```
+### Import Existing Resources
+If the resource group already exists in Azure:
+```bash
+export ARM_SUBSCRIPTION_ID=your-subscription-id
+./imports.sh
+```
 
-2. **Import Existing Resources**
-   ```bash
-   chmod +x imports.sh
-   ./imports.sh
-   ```
+## Resources Created
+- Azure Resource Group: `azurenetwork`
+  - Tags: app, creator, environment
 
-3. **Review Changes**
-   ```bash
-   terraform plan -var-file=environments/terraform.tfvars
-   ```
+## Outputs
+- `resource_group_id`: The Azure resource ID
+- `resource_group_name`: The resource group name
 
-4. **Apply Configuration**
-   ```bash
-   terraform apply -var-file=environments/terraform.tfvars
-   ```
+## Troubleshooting
 
-### Configuration
+### Error: "az": executable file not found
+- Install Azure CLI or configure alternative authentication method (see Prerequisites)
 
-Edit `environments/terraform.tfvars` to customize:
-- Azure region
-- Azure subscription ID
+### Error: No value for required variable
+- Ensure `environments/terraform.tfvars` exists with required values
+- Or pass variables via command line: `-var="region=eastus" -var="subscription_id=..."`
 
-### Resource Details
-
-The stack creates:
-- 1 Azure resource group named "azurenetwork"
-- Tags: app=azurenetwork, creator=stackgurdian, environment=default
-
-## Import
-
-This stack is designed to import an existing Azure resource group. The import script will attach the existing resource to Terraform state management without modifying it.
-
-## Notes
-
-- Ensure the resource group "azurenetwork" exists in your Azure subscription before running imports
-- The subscription_id must be set in terraform.tfvars
-- After import, terraform plan should show zero changes if the configuration matches the existing resource
+### Import Failures
+- Verify `ARM_SUBSCRIPTION_ID` environment variable is set
+- Ensure the resource group exists in Azure
+- Check you have appropriate permissions on the subscription
