@@ -1,9 +1,9 @@
 output "bucket_id" {
-  description = "ID of the private runner storage bucket"
-  value       = module.private_runner_storage.bucket_id
+  value       = module.backend_storage.bucket_id
+  description = "The ID of the backend storage S3 bucket"
 }
 
 output "bucket_arn" {
-  description = "ARN of the private runner storage bucket"
-  value       = module.private_runner_storage.bucket_arn
+  value       = module.backend_storage.bucket_arn
+  description = "The ARN of the backend storage S3 bucket"
 }

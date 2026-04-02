@@ -1,30 +1,26 @@
-# s3-private-runner-storage
+# s3-backend-storage
 
 S3 bucket for private runner storage backend with encryption and public access blocking
 
-## Overview
-
-This Terraform stack manages an S3 bucket configured for private runner storage with the following security features:
-
-- Server-side encryption using AES256
-- Complete public access blocking
-- Bucket owner enforced ownership controls
-- Versioning disabled
-
 ## Architecture
 
-### Modules
+This stack provisions a secure S3 bucket with the following security controls:
 
-#### s3_bucket
+- **Bucket Ownership Controls**: Enforces bucket owner ownership of all objects
+- **Public Access Block**: Blocks all public access at the bucket level
+- **Server-Side Encryption**: Enables AES256 encryption for all objects
 
-Manages S3 bucket with server-side encryption and public access controls
+## Modules
+
+### s3_bucket
+
+Manages S3 bucket with security controls and encryption
 
 **Resources:**
 - `aws_s3_bucket` - Main S3 bucket
-- `aws_s3_bucket_server_side_encryption_configuration` - Encryption configuration
-- `aws_s3_bucket_public_access_block` - Public access blocking
-- `aws_s3_bucket_ownership_controls` - Ownership controls
-- `aws_s3_bucket_versioning` - Versioning configuration
+- `aws_s3_bucket_ownership_controls` - Ownership control settings
+- `aws_s3_bucket_public_access_block` - Public access blocking configuration
+- `aws_s3_bucket_server_side_encryption_configuration` - Encryption settings
 
 ## Variables
 
@@ -36,8 +32,8 @@ Manages S3 bucket with server-side encryption and public access controls
 
 | Name | Description |
 |------|-------------|
-| bucket_id | ID of the private runner storage bucket |
-| bucket_arn | ARN of the private runner storage bucket |
+| bucket_id | The ID of the backend storage S3 bucket |
+| bucket_arn | The ARN of the backend storage S3 bucket |
 
 ## Usage
 
@@ -68,11 +64,11 @@ terraform apply -var-file=environments/terraform.tfvars
 
 ## Security Features
 
-- **Encryption**: AES256 server-side encryption enabled
-- **Public Access**: All public access blocked at bucket level
-- **Ownership**: BucketOwnerEnforced ownership controls
-- **Versioning**: Disabled to reduce storage costs
+- **Encryption at Rest**: All objects are encrypted using AES256
+- **Public Access Prevention**: All public access is blocked at multiple levels
+- **Bucket Owner Enforcement**: All objects are owned by the bucket owner
+- **No Hardcoded Credentials**: All sensitive values must be provided via variables or environment
 
-## Region
+## Notes
 
-This stack is deployed in the **eu-central-1** region.
+This configuration imports existing S3 bucket resources. After import, `terraform plan` should show zero changes, indicating perfect drift alignment with the existing infrastructure.
