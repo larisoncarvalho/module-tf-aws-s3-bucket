@@ -1,45 +1,38 @@
-# s3-private-runner-storage
-
-Private runner storage backend S3 bucket with encryption and public access blocking
+# S3 Bucket Infrastructure
 
 ## Overview
 
-This Terraform stack manages an S3 bucket configured for private runner storage with comprehensive security controls including server-side encryption and public access blocking.
+This Terraform stack manages an S3 bucket with comprehensive security and encryption configuration. The infrastructure includes public access blocking, server-side encryption, ownership controls, and versioning settings.
 
-## Architecture
+## Stack Description
 
-### Modules
+**Name:** s3-bucket-infrastructure  
+**Region:** eu-central-1
 
-#### s3_bucket
+This stack provisions a secure S3 bucket with the following features:
+- Public access blocking to prevent accidental exposure
+- Server-side encryption with AES256
+- Bucket ownership controls
+- Versioning configuration
 
-Manages S3 bucket with server-side encryption and public access controls
+## Modules
+
+### s3_bucket
+
+**Description:** Manages S3 bucket with public access block and server-side encryption
 
 **Resources:**
-- `aws_s3_bucket.this` - S3 bucket
-- `aws_s3_bucket_ownership_controls.this` - Bucket ownership controls
-- `aws_s3_bucket_public_access_block.this` - Public access block configuration
-- `aws_s3_bucket_server_side_encryption_configuration.this` - Server-side encryption configuration
+- `aws_s3_bucket` - Primary S3 bucket
+- `aws_s3_bucket_public_access_block` - Public access blocking configuration
+- `aws_s3_bucket_server_side_encryption_configuration` - Encryption settings
+- `aws_s3_bucket_ownership_controls` - Object ownership controls
+- `aws_s3_bucket_versioning` - Versioning configuration
 
 ## Variables
 
-### Root Variables
-
 | Name | Type | Description | Default |
 |------|------|-------------|---------|
-| region | string | AWS region for the resources | eu-central-1 |
-
-### Module Variables (s3_bucket)
-
-| Name | Type | Description |
-|------|------|-------------|
-| bucket_name | string | Name of the S3 bucket |
-| object_ownership | string | Object ownership control rule |
-| block_public_acls | bool | Whether to block public ACLs |
-| block_public_policy | bool | Whether to block public bucket policies |
-| ignore_public_acls | bool | Whether to ignore public ACLs |
-| restrict_public_buckets | bool | Whether to restrict public bucket policies |
-| sse_algorithm | string | Server-side encryption algorithm |
-| bucket_key_enabled | bool | Whether S3 Bucket Key is enabled |
+| region | string | AWS region for resources | eu-central-1 |
 
 ## Outputs
 
@@ -47,6 +40,17 @@ Manages S3 bucket with server-side encryption and public access controls
 |------|-------------|
 | bucket_id | The ID of the S3 bucket |
 | bucket_arn | The ARN of the S3 bucket |
+
+## Module: private_runner_storage
+
+This module instance creates a private storage bucket for runner backends with the following configuration:
+
+- **Bucket Name:** 9ghvs69l-private-runner-storage-backend
+- **Public Access:** Fully blocked (all public access settings enabled)
+- **Encryption:** AES256 server-side encryption
+- **Bucket Key:** Disabled
+- **Object Ownership:** BucketOwnerEnforced
+- **Versioning:** Disabled
 
 ## Usage
 
@@ -57,6 +61,8 @@ terraform init
 ```
 
 ### Import Existing Resources
+
+Before running plan or apply, import the existing S3 bucket and its configurations:
 
 ```bash
 chmod +x imports.sh
@@ -75,12 +81,26 @@ terraform plan -var-file=environments/terraform.tfvars
 terraform apply -var-file=environments/terraform.tfvars
 ```
 
-## Security Features
+## Import Details
 
-- **Encryption at Rest**: AES256 server-side encryption enabled
-- **Public Access Blocking**: All public access blocked via bucket policies and ACLs
-- **Ownership Controls**: BucketOwnerEnforced ownership for consistent access control
+This stack is designed to import existing S3 bucket resources. The import script will import:
+- The S3 bucket itself
+- Public access block configuration
+- Server-side encryption configuration
+- Ownership controls
+- Versioning configuration
 
-## Region
+After import, `terraform plan` should show zero changes, indicating the configuration matches the existing infrastructure.
 
-This stack is deployed in the **eu-central-1** region.
+## Security Considerations
+
+- All public access to the bucket is blocked by default
+- Server-side encryption is enforced using AES256
+- Object ownership is set to BucketOwnerEnforced for simplified ACL management
+- Versioning can be enabled by changing the `versioning_status` parameter
+
+## Notes
+
+- The bucket name includes a unique prefix (9ghvs69l) to ensure global uniqueness
+- Bucket key is disabled for this configuration
+- Versioning is currently disabled but can be enabled if needed

@@ -3,11 +3,6 @@ variable "bucket_name" {
   description = "Name of the S3 bucket"
 }
 
-variable "object_ownership" {
-  type        = string
-  description = "Object ownership control rule"
-}
-
 variable "block_public_acls" {
   type        = bool
   description = "Whether to block public ACLs"
@@ -36,4 +31,14 @@ variable "sse_algorithm" {
 variable "bucket_key_enabled" {
   type        = bool
   description = "Whether S3 Bucket Key is enabled"
+}
+
+variable "object_ownership" {
+  type        = string
+  description = "Object ownership setting"
+}
+
+variable "versioning_status" {
+  type        = string
+  description = "Versioning status (Enabled, Suspended, or Disabled)"
 }
