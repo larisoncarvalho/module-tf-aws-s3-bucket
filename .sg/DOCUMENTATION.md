@@ -1,33 +1,24 @@
-# S3 Backend Storage
+# s3-private-runner-storage
+
+Private runner storage backend S3 bucket with encryption and public access blocking
 
 ## Overview
 
-This Terraform stack manages an S3 bucket configured for private runner storage backend with security best practices including encryption, public access blocking, and ownership controls.
-
-**Region:** eu-central-1
+This Terraform stack manages an S3 bucket configured for private runner storage with comprehensive security controls including server-side encryption and public access blocking.
 
 ## Architecture
 
-The stack consists of a single module that provisions:
+### Modules
 
-- S3 bucket with a fixed name
-- Bucket ownership controls (BucketOwnerEnforced)
-- Public access block configuration (all protections enabled)
-- Server-side encryption with AES256
+#### s3_bucket
 
-## Modules
-
-### s3_bucket
-
-Manages S3 bucket with encryption and public access blocking.
-
-**Location:** `./modules/s3_bucket`
+Manages S3 bucket with server-side encryption and public access controls
 
 **Resources:**
-- `aws_s3_bucket.this` - Main S3 bucket
-- `aws_s3_bucket_ownership_controls.this` - Ownership controls
-- `aws_s3_bucket_public_access_block.this` - Public access blocking
-- `aws_s3_bucket_server_side_encryption_configuration.this` - Encryption configuration
+- `aws_s3_bucket.this` - S3 bucket
+- `aws_s3_bucket_ownership_controls.this` - Bucket ownership controls
+- `aws_s3_bucket_public_access_block.this` - Public access block configuration
+- `aws_s3_bucket_server_side_encryption_configuration.this` - Server-side encryption configuration
 
 ## Variables
 
@@ -35,63 +26,61 @@ Manages S3 bucket with encryption and public access blocking.
 
 | Name | Type | Description | Default |
 |------|------|-------------|---------|
-| region | string | AWS region for the infrastructure | "eu-central-1" |
+| region | string | AWS region for the resources | eu-central-1 |
 
 ### Module Variables (s3_bucket)
 
-| Name | Type | Description | Required |
-|------|------|-------------|----------|
-| bucket_name | string | Name of the S3 bucket | Yes |
+| Name | Type | Description |
+|------|------|-------------|
+| bucket_name | string | Name of the S3 bucket |
+| object_ownership | string | Object ownership control rule |
+| block_public_acls | bool | Whether to block public ACLs |
+| block_public_policy | bool | Whether to block public bucket policies |
+| ignore_public_acls | bool | Whether to ignore public ACLs |
+| restrict_public_buckets | bool | Whether to restrict public bucket policies |
+| sse_algorithm | string | Server-side encryption algorithm |
+| bucket_key_enabled | bool | Whether S3 Bucket Key is enabled |
 
 ## Outputs
 
-| Name | Description | Source |
-|------|-------------|--------|
-| bucket_id | ID of the backend storage bucket | module.backend_storage.bucket_id |
-| bucket_arn | ARN of the backend storage bucket | module.backend_storage.bucket_arn |
+| Name | Description |
+|------|-------------|
+| bucket_id | The ID of the S3 bucket |
+| bucket_arn | The ARN of the S3 bucket |
 
 ## Usage
 
-### Initial Setup
+### Initialize Terraform
 
-1. **Initialize Terraform:**
-   ```bash
-   terraform init
-   ```
+```bash
+terraform init
+```
 
-2. **Import Existing Resources:**
-   ```bash
-   chmod +x imports.sh
-   ./imports.sh
-   ```
+### Import Existing Resources
 
-3. **Verify Configuration:**
-   ```bash
-   terraform plan -var-file=environments/terraform.tfvars
-   ```
-   
-   This should show no changes if the import was successful and the configuration matches the existing infrastructure.
+```bash
+chmod +x imports.sh
+./imports.sh
+```
 
-4. **Apply Changes (if needed):**
-   ```bash
-   terraform apply -var-file=environments/terraform.tfvars
-   ```
+### Plan Changes
 
-### Day-to-Day Operations
+```bash
+terraform plan -var-file=environments/terraform.tfvars
+```
 
-- **Check for drift:** `terraform plan -var-file=environments/terraform.tfvars`
-- **View outputs:** `terraform output`
-- **Update configuration:** Modify the appropriate `.tf` files and run `terraform plan` then `terraform apply`
+### Apply Configuration
+
+```bash
+terraform apply -var-file=environments/terraform.tfvars
+```
 
 ## Security Features
 
-- **Encryption at rest:** AES256 server-side encryption enabled
-- **Public access blocked:** All public access protections enabled
-- **Ownership controls:** BucketOwnerEnforced to prevent ACL-based access
-- **No hardcoded credentials:** All sensitive values should be provided via environment variables or AWS credentials configuration
+- **Encryption at Rest**: AES256 server-side encryption enabled
+- **Public Access Blocking**: All public access blocked via bucket policies and ACLs
+- **Ownership Controls**: BucketOwnerEnforced ownership for consistent access control
 
-## Notes
+## Region
 
-- The bucket name is hardcoded in the root module: `9ghvs69l-private-runner-storage-backend`
-- This is an import-first configuration designed to manage existing infrastructure
-- After successful import, `terraform plan` should show zero changes
+This stack is deployed in the **eu-central-1** region.
