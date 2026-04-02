@@ -5,10 +5,10 @@ variable "region" {
 
 variable "vpc_id" {
   type        = string
-  description = "VPC ID for the endpoint"
+  description = "VPC ID"
 }
 
 variable "route_table_ids" {
   type        = list(string)
-  description = "Route table IDs to associate with the endpoint"
+  description = "Route table IDs"
 }

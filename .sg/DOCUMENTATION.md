@@ -2,22 +2,18 @@
 
 ## Overview
 
-This stack manages a VPC endpoint for S3 gateway access in the eu-central-1 region. It provides secure, private connectivity between your VPC and Amazon S3 without requiring an internet gateway or NAT device.
+This stack manages a VPC endpoint for AWS S3 service access in the eu-central-1 region. It creates a Gateway-type VPC endpoint that allows private connectivity to S3 from within the VPC without requiring an internet gateway.
 
 ## Architecture
 
-The stack consists of a single module that creates an AWS VPC endpoint configured as a Gateway type for S3 service access.
+The stack consists of a single reusable module:
 
-### Modules
+### Module: vpc_endpoint
 
-#### vpc_endpoint
+Manages VPC endpoints for AWS services. This module creates and configures a VPC endpoint with the specified service, type, and routing configuration.
 
-Manages VPC endpoint for S3 service with the following capabilities:
-
-- Creates a Gateway-type VPC endpoint for S3
-- Associates the endpoint with multiple route tables
-- Applies IAM policy for endpoint access control
-- Supports custom tagging
+**Resources:**
+- `aws_vpc_endpoint.this` - VPC endpoint resource
 
 ## Variables
 
@@ -26,25 +22,27 @@ Manages VPC endpoint for S3 service with the following capabilities:
 | Name | Type | Description | Default |
 |------|------|-------------|---------|
 | region | string | AWS region | eu-central-1 |
-| vpc_id | string | VPC ID for the endpoint | vpc-0119b9388f2104572 |
-| route_table_ids | list(string) | Route table IDs to associate with the endpoint | See terraform.tfvars |
+| vpc_id | string | VPC ID | vpc-0119b9388f2104572 |
+| route_table_ids | list(string) | Route table IDs | 6 route tables |
 
 ### Module Variables (vpc_endpoint)
 
 | Name | Type | Description |
 |------|------|-------------|
-| vpc_id | string | VPC ID for the endpoint |
-| service_name | string | AWS service name for the endpoint |
-| vpc_endpoint_type | string | Type of VPC endpoint |
+| vpc_id | string | VPC ID where the endpoint will be created |
+| service_name | string | AWS service name for the VPC endpoint |
+| vpc_endpoint_type | string | Type of VPC endpoint (Gateway or Interface) |
 | route_table_ids | list(string) | Route table IDs to associate with the endpoint |
-| policy | string | IAM policy document for the endpoint |
-| tags | map(string) | Resource tags |
+| policy | string | IAM policy document for the VPC endpoint |
+| private_dns_enabled | bool | Whether to enable private DNS for the endpoint |
+| tags | map(string) | Tags to apply to the VPC endpoint |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | vpc_endpoint_id | VPC endpoint ID |
+| vpc_endpoint_state | VPC endpoint state |
 
 ## Usage
 
@@ -56,42 +54,35 @@ Manages VPC endpoint for S3 service with the following capabilities:
 
 ### Deployment Steps
 
-1. **Initialize Terraform**
+1. **Initialize Terraform:**
+   ```bash
+   terraform init
+   ```
 
-```bash
-terraform init
-```
+2. **Import Existing Resources:**
+   ```bash
+   chmod +x imports.sh
+   ./imports.sh
+   ```
 
-2. **Import Existing Resources**
+3. **Review Changes:**
+   ```bash
+   terraform plan -var-file environments/terraform.tfvars
+   ```
 
-```bash
-chmod +x imports.sh
-./imports.sh
-```
-
-3. **Review Changes**
-
-```bash
-terraform plan -var-file=environments/terraform.tfvars
-```
-
-After import, this should show no changes (zero drift).
-
-4. **Apply Configuration**
-
-```bash
-terraform apply -var-file=environments/terraform.tfvars
-```
+4. **Apply Configuration:**
+   ```bash
+   terraform apply -var-file environments/terraform.tfvars
+   ```
 
 ### Configuration
 
-The S3 endpoint is configured with:
-
-- **Service**: com.amazonaws.eu-central-1.s3
-- **Type**: Gateway
-- **Policy**: Allow all principals and actions (open policy)
-- **Route Tables**: 6 route tables associated
-- **Tags**: Name=s3, Resource-Type=prod
+The S3 VPC endpoint is configured as a Gateway endpoint with:
+- Service: `com.amazonaws.eu-central-1.s3`
+- Type: Gateway
+- Policy: Allow all actions (open policy)
+- Private DNS: Disabled (not applicable for Gateway endpoints)
+- Associated with 6 route tables
 
 ### Customization
 
@@ -102,20 +93,9 @@ To modify the configuration:
 3. Run `terraform plan` to preview changes
 4. Apply with `terraform apply`
 
-## Resource Details
-
-### VPC Endpoint
-
-- **Resource**: aws_vpc_endpoint.this
-- **Import ID**: vpce-0371ef401a7f5e268
-- **Type**: Gateway
-- **Service**: S3 (eu-central-1)
-
-The endpoint provides private connectivity to S3, routing traffic through AWS's internal network rather than the public internet.
-
 ## Notes
 
-- Gateway endpoints for S3 are free of charge
-- The endpoint policy allows unrestricted access; consider tightening for production use
-- Route table associations enable automatic routing to S3 through the endpoint
-- Changes to route_table_ids will update the endpoint associations
+- This configuration imports an existing VPC endpoint (vpce-0371ef401a7f5e268)
+- Gateway endpoints for S3 do not support private DNS
+- The policy allows unrestricted access - consider tightening for production use
+- Route table associations enable S3 access from subnets using those route tables
