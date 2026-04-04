@@ -16,8 +16,10 @@ resource "aws_instance" "this" {
     capacity_reservation_preference = var.capacity_reservation_preference
   }
 
-  cpu_core_count       = var.cpu_core_count
-  cpu_threads_per_core = var.cpu_threads_per_core
+  cpu_options {
+    core_count       = var.cpu_core_count
+    threads_per_core = var.cpu_threads_per_core
+  }
 
   enclave_options {
     enabled = var.enclave_enabled
