@@ -1,3 +1,1 @@
-provider "aws" {
-  region = var.region
-}
+# Provider configuration removed - already defined in provider.tf
