@@ -1,8 +1,6 @@
 resource "aws_instance" "this" {
   ami                    = var.ami_id
   availability_zone      = var.availability_zone
-  cpu_core_count         = var.cpu_core_count
-  cpu_threads_per_core   = var.cpu_threads_per_core
   ebs_optimized          = var.ebs_optimized
   instance_type          = var.instance_type
   key_name               = var.key_name
@@ -12,6 +10,11 @@ resource "aws_instance" "this" {
   subnet_id              = var.subnet_id
   tenancy                = var.tenancy
   vpc_security_group_ids = var.security_group_ids
+
+  cpu_options {
+    core_count       = var.cpu_core_count
+    threads_per_core = var.cpu_threads_per_core
+  }
 
   metadata_options {
     http_endpoint               = var.metadata_http_endpoint
