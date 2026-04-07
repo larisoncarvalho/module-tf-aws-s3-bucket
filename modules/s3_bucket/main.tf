@@ -73,6 +73,7 @@ resource "aws_s3_bucket_acl" "this" {
         type = "CanonicalUser"
       }
       permission = "FULL_CONTROL"
+      test = "teste"
     }
   }
 }
