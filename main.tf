@@ -8,5 +8,5 @@ module "orchestrator_resources_qa" {
     "arn:aws:iam::790543352839:root",
     "arn:aws:iam::756925330322:role/ecs-workflow-admin-task-execution-role-qa",
     "arn:aws:iam::756925330322:role/ecs-workflow-admin-task-service-role-qa"
-  ]
+  
 }
