@@ -5,7 +5,7 @@ module "primary_workgroup" {
   description                        = "Primary Athena workgroup for dev-manuel-meireles"
   state                              = "ENABLED"
   bytes_scanned_cutoff_per_query     = 107374182
-  enforce_workgroup_configuration    = true
+  enforce_workgroup_configuration    = false
   publish_cloudwatch_metrics_enabled = true
   requester_pays_enabled             = false
   output_location                    = "s3://dev-manuel-meireles-infra-athena-results/query-results/"
