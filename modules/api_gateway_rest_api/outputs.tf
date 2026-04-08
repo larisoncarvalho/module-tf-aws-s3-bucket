@@ -1,9 +1,9 @@
 output "api_id" {
   description = "ID of the API Gateway REST API"
-  value       = module.sg_api_qa.api_id
+  value       = aws_api_gateway_rest_api.this.id
 }
 
 output "created_date" {
   description = "Creation date of the API Gateway REST API"
-  value       = module.sg_api_qa.created_date
+  value       = aws_api_gateway_rest_api.this.created_date
 }
