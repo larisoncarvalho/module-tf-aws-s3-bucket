@@ -1,3 +1,1 @@
-provider "aws" {
-  region = var.region
-}
+# Provider configuration is managed by the system
