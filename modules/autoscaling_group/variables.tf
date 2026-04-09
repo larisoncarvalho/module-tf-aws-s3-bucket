@@ -3,11 +3,6 @@ variable "name" {
   description = "Name of the Auto Scaling Group"
 }
 
-variable "availability_zones" {
-  type        = list(string)
-  description = "Availability zones for the Auto Scaling Group"
-}
-
 variable "default_cooldown" {
   type        = number
   description = "Default cooldown period in seconds"

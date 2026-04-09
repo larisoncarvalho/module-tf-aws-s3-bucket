@@ -1,5 +1,4 @@
 resource "aws_autoscaling_group" "this" {
-  availability_zones        = var.availability_zones
   default_cooldown          = var.default_cooldown
   desired_capacity          = var.desired_capacity
   health_check_grace_period = var.health_check_grace_period

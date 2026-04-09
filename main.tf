@@ -2,7 +2,6 @@ module "runner_asg" {
   source = "./modules/autoscaling_group"
 
   name                      = "SG_RUNNER_new-private-runner-asg"
-  availability_zones        = ["eu-central-1a"]
   default_cooldown          = 300
   desired_capacity          = 1
   health_check_grace_period = 300
