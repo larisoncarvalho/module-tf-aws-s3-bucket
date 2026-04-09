@@ -11,7 +11,6 @@ module "platform_api_dev" {
   description              = "Created automatically by Zappa."
   minimum_compression_size = 0
   name                     = "platform-api-dev"
-  test = 21
   tags = {
     "ZappaProject" = "platform-api-dev"
   }
