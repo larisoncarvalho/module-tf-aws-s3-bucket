@@ -1,12 +1,10 @@
-# ACM Certificate Stack
-
-## Description
+# acm-certificate-int-qa-stackguardian
 
 ACM certificate for *.int.qa.stackguardian.io domain
 
-## Region
+## Overview
 
-eu-central-1
+This stack manages an AWS ACM certificate for the int.qa.stackguardian.io domain with wildcard support.
 
 ## Modules
 
@@ -15,20 +13,20 @@ eu-central-1
 Manages ACM certificate for int.qa.stackguardian.io
 
 **Resources:**
-- `aws_acm_certificate.this`
+- `aws_acm_certificate.this` - ACM certificate with DNS validation
 
 ## Variables
 
 | Name | Type | Description | Default |
 |------|------|-------------|---------|
-| region | string | AWS region | - |
+| region | string | AWS region for resources | - |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | certificate_arn | ARN of the ACM certificate |
-| certificate_domain_name | Domain name of the certificate |
+| certificate_domain | Domain name of the certificate |
 | certificate_status | Status of the certificate |
 
 ## Usage
@@ -58,19 +56,11 @@ terraform plan -var-file=environments/terraform.tfvars
 terraform apply -var-file=environments/terraform.tfvars
 ```
 
-## Module Details
+## Certificate Details
 
-### acm_certificate
-
-Creates an ACM certificate with DNS validation for the int.qa.stackguardian.io domain and its wildcard subdomain.
-
-**Inputs:**
-- `domain_name`: Primary domain name
-- `subject_alternative_names`: List of SANs
-- `validation_method`: Validation method (DNS)
-- `tags`: Resource tags
-
-**Outputs:**
-- `certificate_arn`: Certificate ARN
-- `domain_name`: Certificate domain name
-- `status`: Certificate status
+- **Primary Domain:** *.int.qa.stackguardian.io
+- **Subject Alternative Names:**
+  - *.int.qa.stackguardian.io
+  - int.qa.stackguardian.io
+- **Validation Method:** DNS
+- **Region:** eu-central-1
