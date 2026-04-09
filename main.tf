@@ -1,6 +1,5 @@
 module "acm_certificates" {
   source = "./modules/acm_certificate"
-
   certificates = var.certificates
 }
 
@@ -12,7 +11,7 @@ module "platform_api_dev" {
   description              = "Created automatically by Zappa."
   minimum_compression_size = 0
   name                     = "platform-api-dev"
-  test = 2
+  test = 21
   tags = {
     "ZappaProject" = "platform-api-dev"
   }
