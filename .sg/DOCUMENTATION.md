@@ -55,25 +55,19 @@ terraform init
 
 ```bash
 chmod +x imports.sh
-./imports.sh terraform
-```
-
-Or for OpenTofu:
-
-```bash
-./imports.sh tofu
+./imports.sh
 ```
 
 ### Plan
 
 ```bash
-terraform plan -var-file=environments/terraform.tfvars
+terraform plan
 ```
 
 ### Apply
 
 ```bash
-terraform apply -var-file=environments/terraform.tfvars
+terraform apply
 ```
 
 ## Instance Configuration
@@ -84,7 +78,7 @@ Each instance in the `instances` map supports the following configuration:
 - **Networking**: Subnet ID, security groups, public IP association, source/destination checks
 - **Performance**: EBS optimization, CPU core count and threads per core
 - **Monitoring**: CloudWatch detailed monitoring
-- **Advanced**: Tenancy, hibernation, enclave options, capacity reservations
+- **Advanced**: Tenancy, enclave options, capacity reservations
 - **Metadata Service**: HTTP endpoint, tokens, hop limit, IPv6, instance tags
 - **Root Volume**: Volume type, delete on termination
 - **Tags**: Resource tags

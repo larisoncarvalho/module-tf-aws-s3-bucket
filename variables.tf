@@ -1,6 +1,6 @@
 variable "region" {
-  description = "AWS region"
   type        = string
+  description = "AWS region"
 }
 
 variable "instances" {
@@ -17,7 +17,6 @@ variable "instances" {
     ebs_optimized                        = bool
     monitoring                           = bool
     tenancy                              = string
-    hibernation                          = bool
     enclave_enabled                      = bool
     metadata_http_endpoint               = string
     metadata_http_tokens                 = string

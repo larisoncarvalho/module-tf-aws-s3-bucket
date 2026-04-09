@@ -2,17 +2,16 @@ resource "aws_instance" "this" {
   for_each = var.instances
 
   ami                         = each.value.ami_id
-  associate_public_ip_address = each.value.associate_public_ip_address
-  availability_zone           = each.value.availability_zone
-  ebs_optimized               = each.value.ebs_optimized
-  hibernation                 = each.value.hibernation
   instance_type               = each.value.instance_type
+  availability_zone           = each.value.availability_zone
   key_name                    = each.value.key_name
-  monitoring                  = each.value.monitoring
-  source_dest_check           = each.value.source_dest_check
   subnet_id                   = each.value.subnet_id
-  tenancy                     = each.value.tenancy
   vpc_security_group_ids      = each.value.security_group_ids
+  associate_public_ip_address = each.value.associate_public_ip_address
+  source_dest_check           = each.value.source_dest_check
+  ebs_optimized               = each.value.ebs_optimized
+  monitoring                  = each.value.monitoring
+  tenancy                     = each.value.tenancy
 
   capacity_reservation_specification {
     capacity_reservation_preference = each.value.capacity_reservation_preference
@@ -35,9 +34,12 @@ resource "aws_instance" "this" {
     instance_metadata_tags      = each.value.metadata_instance_metadata_tags
   }
 
-  root_block_device {
-    delete_on_termination = each.value.root_delete_on_termination
-    volume_type           = each.value.root_volume_type
+  dynamic "root_block_device" {
+    for_each = each.value.root_delete_on_termination != null || each.value.root_volume_type != null ? [1] : []
+    content {
+      delete_on_termination = each.value.root_delete_on_termination
+      volume_type           = each.value.root_volume_type
+    }
   }
 
   tags = each.value.tags
