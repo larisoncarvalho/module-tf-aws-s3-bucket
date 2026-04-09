@@ -2,7 +2,6 @@ module "acm_certificates" {
   source = "./modules/acm_certificate"
 
   certificates = var.certificates
-  test = 22
 }
 
 module "platform_api_dev" {
