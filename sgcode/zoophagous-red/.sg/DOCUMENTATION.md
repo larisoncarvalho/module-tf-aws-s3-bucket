@@ -57,13 +57,13 @@ chmod +x imports.sh
 ### Plan
 
 ```bash
-tofu plan -var-file environments/terraform.tfvars
+tofu plan -var-file environments/sg.tfvars
 ```
 
 ### Apply
 
 ```bash
-tofu apply -var-file environments/terraform.tfvars
+tofu apply -var-file environments/sg.tfvars
 ```
 
 ## Notes
