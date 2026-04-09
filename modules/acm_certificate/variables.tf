@@ -1,8 +1,3 @@
-variable "region" {
-  type        = string
-  description = "AWS region"
-}
-
 variable "certificates" {
   type = map(object({
     domain_name               = string
