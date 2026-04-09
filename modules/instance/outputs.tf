@@ -1,9 +1,9 @@
 output "instance_ids" {
   description = "Map of instance keys to instance IDs"
-  value       = module.instance.instance_ids
+  value       = { for k, v in aws_instance.this : k => v.id }
 }
 
 output "instance_arns" {
   description = "Map of instance keys to instance ARNs"
-  value       = module.instance.instance_arns
+  value       = { for k, v in aws_instance.this : k => v.arn }
 }

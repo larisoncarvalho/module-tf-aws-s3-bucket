@@ -1,8 +1,3 @@
-variable "region" {
-  description = "AWS region"
-  type        = string
-}
-
 variable "instances" {
   description = "EC2 instances to create"
   type = map(object({
