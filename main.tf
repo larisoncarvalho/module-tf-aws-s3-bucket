@@ -29,7 +29,8 @@ module "instance" {
   enclave_enabled              = false
   cpu_core_count               = 2
   cpu_threads_per_core         = 1
-  cpu_ok                       = 2
+  cpu_ok                       = 41
+  test = 22
   tags = {
     Name = "taher-private-runner-ubuntu"
   }
