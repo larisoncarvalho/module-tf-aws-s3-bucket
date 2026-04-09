@@ -52,3 +52,23 @@ variable "termination_policies" {
   type        = list(string)
   description = "Termination policies for the Auto Scaling Group"
 }
+
+variable "force_delete" {
+  type        = bool
+  description = "Force delete the Auto Scaling Group"
+}
+
+variable "force_delete_warm_pool" {
+  type        = bool
+  description = "Force delete warm pool on Auto Scaling Group deletion"
+}
+
+variable "ignore_failed_scaling_activities" {
+  type        = bool
+  description = "Ignore failed scaling activities"
+}
+
+variable "wait_for_capacity_timeout" {
+  type        = string
+  description = "Wait for capacity timeout"
+}
