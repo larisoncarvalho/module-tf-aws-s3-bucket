@@ -43,32 +43,12 @@ variable "package_type" {
   description = "Lambda deployment package type"
 }
 
-variable "filename" {
-  type        = string
-  description = "Path to the function deployment package"
-}
-
-variable "source_code_hash" {
-  type        = string
-  description = "Base64-encoded SHA256 hash of the package file"
-}
-
 variable "ephemeral_storage_size" {
   type        = number
   description = "Ephemeral storage size in MB"
 }
 
-variable "snap_start_apply_on" {
-  type        = string
-  description = "SnapStart optimization setting"
-}
-
 variable "tracing_mode" {
   type        = string
   description = "X-Ray tracing mode"
-}
-
-variable "publish" {
-  type        = bool
-  description = "Whether to publish creation/change as new Lambda Function Version"
 }
