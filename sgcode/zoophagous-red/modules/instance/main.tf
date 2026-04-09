@@ -16,8 +16,10 @@ resource "aws_instance" "this" {
   tenancy                = var.tenancy
   vpc_security_group_ids = var.security_group_ids
 
-  cpu_core_count       = var.cpu_core_count
-  cpu_threads_per_core = var.cpu_threads_per_core
+  cpu_options {
+    core_count       = var.cpu_core_count
+    threads_per_core = var.cpu_threads_per_core
+  }
 
   root_block_device {
     delete_on_termination = var.root_delete_on_termination
@@ -35,10 +37,6 @@ resource "aws_instance" "this" {
 
   enclave_options {
     enabled = var.enclave_enabled
-  }
-
-  hibernation_options {
-    configured = var.hibernation_configured
   }
 
   capacity_reservation_specification {

@@ -24,7 +24,6 @@ module "instance" {
   metadata_http_protocol_ipv6          = "disabled"
   metadata_instance_metadata_tags      = "disabled"
   enclave_enabled                      = false
-  hibernation_configured               = false
   capacity_reservation_preference      = "open"
   tags = {
     Name = "taher-private-runner-amz"

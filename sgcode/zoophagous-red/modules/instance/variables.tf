@@ -114,11 +114,6 @@ variable "enclave_enabled" {
   type        = bool
 }
 
-variable "hibernation_configured" {
-  description = "Hibernation configured flag"
-  type        = bool
-}
-
 variable "capacity_reservation_preference" {
   description = "Capacity reservation preference"
   type        = string
