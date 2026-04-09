@@ -13,6 +13,11 @@ variable "validation_method" {
   description = "Certificate validation method"
 }
 
+variable "certificate_transparency_logging_preference" {
+  type        = string
+  description = "Certificate transparency logging preference"
+}
+
 variable "tags" {
   type        = map(string)
   description = "Resource tags"

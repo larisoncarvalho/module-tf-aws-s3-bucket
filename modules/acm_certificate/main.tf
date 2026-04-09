@@ -4,7 +4,7 @@ resource "aws_acm_certificate" "this" {
   validation_method         = var.validation_method
   tags                      = var.tags
 
-  lifecycle {
-    create_before_destroy = true
+  options {
+    certificate_transparency_logging_preference = var.certificate_transparency_logging_preference
   }
 }

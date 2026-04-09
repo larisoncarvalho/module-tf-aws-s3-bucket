@@ -3,12 +3,12 @@ output "certificate_arn" {
   description = "ARN of the ACM certificate"
 }
 
+output "certificate_id" {
+  value       = aws_acm_certificate.this.id
+  description = "ID of the ACM certificate"
+}
+
 output "domain_validation_options" {
   value       = aws_acm_certificate.this.domain_validation_options
   description = "Domain validation options for the certificate"
-}
-
-output "status" {
-  value       = aws_acm_certificate.this.status
-  description = "Status of the certificate"
 }
