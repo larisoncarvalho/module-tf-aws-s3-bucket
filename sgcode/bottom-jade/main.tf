@@ -32,13 +32,17 @@ module "lambda_function" {
 
   architectures                  = ["x86_64"]
   ephemeral_storage_size         = 512
+  filename.                      = var.lambda_package_path
   function_name                  = "LambdaSQSProcessorFunction"
   handler                        = "lambda_function.lambda_handler"
   memory_size                    = 128
   package_type                   = "Zip"
+  publish                        = false
   reserved_concurrent_executions = 1
   role_arn                       = module.iam_role.role_arn
   runtime                        = "python3.9"
+  snap_start_apply_on            = "None"
+  source_code_hash               = var.lambda_source_code_hash
   timeout                        = 900
   tracing_mode                   = "PassThrough"
 }
