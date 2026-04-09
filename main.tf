@@ -11,5 +11,5 @@ module "runner_asg" {
   max_size                  = 5
   min_size                  = 1
   vpc_zone_identifier       = [var.subnet_id]
-  termination_policies      = ["Default"]
+  termination_policies      = []
 }
