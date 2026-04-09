@@ -32,7 +32,7 @@ module "lambda_function" {
 
   architectures                  = ["x86_64"]
   ephemeral_storage_size         = 512
-  filename.                      = var.lambda_package_path
+  filename                       = var.lambda_package_path
   function_name                  = "LambdaSQSProcessorFunction"
   handler                        = "lambda_function.lambda_handler"
   memory_size                    = 128
