@@ -14,7 +14,7 @@ variable "max_session_duration" {
 }
 
 variable "assume_role_policy" {
-  type        = object({})
+  type        = string
   description = "Assume role policy document"
 }
 

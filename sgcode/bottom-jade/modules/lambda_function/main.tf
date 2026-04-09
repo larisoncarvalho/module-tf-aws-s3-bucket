@@ -5,6 +5,7 @@ resource "aws_lambda_function" "this" {
   handler                        = var.handler
   memory_size                    = var.memory_size
   package_type                   = var.package_type
+  publish                        = var.publish
   reserved_concurrent_executions = var.reserved_concurrent_executions
   role                           = var.role_arn
   runtime                        = var.runtime

@@ -1,5 +1,5 @@
 resource "aws_iam_role" "this" {
-  assume_role_policy   = jsonencode(var.assume_role_policy)
+  assume_role_policy   = var.assume_role_policy
   max_session_duration = var.max_session_duration
   name                 = var.role_name
   path                 = var.role_path

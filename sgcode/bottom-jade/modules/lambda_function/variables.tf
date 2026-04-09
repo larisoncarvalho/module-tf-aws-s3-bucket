@@ -67,3 +67,8 @@ variable "tracing_mode" {
   type        = string
   description = "X-Ray tracing mode"
 }
+
+variable "publish" {
+  type        = bool
+  description = "Whether to publish creation/change as new Lambda Function Version"
+}
