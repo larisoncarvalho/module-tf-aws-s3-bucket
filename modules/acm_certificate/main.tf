@@ -12,10 +12,3 @@ resource "aws_acm_certificate" "this" {
     create_before_destroy = true
   }
 }
-
-resource "aws_acm_certificate_validation" "this" {
-  for_each = var.certificates
-
-  certificate_arn         = aws_acm_certificate.this[each.key].arn
-  validation_record_fqdns = each.value.validation_record_fqdns
-}
