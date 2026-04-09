@@ -26,14 +26,12 @@ module "iam_role" {
 module "lambda_function" {
   source = "./modules/lambda_function"
 
-  architectures    = ["x86_64"]
-  function_name    = "adhoc-lambda"
-  handler          = "lambda_function.lambda_handler"
-  memory_size      = 128
-  package_type     = "Zip"
-  role_arn         = module.iam_role.role_arn
-  runtime          = "python3.7"
-  timeout          = 900
-  filename         = var.lambda_package_path
-  source_code_hash = var.lambda_source_code_hash
+  architectures = ["x86_64"]
+  function_name = "adhoc-lambda"
+  handler       = "lambda_function.lambda_handler"
+  memory_size   = 128
+  package_type  = "Zip"
+  role_arn      = module.iam_role.role_arn
+  runtime       = "python3.7"
+  timeout       = 900
 }
