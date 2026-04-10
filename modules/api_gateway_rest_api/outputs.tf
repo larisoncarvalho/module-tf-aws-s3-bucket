@@ -3,7 +3,12 @@ output "api_id" {
   value       = aws_api_gateway_rest_api.this.id
 }
 
-output "created_date" {
-  description = "Creation date of the API Gateway REST API"
-  value       = aws_api_gateway_rest_api.this.created_date
+output "api_arn" {
+  description = "ARN of the API Gateway REST API"
+  value       = aws_api_gateway_rest_api.this.arn
+}
+
+output "root_resource_id" {
+  description = "Root resource ID of the API Gateway REST API"
+  value       = aws_api_gateway_rest_api.this.root_resource_id
 }

@@ -1,9 +1,9 @@
 output "api_id" {
   description = "ID of the API Gateway REST API"
-  value       = module.api_gateway_rest_api.api_id
+  value       = module.arunim_test_api.api_id
 }
 
-output "created_date" {
-  description = "Creation date of the API Gateway REST API"
-  value       = module.api_gateway_rest_api.created_date
+output "api_arn" {
+  description = "ARN of the API Gateway REST API"
+  value       = module.arunim_test_api.api_arn
 }

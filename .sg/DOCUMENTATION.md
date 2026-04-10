@@ -1,30 +1,45 @@
-# API Gateway Infrastructure
+# arunim-test-api-gateway
+
+API Gateway REST API infrastructure
 
 ## Overview
 
-This stack manages API Gateway REST API infrastructure in AWS.
+This stack manages an API Gateway REST API in AWS. It provisions a single REST API resource with configurable name and API key source.
 
 ## Modules
 
 ### api_gateway_rest_api
 
-Manages API Gateway REST API resources.
+Manages API Gateway REST API
 
 **Resources:**
-- `aws_api_gateway_rest_api.this` - REST API
+- `aws_api_gateway_rest_api.this` - REST API resource
 
-## Variables
+**Variables:**
+| Name | Type | Description |
+|------|------|-------------|
+| api_name | string | Name of the API Gateway REST API |
+| api_key_source | string | Source of the API key for requests |
+
+**Outputs:**
+| Name | Description |
+|------|-------------|
+| api_id | ID of the API Gateway REST API |
+| api_arn | ARN of the API Gateway REST API |
+| root_resource_id | Root resource ID of the API Gateway REST API |
+
+## Root Variables
 
 | Name | Type | Description | Default |
 |------|------|-------------|---------|
-| region | string | AWS region for resources | - |
+| region | string | AWS region for resources | eu-central-1 |
 
-## Outputs
+## Root Outputs
 
 | Name | Description |
 |------|-------------|
 | api_id | ID of the API Gateway REST API |
-| created_date | Creation date of the API Gateway REST API |
+| api_arn | ARN of the API Gateway REST API |
 
 ## Usage
 
@@ -52,7 +67,3 @@ terraform plan -var-file environments/sg.tfvars
 ```bash
 terraform apply -var-file environments/sg.tfvars
 ```
-
-## Region
-
-Resources are deployed to: **eu-central-1**
