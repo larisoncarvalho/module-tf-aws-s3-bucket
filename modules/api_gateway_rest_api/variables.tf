@@ -1,9 +1,9 @@
-variable "api_name" {
-  description = "Name of the API Gateway REST API"
+variable "name" {
   type        = string
+  description = "Name of the API Gateway REST API"
 }
 
 variable "api_key_source" {
-  description = "Source of the API key for requests"
   type        = string
+  description = "Source of the API key for requests (HEADER or AUTHORIZER)"
 }
