@@ -11,20 +11,20 @@ This stack manages API Gateway REST API infrastructure in AWS.
 Manages API Gateway REST API resources.
 
 **Resources:**
-- `aws_api_gateway_rest_api.this` - API Gateway REST API
+- `aws_api_gateway_rest_api.this` - REST API
 
 ## Variables
 
 | Name | Type | Description | Default |
 |------|------|-------------|---------|
-| region | string | AWS region | - |
+| region | string | AWS region for resources | - |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| api_id | API Gateway REST API ID |
-| api_created_date | API Gateway REST API creation date |
+| api_id | ID of the API Gateway REST API |
+| created_date | Creation date of the API Gateway REST API |
 
 ## Usage
 
@@ -44,15 +44,15 @@ chmod +x imports.sh
 ### Plan
 
 ```bash
-terraform plan -var-file=environments/sg.tfvars
+terraform plan -var-file environments/sg.tfvars
 ```
 
 ### Apply
 
 ```bash
-terraform apply -var-file=environments/sg.tfvars
+terraform apply -var-file environments/sg.tfvars
 ```
 
 ## Region
 
-This stack is configured for the `eu-central-1` region.
+Resources are deployed to: **eu-central-1**
