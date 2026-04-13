@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+
+"$1" import -var-file environments/sg.tfvars 'module.storage_accounts["bloblogging"].azurerm_storage_account.self' '/subscriptions/a97621d8-9158-4681-81b6-38b1222afba4/resourceGroups/NetworkWatcherRG/providers/Microsoft.Storage/storageAccounts/bloblogging'
+"$1" import -var-file environments/sg.tfvars 'module.storage_accounts["autoscalersgrunnsfhb4vyt"].azurerm_storage_account.self' '/subscriptions/a97621d8-9158-4681-81b6-38b1222afba4/resourceGroups/adis-eu/providers/Microsoft.Storage/storageAccounts/autoscalersgrunnsfhb4vyt'
+"$1" import -var-file environments/sg.tfvars 'module.storage_accounts["stgbackendsgrunnnz6ztbrv"].azurerm_storage_account.self' '/subscriptions/a97621d8-9158-4681-81b6-38b1222afba4/resourceGroups/adis-eu/providers/Microsoft.Storage/storageAccounts/stgbackendsgrunnnz6ztbrv'
+"$1" import -var-file environments/sg.tfvars 'module.storage_accounts["romedocspipeline"].azurerm_storage_account.self' '/subscriptions/a97621d8-9158-4681-81b6-38b1222afba4/resourceGroups/arunim-test-resource-group/providers/Microsoft.Storage/storageAccounts/romedocspipeline'
+"$1" import -var-file environments/sg.tfvars 'module.storage_accounts["autoscaleprivaterunbe10"].azurerm_storage_account.self' '/subscriptions/a97621d8-9158-4681-81b6-38b1222afba4/resourceGroups/autoscale-private-runner_group-bd75/providers/Microsoft.Storage/storageAccounts/autoscaleprivaterunbe10'
+"$1" import -var-file environments/sg.tfvars 'module.storage_accounts["autoscalersgrunnsfhb4vyt"].azurerm_storage_container.container[0]' 'https://autoscalersgrunnsfhb4vyt.blob.core.windows.net/autoscaler-state'
+"$1" import -var-file environments/sg.tfvars 'module.storage_accounts["autoscalersgrunnsfhb4vyt"].azurerm_storage_container.container[1]' 'https://autoscalersgrunnsfhb4vyt.blob.core.windows.net/deployments'
+"$1" import -var-file environments/sg.tfvars 'module.storage_accounts["stgbackendsgrunnnz6ztbrv"].azurerm_storage_container.container[0]' 'https://stgbackendsgrunnnz6ztbrv.blob.core.windows.net/runner'
+"$1" import -var-file environments/sg.tfvars 'module.storage_accounts["stgbackendsgrunnnz6ztbrv"].azurerm_storage_container.container[1]' 'https://stgbackendsgrunnnz6ztbrv.blob.core.windows.net/system'
+"$1" import -var-file environments/sg.tfvars 'module.storage_accounts["romedocspipeline"].azurerm_storage_container.container[0]' 'https://romedocspipeline.blob.core.windows.net/docs'
+"$1" import -var-file environments/sg.tfvars 'module.storage_accounts["autoscaleprivaterunbe10"].azurerm_storage_container.container[0]' 'https://autoscaleprivaterunbe10.blob.core.windows.net/azure-webjobs-hosts'
+"$1" import -var-file environments/sg.tfvars 'module.storage_accounts["autoscaleprivaterunbe10"].azurerm_storage_container.container[1]' 'https://autoscaleprivaterunbe10.blob.core.windows.net/azure-webjobs-secrets'
+"$1" import -var-file environments/sg.tfvars 'module.storage_accounts["autoscaleprivaterunbe10"].azurerm_storage_container.container[2]' 'https://autoscaleprivaterunbe10.blob.core.windows.net/scm-releases'
