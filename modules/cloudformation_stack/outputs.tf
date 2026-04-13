@@ -1,14 +1,14 @@
 output "stack_id" {
   description = "The ID of the CloudFormation stack"
-  value       = module.cloudformation_stack.stack_id
+  value       = aws_cloudformation_stack.this.id
 }
 
 output "stack_name" {
   description = "The name of the CloudFormation stack"
-  value       = module.cloudformation_stack.stack_name
+  value       = aws_cloudformation_stack.this.name
 }
 
-output "stack_outputs" {
+output "outputs" {
   description = "The outputs of the CloudFormation stack"
-  value       = module.cloudformation_stack.outputs
+  value       = aws_cloudformation_stack.this.outputs
 }
