@@ -2,13 +2,19 @@
 
 ## Description
 
-CloudFormation stack for the Stulyze application managing a DynamoDB table resource.
+CloudFormation stack managing the Stulyze application DynamoDB table resource.
 
 ## Module Overview
 
 | Module | Description |
 |--------|-------------|
 | `cloudformation_stack` | Manages the stulyze-app CloudFormation stack |
+
+## Resources
+
+| Resource Type | Logical Name | Description |
+|---------------|--------------|-------------|
+| `aws_cloudformation_stack` | `this` | The stulyze-app CloudFormation stack |
 
 ## Variables Reference
 
@@ -36,9 +42,12 @@ terraform init
 ### 2. Import Existing Resources
 
 ```sh
-chmod +x imports.sh
 ./imports.sh terraform
-# or for OpenTofu:
+```
+
+Or with OpenTofu:
+
+```sh
 ./imports.sh tofu
 ```
 
