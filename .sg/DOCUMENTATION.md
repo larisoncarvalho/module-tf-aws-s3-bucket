@@ -2,37 +2,37 @@
 
 ## Description
 
-CloudFormation stack for the Stulyze application managing a DynamoDB table resource.
+CloudFormation stack managing the stulyze-app infrastructure including a DynamoDB table for Stulyze resources.
 
 ## Stack Overview
 
-| Module | Description |
-|--------|-------------|
-| `cloudformation_stack` | Manages the stulyze-app CloudFormation stack |
+| Component | Description |
+|-----------|-------------|
+| Region | ap-southeast-1 |
+| Module | `cloudformation_stack` — Manages the stulyze-app CloudFormation stack |
 
-## Module Details
+## Module Overview
 
-### cloudformation_stack (`modules/cloudformation_stack`)
+### `cloudformation_stack`
 
-Manages an `aws_cloudformation_stack` resource for the Stulyze application.
+Manages the `aws_cloudformation_stack` resource for the stulyze-app stack.
 
-**Resources:**
-| Resource Type | Logical Name | Description |
-|---------------|--------------|-------------|
-| `aws_cloudformation_stack` | `this` | The Stulyze app CloudFormation stack |
+| Resource | Type | Description |
+|----------|------|-------------|
+| `aws_cloudformation_stack.this` | `aws_cloudformation_stack` | The CloudFormation stack |
 
 ## Variables Reference
 
-| Variable | Type | Default | Description |
-|----------|------|---------|-------------|
-| `region` | `string` | — | AWS region |
-| `stulyze_app_name` | `string` | — | CloudFormation stack name for the Stulyze application |
-| `stulyze_app_disable_rollback` | `bool` | — | Set to true to disable rollback of the stack if stack creation failed |
+| Name | Type | Description | Default |
+|------|------|-------------|---------|
+| `region` | `string` | AWS region | `"ap-southeast-1"` |
+| `name` | `string` | Stack name | `"stulyze-app"` |
+| `disable_rollback` | `bool` | Set to true to disable rollback of the stack if stack creation failed | `false` |
 
 ## Outputs Reference
 
-| Output | Description |
-|--------|-------------|
+| Name | Description |
+|------|-------------|
 | `stack_id` | A unique identifier of the CloudFormation stack |
 | `stack_outputs` | A map of outputs from the CloudFormation stack |
 
@@ -48,7 +48,7 @@ terraform init
 
 ```sh
 ./imports.sh terraform
-# or with OpenTofu:
+# or for OpenTofu:
 ./imports.sh tofu
 ```
 
@@ -63,9 +63,3 @@ terraform plan -var-file environments/sg.tfvars
 ```sh
 terraform apply -var-file environments/sg.tfvars
 ```
-
-## Notes
-
-- This stack targets the `ap-southeast-1` (Singapore) AWS region.
-- The CloudFormation stack `stulyze-app` is imported via `imports.sh` — no new stack is created.
-- `disable_rollback` is set to `false` by default, meaning CloudFormation will roll back on failure.

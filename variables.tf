@@ -3,12 +3,12 @@ variable "region" {
   type        = string
 }
 
-variable "stulyze_app_name" {
-  description = "CloudFormation stack name for the Stulyze application"
+variable "name" {
+  description = "Stack name"
   type        = string
 }
 
-variable "stulyze_app_disable_rollback" {
+variable "disable_rollback" {
   description = "Set to true to disable rollback of the stack if stack creation failed"
   type        = bool
 }
