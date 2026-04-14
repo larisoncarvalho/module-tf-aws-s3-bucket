@@ -6,5 +6,4 @@ module "iam_role" {
   max_session_duration = var.iam_role_max_session_duration
   name                 = var.iam_role_name
   path                 = var.iam_role_path
-  test = 23
 }

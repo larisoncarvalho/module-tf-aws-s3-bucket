@@ -6,7 +6,6 @@ variable "region" {
 variable "iam_role_name" {
   type        = string
   description = "Friendly name of the IAM role"
-  test =25
 }
 
 variable "iam_role_path" {
