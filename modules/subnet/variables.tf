@@ -1,8 +1,3 @@
-variable "region" {
-  type        = string
-  description = "AWS region"
-}
-
 variable "vpc_id" {
   type        = string
   description = "VPC ID for the subnets"
@@ -16,4 +11,5 @@ variable "subnets" {
     tags                        = map(string)
   }))
   description = "Map of subnets to create"
+  default     = {}
 }
