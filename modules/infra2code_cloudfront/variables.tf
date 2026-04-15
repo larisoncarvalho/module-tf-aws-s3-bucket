@@ -21,34 +21,39 @@ variable "logging_bucket" {
 variable "logging_prefix" {
   description = "Prefix for CloudFront logs"
   type        = string
+  default     = "cloudfront/dash"
 }
 
 variable "geo_whitelist_countries" {
   description = "List of country codes for geo-restriction whitelist"
   type        = list(string)
+  default     = []
 }
 
 variable "cache_policy_id" {
-  description = "CloudFront cache policy ID (Managed-CachingOptimized)"
+  description = "CloudFront cache policy ID"
   type        = string
 }
 
 variable "response_headers_policy_id" {
-  description = "CloudFront response headers policy ID (Managed-SecurityHeadersPolicy)"
+  description = "CloudFront response headers policy ID"
   type        = string
 }
 
 variable "default_root_object" {
   description = "Default root object for CloudFront"
   type        = string
+  default     = "index.html"
 }
 
 variable "price_class" {
   description = "CloudFront price class"
   type        = string
+  default     = "PriceClass_All"
 }
 
-variable "common_tags" {
-  description = "Common tags to apply to all resources"
+variable "tags" {
+  description = "Tags to apply to resources"
   type        = map(string)
+  default     = {}
 }
