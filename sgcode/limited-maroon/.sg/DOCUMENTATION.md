@@ -2,37 +2,39 @@
 
 ## Description
 
-CloudFormation stack for the Stulyze application managing a DynamoDB table resource.
+CloudFormation stack for the Stulyze application, managing a DynamoDB table resource.
 
 ## Stack Overview
 
-| Module | Description |
-|--------|-------------|
-| `cloudformation_stack` | Manages the stulyze-app CloudFormation stack |
+| Component | Details |
+|-----------|---------|
+| Region | ap-southeast-1 |
+| Provider | AWS (hashicorp/aws) |
 
-## Module Details
+## Modules
 
-### cloudformation_stack (`modules/cloudformation_stack`)
+### `cloudformation_stack`
 
-Manages the `aws_cloudformation_stack` resource for the Stulyze application.
+Manages the stulyze-app CloudFormation stack.
 
-**Resources:**
-- `aws_cloudformation_stack.this` — The CloudFormation stack
+| Resource Type | Logical Name | Description |
+|---------------|--------------|-------------|
+| `aws_cloudformation_stack` | `this` | The CloudFormation stack resource |
 
 ## Variables Reference
 
 | Name | Type | Description | Default |
 |------|------|-------------|---------|
 | `region` | `string` | AWS region | `"ap-southeast-1"` |
-| `name` | `string` | CloudFormation stack name | `"stulyze-app"` |
+| `name` | `string` | Stack name | `"stulyze-app"` |
 | `disable_rollback` | `bool` | Set to true to disable rollback of the stack if stack creation failed | `false` |
 
 ## Outputs Reference
 
 | Name | Description |
 |------|-------------|
-| `stack_id` | The unique identifier of the CloudFormation stack |
-| `stack_outputs` | A map of outputs from the CloudFormation stack |
+| `stack_id` | A unique identifier of the stack |
+| `stack_outputs` | A map of outputs from the stack |
 
 ## Usage Instructions
 
@@ -42,15 +44,11 @@ Manages the `aws_cloudformation_stack` resource for the Stulyze application.
 terraform init
 ```
 
-### 2. Import existing resources
+### 2. Import Existing Resources
 
 ```sh
 ./imports.sh terraform
-```
-
-Or with OpenTofu:
-
-```sh
+# or for OpenTofu:
 ./imports.sh tofu
 ```
 
