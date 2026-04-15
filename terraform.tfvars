@@ -1,0 +1,10 @@
+cloudfront_aliases      = ["docs.qa.stackguardian.io"]
+distribution_comment    = "docs"
+s3_origin_domain        = "sg-docs-qa.s3.eu-central-1.amazonaws.com"
+origin_id               = "sg-docs-qa.s3.eu-central-1.amazonaws.com"
+origin_access_identity  = "origin-access-identity/cloudfront/EPRD63SV6WM7V"
+cache_policy_id         = "658327ea-f89d-4fab-a63d-7e88639e58f6"
+function_arn            = "arn:aws:cloudfront::790543352839:function/redirect-lambda"
+acm_certificate_arn     = "arn:aws:acm:us-east-1:790543352839:certificate/1ebf4f02-1f17-4580-b3c3-8a899fc8c703"
+price_class             = "PriceClass_All"
+default_root_object     = "/index.html"
