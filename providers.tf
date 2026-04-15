@@ -1,0 +1,1 @@
+# Provider configuration removed - already defined in provider.tf
