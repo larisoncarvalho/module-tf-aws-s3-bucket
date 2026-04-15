@@ -1,0 +1,37 @@
+variable "role_name" {
+  description = "Name of the IAM role"
+  type        = string
+}
+
+variable "role_path" {
+  description = "Path for the IAM role"
+  type        = string
+}
+
+variable "role_description" {
+  description = "Description of the IAM role"
+  type        = string
+}
+
+variable "max_session_duration" {
+  description = "Maximum session duration in seconds"
+  type        = number
+}
+
+variable "assume_role_policy_document" {
+  description = "Assume role policy document"
+  type = object({
+    Version = string
+    Statement = list(object({
+      Effect    = string
+      Principal = map(any)
+      Action    = string
+    }))
+  })
+}
+
+variable "attached_policy_arns" {
+  description = "Set of policy ARNs to attach to the role"
+  type        = set(string)
+  default     = []
+}
