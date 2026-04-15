@@ -1,0 +1,1 @@
+# Module outputs removed - no resources defined
