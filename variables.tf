@@ -1,14 +1,14 @@
 variable "region" {
-  description = "AWS region"
   type        = string
+  description = "AWS region"
 }
 
 variable "name" {
-  description = "Stack name"
   type        = string
+  description = "CloudFormation stack name"
 }
 
 variable "disable_rollback" {
-  description = "Set to true to disable rollback of the stack if stack creation failed"
   type        = bool
+  description = "Set to true to disable rollback of the stack if stack creation failed"
 }

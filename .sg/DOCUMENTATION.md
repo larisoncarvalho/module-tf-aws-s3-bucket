@@ -2,42 +2,39 @@
 
 ## Description
 
-CloudFormation stack for the stulyze-app application, managing a DynamoDB table resource.
+CloudFormation stack for the Stulyze application managing a DynamoDB table resource.
 
 ## Stack Overview
 
-| Component | Details |
-|-----------|---------|
-| Stack Name | stulyze-app-cloudformation |
-| Region | ap-southeast-1 |
-| Provider | hashicorp/aws |
+| Module | Description |
+|--------|-------------|
+| `cloudformation_stack` | Manages the stulyze-app CloudFormation stack |
 
-## Modules
+## Module Details
 
-### `cloudformation_stack`
+### cloudformation_stack (`./modules/cloudformation_stack`)
 
-Manages the stulyze-app CloudFormation stack.
+Manages the `aws_cloudformation_stack` resource for the Stulyze application.
 
-| Resource Type | Logical Name | Description |
-|---------------|--------------|-------------|
-| `aws_cloudformation_stack` | `this` | The CloudFormation stack resource |
+**Resources:**
+- `aws_cloudformation_stack.this` — The CloudFormation stack
 
-## Variables
+## Variables Reference
 
 | Name | Type | Description | Default |
 |------|------|-------------|---------|
 | `region` | `string` | AWS region | `"ap-southeast-1"` |
-| `name` | `string` | Stack name | `"stulyze-app"` |
+| `name` | `string` | CloudFormation stack name | `"stulyze-app"` |
 | `disable_rollback` | `bool` | Set to true to disable rollback of the stack if stack creation failed | `false` |
 
-## Outputs
+## Outputs Reference
 
 | Name | Description |
 |------|-------------|
-| `stack_id` | A unique identifier of the stack |
-| `stack_outputs` | A map of outputs from the stack |
+| `stack_id` | The unique identifier of the CloudFormation stack |
+| `stack_outputs` | A map of outputs from the CloudFormation stack |
 
-## Usage
+## Usage Instructions
 
 ### 1. Initialize
 
@@ -45,15 +42,12 @@ Manages the stulyze-app CloudFormation stack.
 terraform init
 ```
 
-### 2. Import existing resources
+### 2. Import Existing Resources
 
 ```sh
+chmod +x imports.sh
 ./imports.sh terraform
-```
-
-Or with OpenTofu:
-
-```sh
+# or for OpenTofu:
 ./imports.sh tofu
 ```
 
