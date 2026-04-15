@@ -1,0 +1,5 @@
+region                 = "eu-central-1"
+bucket                 = "orchestrator-resources-qa"
+acl_grant_owner_id     = "9384ba540c1093b9523308500d905bb6385ccb904afa22a41b8309ad4cc458ff"
+acl_grant_secondary_id = "5d1c6125124144c11c18f8ffce30a7c3b5e3b54691575904e65172a677fc8b33"
+bucket_policy          = "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::756925330322:root\",\"arn:aws:iam::790543352839:root\",\"arn:aws:iam::756925330322:role/ecs-workflow-admin-task-execution-role-qa\",\"arn:aws:iam::756925330322:role/ecs-workflow-admin-task-service-role-qa\"]},\"Action\":\"s3:*\",\"Resource\":[\"arn:aws:s3:::orchestrator-resources-qa/*\",\"arn:aws:s3:::orchestrator-resources-qa\"]}]}"
