@@ -1,24 +1,24 @@
-variable "distribution_aliases" {
+variable "aliases" {
   description = "Domain aliases for the CloudFront distribution"
   type        = list(string)
 }
 
-variable "distribution_comment" {
+variable "comment" {
   description = "Comment to describe the distribution"
   type        = string
 }
 
-variable "s3_origin_domain_name" {
+variable "origin_domain_name" {
   description = "S3 bucket domain name for origin"
   type        = string
 }
 
-variable "s3_origin_id" {
+variable "origin_id" {
   description = "Unique identifier for the origin"
   type        = string
 }
 
-variable "cloudfront_oai" {
+variable "origin_access_identity" {
   description = "CloudFront origin access identity for S3"
   type        = string
 }
@@ -28,7 +28,7 @@ variable "acm_certificate_arn" {
   type        = string
 }
 
-variable "cloudfront_function_arn" {
+variable "function_arn" {
   description = "ARN of CloudFront function for viewer requests"
   type        = string
 }
