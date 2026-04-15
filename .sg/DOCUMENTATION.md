@@ -1,65 +1,82 @@
-# orchestrator-resources-qa
+# orchestrator-resources-qa-s3
 
-S3 bucket for orchestrator resources in QA environment
+## Description
 
-## Overview
+S3 bucket for orchestrator resources in QA environment with versioning, SSE-AES256 encryption, public access blocking, and bucket policy.
 
-This stack manages an S3 bucket with versioning, encryption, and public access controls for the orchestrator resources in the QA environment.
+## Stack Overview
 
-## Modules
+| Component | Details |
+|-----------|---------|
+| Stack Name | orchestrator-resources-qa-s3 |
+| Region | eu-central-1 |
+| Bucket | orchestrator-resources-qa |
 
-### s3_bucket
+## Module Overview
 
-Manages S3 bucket with versioning, encryption, and public access controls
+### `s3_bucket` (`./modules/s3_bucket`)
 
-**Resources:**
-- `aws_s3_bucket.this` - Main S3 bucket
-- `aws_s3_bucket_versioning.this` - Bucket versioning configuration
-- `aws_s3_bucket_server_side_encryption_configuration.this` - Server-side encryption
-- `aws_s3_bucket_public_access_block.this` - Public access block settings
-- `aws_s3_bucket_policy.this` - Bucket policy for principal access
-- `aws_s3_bucket_acl.this` - Bucket ACL configuration
+Manages the orchestrator-resources-qa S3 bucket with associated ACL grants, versioning, encryption, public access block, and bucket policy.
 
-## Variables
+| Resource | Type | Description |
+|----------|------|-------------|
+| `aws_s3_bucket.this` | aws_s3_bucket | Primary S3 bucket |
+| `aws_s3_bucket_acl.this` | aws_s3_bucket_acl | ACL with dual FULL_CONTROL grants |
+| `aws_s3_bucket_versioning.this` | aws_s3_bucket_versioning | Versioning enabled, MFA delete disabled |
+| `aws_s3_bucket_server_side_encryption_configuration.this` | aws_s3_bucket_server_side_encryption_configuration | SSE-AES256 encryption |
+| `aws_s3_bucket_public_access_block.this` | aws_s3_bucket_public_access_block | All public access blocked |
+| `aws_s3_bucket_policy.this` | aws_s3_bucket_policy | IAM principal access policy |
 
-| Name | Type | Description | Default |
-|------|------|-------------|---------|
-| region | string | AWS region | - |
+## Variables Reference
 
-## Outputs
+| Name | Type | Description |
+|------|------|-------------|
+| `region` | string | AWS region where resources will be managed |
+| `bucket` | string | Name of the S3 bucket |
+| `acl_grant_owner_id` | string | Canonical user ID of the bucket owner granted FULL_CONTROL |
+| `acl_grant_secondary_id` | string | Canonical user ID of the secondary grantee with FULL_CONTROL |
+| `bucket_policy` | string | JSON bucket policy document granting s3:* to specified AWS principals |
+
+## Outputs Reference
 
 | Name | Description |
 |------|-------------|
-| bucket_id | ID of the S3 bucket |
-| bucket_arn | ARN of the S3 bucket |
+| `bucket_id` | The name of the S3 bucket |
+| `bucket_arn` | The ARN of the S3 bucket |
 
-## Usage
+## Usage Instructions
 
-### Initialize
+### 1. Initialize
 
-```bash
+```sh
 terraform init
 ```
 
-### Import Existing Resources
+### 2. Import Existing Resources
 
-```bash
+```sh
 chmod +x imports.sh
-./imports.sh
+./imports.sh terraform
+# or for OpenTofu:
+./imports.sh tofu
 ```
 
-### Plan
+### 3. Plan
 
-```bash
-terraform plan -var-file=environments/terraform.tfvars
+```sh
+terraform plan -var-file environments/sg.tfvars
 ```
 
-### Apply
+### 4. Apply
 
-```bash
-terraform apply -var-file=environments/terraform.tfvars
+```sh
+terraform apply -var-file environments/sg.tfvars
 ```
 
-## Region
+## Notes
 
-This stack is deployed in **eu-central-1**.
+- All public access is blocked on the bucket (block_public_acls, block_public_policy, ignore_public_acls, restrict_public_buckets all set to true)
+- Versioning is enabled; once enabled it cannot be fully disabled, only suspended
+- SSE-AES256 encryption is applied by default to all objects
+- The bucket policy grants `s3:*` to four specific AWS principals across two accounts
+- Two canonical users hold FULL_CONTROL ACL grants on the bucket

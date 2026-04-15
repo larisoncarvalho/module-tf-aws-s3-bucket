@@ -1,9 +1,9 @@
 output "bucket_id" {
-  value       = module.orchestrator_resources_qa.bucket_id
-  description = "ID of the S3 bucket"
+  description = "THE NAME OF THE S3 BUCKET"
+  value       = module.s3_bucket.bucket_id
 }
 
 output "bucket_arn" {
-  value       = module.orchestrator_resources_qa.bucket_arn
-  description = "ARN of the S3 bucket"
+  description = "THE ARN OF THE S3 BUCKET"
+  value       = module.s3_bucket.bucket_arn
 }
