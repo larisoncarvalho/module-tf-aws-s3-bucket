@@ -1,0 +1,8 @@
+vpc_cidr               = "10.0.0.0/16"
+vpc_name               = "do_not_delete"
+public_subnet_1a_cidr  = "10.0.10.0/24"
+public_subnet_1b_cidr  = "10.0.20.0/24"
+private_subnet_1a_cidr = "10.0.110.0/24"
+private_subnet_1b_cidr = "10.0.120.0/24"
+availability_zone_a    = "eu-central-1a"
+availability_zone_b    = "eu-central-1b"
