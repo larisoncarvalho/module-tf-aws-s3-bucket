@@ -1,9 +1,9 @@
 output "route_table_id" {
   description = "Route table ID"
-  value       = module.route_table.route_table_id
+  value       = aws_route_table.this.id
 }
 
 output "route_table_arn" {
   description = "Route table ARN"
-  value       = module.route_table.route_table_arn
+  value       = aws_route_table.this.arn
 }
