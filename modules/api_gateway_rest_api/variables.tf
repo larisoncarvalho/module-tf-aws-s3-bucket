@@ -1,8 +1,3 @@
-variable "region" {
-  type        = string
-  description = "AWS region for the resources"
-}
-
 variable "apis" {
   type = map(object({
     name                     = string
