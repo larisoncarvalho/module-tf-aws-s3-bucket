@@ -1,0 +1,29 @@
+variable "name" {
+  type        = string
+  description = "The name of the REST API"
+}
+
+variable "description" {
+  type        = string
+  description = "Description of the REST API"
+}
+
+variable "api_key_source" {
+  type        = string
+  description = "Source of the API key for requests"
+}
+
+variable "binary_media_types" {
+  type        = list(string)
+  description = "List of binary media types supported by the API"
+}
+
+variable "minimum_compression_size" {
+  type        = number
+  description = "Minimum response size to compress for the REST API"
+}
+
+variable "tags" {
+  type        = map(string)
+  description = "Tags to apply to the REST API"
+}
