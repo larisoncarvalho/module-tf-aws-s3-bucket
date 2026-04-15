@@ -1,49 +1,49 @@
-output "s3_bucket_id" {
-  description = "The name of the bucket."
-  value       = try(aws_s3_bucket_policy.this[0].id, aws_s3_bucket.this[0].id, "")
+output "int_qa_cert_arn" {
+  value       = module.int_qa_stackguardian_cert.arn
+  description = "ARN of the int.qa.stackguardian.io certificate"
 }
 
-output "s3_bucket_arn" {
-  description = "The ARN of the bucket. Will be of format arn:aws:s3:::bucketname."
-  value       = try(aws_s3_bucket.this[0].arn, "")
+output "stackguardian_cert_arn" {
+  value       = module.stackguardian_cert.arn
+  description = "ARN of the stackguardian.io certificate"
 }
 
-output "s3_bucket_bucket_domain_name" {
-  description = "The bucket domain name. Will be of format bucketname.s3.amazonaws.com."
-  value       = try(aws_s3_bucket.this[0].bucket_domain_name, "")
+output "platform_api_dev_id" {
+  value       = module.platform_api_dev.id
+  description = "ID of the platform-api-dev REST API"
 }
 
-output "s3_bucket_bucket_regional_domain_name" {
-  description = "The bucket region-specific domain name. The bucket domain name including the region name, please refer here for format. Note: The AWS CloudFront allows specifying S3 region-specific endpoint when creating S3 origin, it will prevent redirect issues from CloudFront to S3 Origin URL."
-  value       = try(aws_s3_bucket.this[0].bucket_regional_domain_name, "")
+output "sg_api_qa_id" {
+  value       = module.sg_api_qa.id
+  description = "ID of the sg-api-qa REST API"
 }
 
-output "s3_bucket_hosted_zone_id" {
-  description = "The Route 53 Hosted Zone ID for this bucket's region."
-  value       = try(aws_s3_bucket.this[0].hosted_zone_id, "")
+output "arunim_test_api_id" {
+  value       = module.arunim_test_api.id
+  description = "ID of the arunim-test-api REST API"
 }
 
-output "s3_bucket_lifecycle_configuration_rules" {
-  description = "The lifecycle rules of the bucket, if the bucket is configured with lifecycle rules. If not, this will be an empty string."
-  value       = try(aws_s3_bucket_lifecycle_configuration.this[0].rule, "")
+output "github_oidc_wrapper_id" {
+  value       = module.github_oidc_wrapper.id
+  description = "ID of the github-oidc-wrapper REST API"
 }
 
-output "s3_bucket_policy" {
-  description = "The policy of the bucket, if the bucket is configured with a policy. If not, this will be an empty string."
-  value       = try(aws_s3_bucket_policy.this[0].policy, "")
+output "orchestrator_platform_api_id" {
+  value       = module.orchestrator_platform_api.id
+  description = "ID of the orchestrator-platform-api GraphQL API"
 }
 
-output "s3_bucket_region" {
-  description = "The AWS region this bucket resides in."
-  value       = try(aws_s3_bucket.this[0].region, "")
+output "de_manuel_meireles_workgroup_id" {
+  value       = module.de_manuel_meireles_workgroup.id
+  description = "ID of the de-manuel-meireles Athena workgroup"
 }
 
-output "s3_bucket_website_endpoint" {
-  description = "The website endpoint, if the bucket is configured with a website. If not, this will be an empty string."
-  value       = try(aws_s3_bucket_website_configuration.this[0].website_endpoint, "")
+output "dev_manuel_meireles_workgroup_id" {
+  value       = module.dev_manuel_meireles_workgroup.id
+  description = "ID of the dev-manuel-meireles Athena workgroup"
 }
 
-output "s3_bucket_website_domain" {
-  description = "The domain of the website endpoint, if the bucket is configured with a website. If not, this will be an empty string. This is used to create Route 53 alias records."
-  value       = try(aws_s3_bucket_website_configuration.this[0].website_domain, "")
+output "dev_pedro_chaves_workgroup_id" {
+  value       = module.dev_pedro_chaves_workgroup.id
+  description = "ID of the dev-pedro-chaves Athena workgroup"
 }
