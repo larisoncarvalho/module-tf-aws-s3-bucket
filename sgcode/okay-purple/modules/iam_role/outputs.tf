@@ -1,14 +1,14 @@
-output "role_arn" {
+output "arn" {
   description = "ARN of the IAM role"
   value       = aws_iam_role.this.arn
 }
 
-output "role_name" {
+output "name" {
   description = "Name of the IAM role"
   value       = aws_iam_role.this.name
 }
 
-output "role_id" {
+output "unique_id" {
   description = "Stable and unique string identifying the IAM role"
   value       = aws_iam_role.this.unique_id
 }

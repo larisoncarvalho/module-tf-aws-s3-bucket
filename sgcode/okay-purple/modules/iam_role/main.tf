@@ -7,8 +7,7 @@ resource "aws_iam_role" "this" {
 }
 
 resource "aws_iam_role_policy_attachment" "this" {
-  for_each = var.attached_policy_arns
-
-  policy_arn = each.value
+  for_each   = var.attached_policy_arns
+  policy_arn = each.value.arn
   role       = aws_iam_role.this.name
 }

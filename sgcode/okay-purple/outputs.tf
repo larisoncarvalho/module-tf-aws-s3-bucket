@@ -1,14 +1,14 @@
-output "role_arn" {
+output "iam_role_arn" {
   description = "ARN of the IAM role"
-  value       = module.iam_role.role_arn
+  value       = module.iam_role.arn
 }
 
-output "role_name" {
+output "iam_role_name" {
   description = "Name of the IAM role"
-  value       = module.iam_role.role_name
+  value       = module.iam_role.name
 }
 
-output "role_id" {
+output "iam_role_unique_id" {
   description = "Stable and unique string identifying the IAM role"
-  value       = module.iam_role.role_id
+  value       = module.iam_role.unique_id
 }

@@ -1,6 +1,5 @@
 module "iam_role" {
-  source = "./modules/iam_role"
-
+  source               = "./modules/iam_role"
   assume_role_policy   = var.assume_role_policy
   attached_policy_arns = var.attached_policy_arns
   description          = var.description
