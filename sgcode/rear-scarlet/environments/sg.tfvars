@@ -1,5 +1,5 @@
 region                  = "eu-central-1"
-bucket                  = "test-1-1-3"
+bucket                  = "abc"
 tags                    = {
   Environment = "Dev_1"
   hello       = "world"

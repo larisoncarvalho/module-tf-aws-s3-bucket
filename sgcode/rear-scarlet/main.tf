@@ -1,3 +1,4 @@
+# S3 bucket with server-side encryption, versioning, and public access block configuration.
 module "s3_bucket" {
   source = "./modules/s3_bucket"
 
