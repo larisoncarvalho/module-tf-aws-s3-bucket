@@ -1,3 +1,6 @@
+# This file defines the root module configuration for ap-southeast-1-infrastructure,
+# wiring together Athena workgroup, CloudFormation stack, Internet Gateway, Network ACL, and Route Table.
+
 module "athena_workgroup" {
   source = "./modules/athena_workgroup"
 
