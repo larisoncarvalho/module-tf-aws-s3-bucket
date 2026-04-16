@@ -1,0 +1,19 @@
+region                  = "eu-central-1"
+bucket                  = "test-1-1-3"
+tags                    = {
+  Environment = "Dev_1"
+  hello       = "world"
+  Name        = "My bucket"
+}
+versioning_status       = "Enabled"
+versioning_mfa_delete   = "Disabled"
+sse_algorithm           = "AES256"
+bucket_key_enabled      = false
+block_public_acls       = false
+block_public_policy     = false
+ignore_public_acls      = false
+restrict_public_buckets = false
+acl_grantee_id          = "9384ba540c1093b9523308500d905bb6385ccb904afa22a41b8309ad4cc458ff"
+acl_grantee_type        = "CanonicalUser"
+acl_permission          = "FULL_CONTROL"
+acl_owner_id            = "9384ba540c1093b9523308500d905bb6385ccb904afa22a41b8309ad4cc458ff"
