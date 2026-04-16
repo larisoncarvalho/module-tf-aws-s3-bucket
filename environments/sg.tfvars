@@ -1,0 +1,16 @@
+region                                    = "ap-southeast-1"
+athena_workgroup_name                     = "primary"
+athena_workgroup_state                    = "ENABLED"
+athena_enforce_workgroup_configuration    = false
+athena_publish_cloudwatch_metrics_enabled = true
+athena_requester_pays_enabled             = false
+athena_selected_engine_version            = "AUTO"
+cloudformation_stack_name                 = "stulyze-app"
+cloudformation_disable_rollback           = false
+vpc_id                                    = "vpc-05fed6e9ac0f64a6e"
+network_acl_default_network_acl_id        = "acl-0b1b4715940488f98"
+network_acl_subnet_ids = [
+  "subnet-0df3e594471580676",
+  "subnet-0aee82bad124320d3",
+  "subnet-0aec9ccc3d679b626",
+]
