@@ -1,35 +1,29 @@
 variable "region" {
+  description = "AWS region for the provider"
   type        = string
-  description = "AWS region for the provider."
 }
 
-variable "name" {
+variable "iam_role_name" {
+  description = "Friendly name of the IAM role"
   type        = string
-  description = "Friendly name of the IAM role."
 }
 
-variable "path" {
+variable "iam_role_path" {
+  description = "Path to the IAM role"
   type        = string
-  description = "Path to the IAM role."
 }
 
-variable "description" {
+variable "iam_role_description" {
+  description = "Description of the IAM role"
   type        = string
-  description = "Description of the IAM role."
 }
 
-variable "max_session_duration" {
+variable "iam_role_assume_role_policy" {
+  description = "Policy document granting an entity permission to assume the role (JSON string)"
+  type        = string
+}
+
+variable "iam_role_max_session_duration" {
+  description = "Maximum session duration in seconds for the IAM role"
   type        = number
-  description = "Maximum session duration in seconds for the IAM role."
-}
-
-variable "assume_role_policy" {
-  type        = string
-  description = "JSON-encoded assume-role policy document granting an entity permission to assume the role."
-}
-
-variable "attached_policy_arns" {
-  type        = map(object({ arn = string }))
-  description = "Map of managed policy ARNs to attach to the IAM role."
-  default     = {}
 }

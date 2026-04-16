@@ -2,32 +2,37 @@
 
 ## Description
 
-IAM role granting API Gateway permissions within the Amazon SageMaker Service Catalog portfolio, with an attached AWS managed policy.
+IAM role granting API Gateway permissions within the Amazon SageMaker portfolio of products.
 
 ## Module Overview
 
 | Module | Description |
 |--------|-------------|
-| `iam_role` | Manages the AmazonSageMakerServiceCatalogProductsApiGatewayRole IAM role and its managed policy attachment. |
+| `iam_role` | Manages the AmazonSageMakerServiceCatalogProductsApiGatewayRole IAM role |
+
+## Resources
+
+| Resource | Type | Description |
+|----------|------|-------------|
+| `aws_iam_role.this` | `aws_iam_role` | IAM role for SageMaker Service Catalog API Gateway |
 
 ## Variables Reference
 
-| Name | Type | Description | Default |
-|------|------|-------------|---------|
-| `region` | `string` | AWS region for the provider. | — |
-| `name` | `string` | Friendly name of the IAM role. | — |
-| `path` | `string` | Path to the IAM role. | — |
-| `description` | `string` | Description of the IAM role. | — |
-| `max_session_duration` | `number` | Maximum session duration in seconds for the IAM role. | — |
-| `assume_role_policy` | `string` | JSON-encoded assume-role policy document granting an entity permission to assume the role. | — |
-| `attached_policy_arns` | `map(object({ arn = string }))` | Map of managed policy ARNs to attach to the IAM role. | `{}` |
+| Variable | Type | Description |
+|----------|------|-------------|
+| `region` | `string` | AWS region for the provider |
+| `iam_role_name` | `string` | Friendly name of the IAM role |
+| `iam_role_path` | `string` | Path to the IAM role |
+| `iam_role_description` | `string` | Description of the IAM role |
+| `iam_role_assume_role_policy` | `string` | Policy document granting an entity permission to assume the role (JSON string) |
+| `iam_role_max_session_duration` | `number` | Maximum session duration in seconds for the IAM role |
 
 ## Outputs Reference
 
-| Name | Description |
-|------|-------------|
-| `role_arn` | ARN of the IAM role. |
-| `role_name` | Name of the IAM role. |
+| Output | Description |
+|--------|-------------|
+| `role_name` | Name of the IAM role |
+| `role_arn` | ARN of the IAM role |
 
 ## Usage Instructions
 
@@ -37,13 +42,15 @@ IAM role granting API Gateway permissions within the Amazon SageMaker Service Ca
 terraform init
 ```
 
-### 2. Import existing resources
+### 2. Import Existing Resources
 
 ```sh
 ./imports.sh terraform
+# or for OpenTofu:
+./imports.sh tofu
 ```
 
-### 3. Plan (verify zero drift)
+### 3. Plan
 
 ```sh
 terraform plan -var-file environments/sg.tfvars
@@ -54,10 +61,3 @@ terraform plan -var-file environments/sg.tfvars
 ```sh
 terraform apply -var-file environments/sg.tfvars
 ```
-
-## Resources Managed
-
-| Resource | Import ID |
-|----------|-----------|
-| `module.iam_role.aws_iam_role.this` | `AmazonSageMakerServiceCatalogProductsApiGatewayRole` |
-| `module.iam_role.aws_iam_role_policy_attachment.this["amazon_sagemaker_service_catalog_products_api_gateway_service_role_policy"]` | `AmazonSageMakerServiceCatalogProductsApiGatewayRole/arn:aws:iam::aws:policy/service-role/AmazonSageMakerServiceCatalogProductsApiGatewayServiceRolePolicy` |
