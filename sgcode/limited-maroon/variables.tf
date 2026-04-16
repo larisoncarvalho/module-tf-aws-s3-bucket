@@ -4,7 +4,7 @@ variable "region" {
 }
 
 variable "name" {
-  description = "Stack name"
+  description = "CloudFormation stack name"
   type        = string
 }
 

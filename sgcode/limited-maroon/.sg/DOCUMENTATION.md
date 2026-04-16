@@ -2,39 +2,37 @@
 
 ## Description
 
-CloudFormation stack for the Stulyze application, managing a DynamoDB table resource.
+CloudFormation stack for the Stulyze application managing a DynamoDB table resource.
 
 ## Stack Overview
 
-| Component | Details |
-|-----------|---------|
-| Region | ap-southeast-1 |
-| Provider | AWS (hashicorp/aws) |
+| Module | Description |
+|--------|-------------|
+| `cloudformation_stack` | Manages the stulyze-app CloudFormation stack |
 
-## Modules
+## Module Details
 
-### `cloudformation_stack`
+### cloudformation_stack (`./modules/cloudformation_stack`)
 
-Manages the stulyze-app CloudFormation stack.
+Manages the `aws_cloudformation_stack` resource for the Stulyze application.
 
-| Resource Type | Logical Name | Description |
-|---------------|--------------|-------------|
-| `aws_cloudformation_stack` | `this` | The CloudFormation stack resource |
+**Resources:**
+- `aws_cloudformation_stack.this` — The CloudFormation stack
 
 ## Variables Reference
 
 | Name | Type | Description | Default |
 |------|------|-------------|---------|
 | `region` | `string` | AWS region | `"ap-southeast-1"` |
-| `name` | `string` | Stack name | `"stulyze-app"` |
+| `name` | `string` | CloudFormation stack name | `"stulyze-app"` |
 | `disable_rollback` | `bool` | Set to true to disable rollback of the stack if stack creation failed | `false` |
 
 ## Outputs Reference
 
 | Name | Description |
 |------|-------------|
-| `stack_id` | A unique identifier of the stack |
-| `stack_outputs` | A map of outputs from the stack |
+| `stack_id` | The unique identifier of the CloudFormation stack |
+| `stack_outputs` | A map of outputs from the CloudFormation stack |
 
 ## Usage Instructions
 
@@ -47,6 +45,7 @@ terraform init
 ### 2. Import Existing Resources
 
 ```sh
+chmod +x imports.sh
 ./imports.sh terraform
 # or for OpenTofu:
 ./imports.sh tofu
@@ -63,3 +62,9 @@ terraform plan -var-file environments/sg.tfvars
 ```sh
 terraform apply -var-file environments/sg.tfvars
 ```
+
+## Notes
+
+- This stack imports an existing CloudFormation stack named `stulyze-app` in `ap-southeast-1`.
+- After import, running `terraform plan` should show no changes (zero drift).
+- Do not add `template_body` or `template_url` unless the existing stack was originally created with one — omitting them avoids drift on stacks managed outside Terraform.

@@ -1,9 +1,9 @@
 output "stack_id" {
-  description = "A unique identifier of the stack"
+  description = "The unique identifier of the CloudFormation stack"
   value       = module.cloudformation_stack.stack_id
 }
 
 output "stack_outputs" {
-  description = "A map of outputs from the stack"
+  description = "A map of outputs from the CloudFormation stack"
   value       = module.cloudformation_stack.stack_outputs
 }
