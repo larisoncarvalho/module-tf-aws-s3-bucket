@@ -1,6 +1,6 @@
 variable "region" {
   type        = string
-  description = "AWS region to deploy resources into"
+  description = "AWS region"
 }
 
 variable "athena_workgroup_name" {
@@ -43,9 +43,9 @@ variable "cloudformation_disable_rollback" {
   description = "Whether to disable rollback on stack creation failure"
 }
 
-variable "vpc_id" {
+variable "internet_gateway_vpc_id" {
   type        = string
-  description = "The VPC ID used by internet gateway, network ACL, and route table"
+  description = "The VPC ID to attach the internet gateway to"
 }
 
 variable "network_acl_default_network_acl_id" {
@@ -55,5 +55,10 @@ variable "network_acl_default_network_acl_id" {
 
 variable "network_acl_subnet_ids" {
   type        = list(string)
-  description = "List of subnet IDs to apply the Network ACL to"
+  description = "List of subnet IDs to apply the network ACL to"
+}
+
+variable "route_table_vpc_id" {
+  type        = string
+  description = "The VPC ID for the route table"
 }

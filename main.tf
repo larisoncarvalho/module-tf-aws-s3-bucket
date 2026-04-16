@@ -1,6 +1,3 @@
-# This file defines the root module configuration for ap-southeast-1-infrastructure,
-# wiring together Athena workgroup, CloudFormation stack, Internet Gateway, Network ACL, and Route Table.
-
 module "athena_workgroup" {
   source = "./modules/athena_workgroup"
 
@@ -22,13 +19,12 @@ module "cloudformation_stack" {
 module "internet_gateway" {
   source = "./modules/internet_gateway"
 
-  vpc_id = var.vpc_id
+  vpc_id = var.internet_gateway_vpc_id
 }
 
 module "network_acl" {
   source = "./modules/network_acl"
 
-  vpc_id                 = var.vpc_id
   default_network_acl_id = var.network_acl_default_network_acl_id
   subnet_ids             = var.network_acl_subnet_ids
 }
@@ -36,6 +32,6 @@ module "network_acl" {
 module "route_table" {
   source = "./modules/route_table"
 
-  vpc_id              = var.vpc_id
+  vpc_id              = var.route_table_vpc_id
   internet_gateway_id = module.internet_gateway.id
 }

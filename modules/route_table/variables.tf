@@ -5,5 +5,5 @@ variable "vpc_id" {
 
 variable "internet_gateway_id" {
   type        = string
-  description = "The Internet Gateway ID for the default route"
+  description = "The internet gateway ID for the default route"
 }

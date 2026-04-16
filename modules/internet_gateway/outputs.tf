@@ -1,9 +1,9 @@
 output "id" {
-  description = "The ID of the Internet Gateway"
+  description = "ID of the internet gateway"
   value       = aws_internet_gateway.this.id
 }
 
 output "arn" {
-  description = "The ARN of the Internet Gateway"
+  description = "ARN of the internet gateway"
   value       = aws_internet_gateway.this.arn
 }
