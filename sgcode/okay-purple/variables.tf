@@ -27,3 +27,9 @@ variable "iam_role_max_session_duration" {
   description = "Maximum session duration in seconds for the IAM role"
   type        = number
 }
+
+variable "iam_role_policy_arns" {
+  description = "Map of policy ARNs to attach to the IAM role"
+  type        = map(string)
+  default     = {}
+}
