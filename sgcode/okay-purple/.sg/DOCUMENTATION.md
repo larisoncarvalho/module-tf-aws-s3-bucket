@@ -2,33 +2,33 @@
 
 ## Description
 
-IAM role granting API Gateway permissions within the Amazon SageMaker portfolio of products.
+IAM role granting API Gateway permissions within the Amazon SageMaker portfolio of products, with its managed policy attachment.
 
 ## Module Overview
 
 | Module | Description |
 |--------|-------------|
-| `iam_role` | Manages the AmazonSageMakerServiceCatalogProductsApiGatewayRole IAM role and its managed policy attachments |
+| `iam_role` | Manages the AmazonSageMakerServiceCatalogProductsApiGatewayRole IAM role and its attached managed policy via aws_iam_role_policy_attachment. |
 
 ## Variables Reference
 
-| Name | Type | Description | Default |
-|------|------|-------------|---------|
-| `region` | `string` | AWS region | — |
-| `name` | `string` | Friendly name of the IAM role | — |
-| `path` | `string` | Path to the IAM role | — |
-| `description` | `string` | Description of the IAM role | — |
-| `max_session_duration` | `number` | Maximum session duration in seconds for the IAM role | — |
-| `assume_role_policy` | `string` | JSON policy document granting an entity permission to assume the role | — |
-| `attached_policy_arns` | `map(object({ arn = string }))` | Map of managed policy ARNs to attach to the IAM role | `{}` |
+| Name | Type | Description |
+|------|------|-------------|
+| `region` | `string` | AWS region for the provider. |
+| `name` | `string` | Friendly name of the IAM role. |
+| `path` | `string` | Path to the IAM role. |
+| `description` | `string` | Description of the IAM role. |
+| `max_session_duration` | `number` | Maximum session duration in seconds for the IAM role. |
+| `assume_role_policy` | `string` | JSON-encoded assume-role policy document granting an entity permission to assume the role. |
+| `policy_attachments` | `map(object({policy_arn}))` | Map of managed policy ARNs to attach to the IAM role. |
 
 ## Outputs Reference
 
 | Name | Description |
 |------|-------------|
-| `iam_role_arn` | ARN of the IAM role |
-| `iam_role_name` | Name of the IAM role |
-| `iam_role_unique_id` | Stable and unique string identifying the IAM role |
+| `role_name` | Name of the IAM role. |
+| `role_arn` | ARN of the IAM role. |
+| `role_id` | Stable unique ID of the IAM role. |
 
 ## Usage Instructions
 
@@ -41,7 +41,10 @@ terraform init
 ### 2. Import existing resources
 
 ```sh
+chmod +x imports.sh
 ./imports.sh terraform
+# or for OpenTofu:
+./imports.sh tofu
 ```
 
 ### 3. Plan
