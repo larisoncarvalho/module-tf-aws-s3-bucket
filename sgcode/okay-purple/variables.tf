@@ -18,18 +18,17 @@ variable "description" {
   description = "Description of the IAM role"
 }
 
-variable "assume_role_policy" {
-  type        = string
-  description = "JSON-encoded assume role policy document"
-}
-
 variable "max_session_duration" {
   type        = number
   description = "Maximum session duration in seconds"
 }
 
+variable "assume_role_policy" {
+  type        = string
+  description = "JSON-encoded assume role policy document"
+}
+
 variable "attached_policy_arns" {
-  type        = map(object({ arn = string }))
-  description = "Map of managed policy ARNs to attach to the IAM role"
-  default     = {}
+  type        = set(string)
+  description = "Set of managed policy ARNs to attach to the IAM role"
 }
