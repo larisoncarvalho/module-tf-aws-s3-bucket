@@ -2,33 +2,40 @@
 
 ## Description
 
-IAM role granting API Gateway permissions within the Amazon SageMaker Service Catalog portfolio, with an attached AWS managed policy.
+IAM role granting API Gateway permissions within the Amazon SageMaker portfolio of products.
 
 ## Module Overview
 
 | Module | Description |
 |--------|-------------|
-| `iam_role` | Manages the AmazonSageMakerServiceCatalogProductsApiGatewayRole IAM role and its managed policy attachment. |
+| `iam_role` | Manages the AmazonSageMakerServiceCatalogProductsApiGatewayRole IAM role and its managed policy attachment |
+
+## Resources
+
+| Resource Type | Logical Name | Description |
+|---------------|--------------|-------------|
+| `aws_iam_role` | `this` | IAM role for SageMaker Service Catalog API Gateway |
+| `aws_iam_role_policy_attachment` | `this` | Attaches managed policies to the IAM role |
 
 ## Variables Reference
 
-| Name | Type | Description | Default |
-|------|------|-------------|---------|
-| `region` | `string` | AWS region for the provider. | — |
-| `name` | `string` | Friendly name of the IAM role. | — |
-| `path` | `string` | Path to the IAM role. | — |
-| `description` | `string` | Description of the IAM role. | — |
-| `max_session_duration` | `number` | Maximum session duration in seconds for the IAM role. | — |
-| `assume_role_policy` | `string` | JSON-encoded assume-role policy document. | — |
-| `attached_policy_arns` | `map(object({arn=string}))` | Map of managed IAM policy ARNs to attach to the role. | `{}` |
+| Variable | Type | Description | Default |
+|----------|------|-------------|---------|
+| `region` | `string` | AWS region | — |
+| `name` | `string` | Friendly name of the IAM role | — |
+| `path` | `string` | Path to the IAM role | — |
+| `description` | `string` | Description of the IAM role | — |
+| `assume_role_policy` | `string` | JSON-encoded assume role policy document | — |
+| `max_session_duration` | `number` | Maximum session duration in seconds | — |
+| `attached_policy_arns` | `map(object({ arn = string }))` | Map of managed policy ARNs to attach to the IAM role | `{}` |
 
 ## Outputs Reference
 
-| Name | Description |
-|------|-------------|
-| `role_arn` | ARN of the IAM role. |
-| `role_name` | Name of the IAM role. |
-| `role_id` | Stable and unique string identifying the IAM role. |
+| Output | Description |
+|--------|-------------|
+| `role_arn` | ARN of the IAM role |
+| `role_name` | Name of the IAM role |
+| `role_id` | Stable and unique string identifying the IAM role |
 
 ## Usage Instructions
 
@@ -42,6 +49,8 @@ terraform init
 
 ```sh
 ./imports.sh terraform
+# or for OpenTofu:
+./imports.sh tofu
 ```
 
 ### 3. Plan
