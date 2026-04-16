@@ -23,8 +23,8 @@ variable "assume_role_policy" {
   description = "JSON-encoded assume-role policy document granting an entity permission to assume the role."
 }
 
-variable "policy_attachments" {
-  type        = map(object({ policy_arn = string }))
+variable "attached_policy_arns" {
+  type        = map(object({ arn = string }))
   description = "Map of managed policy ARNs to attach to the IAM role."
   default     = {}
 }
