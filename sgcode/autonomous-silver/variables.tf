@@ -1,7 +1,7 @@
-variable "region" {
-  type        = string
-  description = "AWS region for the provider."
-}
+# variable "region" {
+#   type        = string
+#   description = "AWS region for the provider."
+# }
 
 variable "iam_role_name" {
   type        = string
