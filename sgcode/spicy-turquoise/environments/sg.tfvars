@@ -23,7 +23,7 @@ tags = {
 user_data = <<-EOT
   #!/bin/bash
   
-  cat > /usr/local/bin/auto-shutdown.sh << 'SCRIPT'
+  cat > /usr/local/bin/auto-shutdown.sh ${"<<"}  'SCRIPT'
   #!/bin/bash
   IDLE_FILE="/tmp/idle-minutes"
   THRESHOLD_MINUTES=$${IDLE_THRESHOLD:-240}
