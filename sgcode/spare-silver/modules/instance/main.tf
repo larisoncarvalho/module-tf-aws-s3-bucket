@@ -12,7 +12,8 @@ resource "aws_instance" "this" {
   lifecycle {
     ignore_changes = [
       user_data,
-      user_data_base64
+      user_data_base64,
+      user_data_replace_on_change
     ]
   }
 }
