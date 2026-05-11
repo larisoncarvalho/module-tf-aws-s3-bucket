@@ -17,6 +17,8 @@ module "instance" {
   root_block_device_delete_on_termination = var.root_block_device_delete_on_termination
   source_dest_check                       = var.source_dest_check
   subnet_id                               = var.subnet_id
+  tags                                    = var.tags
   tenancy                                 = var.tenancy
+  user_data                               = var.user_data
   vpc_security_group_ids                  = var.vpc_security_group_ids
 }

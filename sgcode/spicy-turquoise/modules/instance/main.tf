@@ -8,7 +8,9 @@ resource "aws_instance" "this" {
   source_dest_check      = var.source_dest_check
   subnet_id              = var.subnet_id
   tenancy                = var.tenancy
+  user_data              = var.user_data
   vpc_security_group_ids = var.vpc_security_group_ids
+  tags                   = var.tags
 
   capacity_reservation_specification {
     capacity_reservation_preference = var.capacity_reservation_preference

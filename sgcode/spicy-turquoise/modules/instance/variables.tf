@@ -87,3 +87,13 @@ variable "root_block_device_delete_on_termination" {
   type        = bool
   description = "Whether the root block device is deleted on instance termination"
 }
+
+variable "user_data" {
+  type        = string
+  description = "User data to provide when launching the instance"
+}
+
+variable "tags" {
+  type        = map(string)
+  description = "Map of tags to assign to the instance"
+}
