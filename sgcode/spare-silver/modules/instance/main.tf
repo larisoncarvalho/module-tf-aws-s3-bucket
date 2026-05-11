@@ -8,6 +8,13 @@ resource "aws_instance" "this" {
   source_dest_check      = var.source_dest_check
   subnet_id              = var.subnet_id
   vpc_security_group_ids = var.vpc_security_group_ids
+
+  lifecycle {
+    ignore_changes = [
+      user_data,
+      user_data_base64
+    ]
+  }
 }
 
 resource "aws_ebs_volume" "this" {
