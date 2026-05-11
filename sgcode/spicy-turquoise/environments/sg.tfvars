@@ -26,8 +26,8 @@ user_data = <<-EOT
   cat > /usr/local/bin/auto-shutdown.sh << 'SCRIPT'
   #!/bin/bash
   IDLE_FILE="/tmp/idle-minutes"
-  THRESHOLD_MINUTES=${IDLE_THRESHOLD:-240}
-  CPU_THRESHOLD=${CPU_THRESHOLD:-5}
+  THRESHOLD_MINUTES=$${IDLE_THRESHOLD:-240}
+  CPU_THRESHOLD=$${CPU_THRESHOLD:-5}
   
   [ ! -f "$IDLE_FILE" ] && echo 0 > "$IDLE_FILE"
   
