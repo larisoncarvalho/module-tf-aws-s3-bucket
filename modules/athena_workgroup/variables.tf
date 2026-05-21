@@ -1,8 +1,3 @@
-variable "region" {
-  type        = string
-  description = "AWS region where resources will be managed"
-}
-
 variable "name" {
   type        = string
   description = "Name of the Athena workgroup"
