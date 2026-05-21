@@ -1,0 +1,29 @@
+variable "region" {
+  description = "AWS region"
+  type        = string
+}
+
+variable "iam_role_name" {
+  description = "Friendly name of the IAM role"
+  type        = string
+}
+
+variable "iam_role_path" {
+  description = "Path to the IAM role"
+  type        = string
+}
+
+variable "iam_role_description" {
+  description = "Description of the IAM role"
+  type        = string
+}
+
+variable "iam_role_assume_role_policy" {
+  description = "Policy that grants an entity permission to assume the role (JSON string)"
+  type        = string
+}
+
+variable "iam_role_max_session_duration" {
+  description = "Maximum session duration in seconds for the IAM role"
+  type        = number
+}
