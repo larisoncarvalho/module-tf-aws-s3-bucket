@@ -1,0 +1,14 @@
+region                  = "eu-central-1"
+name                    = "taher-private-runner"
+max_size                = 5
+min_size                = 0
+desired_capacity        = 0
+default_cooldown        = 300
+health_check_grace_period = 300
+health_check_type       = "EC2"
+protect_from_scale_in   = false
+service_linked_role_arn = "arn:aws:iam::790543352839:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling"
+termination_policies    = ["Default"]
+vpc_zone_identifier     = ["subnet-02aff1dbfda577bb1"]
+launch_template_id      = "lt-00ead3b0f34510223"
+launch_template_version = "$Latest"
