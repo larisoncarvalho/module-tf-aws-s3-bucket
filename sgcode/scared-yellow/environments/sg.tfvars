@@ -1,0 +1,209 @@
+region  = "global"
+project = "597595105496"
+
+bindings = [
+  {
+    role    = "roles/aiplatform.expressUser"
+    members = ["serviceAccount:vertex-express@stackguardian-nonprod.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/aiplatform.serviceAgent"
+    members = ["serviceAccount:service-597595105496@gcp-sa-aiplatform.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/analyticshub.admin"
+    members = ["serviceAccount:infra2code-gcp@stackguardian-nonprod.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/artifactregistry.serviceAgent"
+    members = ["serviceAccount:service-597595105496@gcp-sa-artifactregistry.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/axt.admin"
+    members = ["user:digbijayinee.clara@stackguardian.io"]
+  },
+  {
+    role    = "roles/baremetalsolution.admin"
+    members = ["serviceAccount:infra2code-gcp@stackguardian-nonprod.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/billing.projectManager"
+    members = ["user:johannes.scheuerer@stackguardian.io"]
+  },
+  {
+    role    = "roles/cloudaicompanion.admin"
+    members = ["serviceAccount:infra2code-gcp@stackguardian-nonprod.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/cloudaicompanion.serviceAgent"
+    members = ["serviceAccount:service-597595105496@gcp-sa-cloudaicompanion.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/cloudbuild.builds.builder"
+    members = ["serviceAccount:597595105496@cloudbuild.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/cloudbuild.serviceAgent"
+    members = ["serviceAccount:service-597595105496@gcp-sa-cloudbuild.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/cloudkms.serviceAgent"
+    members = ["serviceAccount:service-597595105496@gcp-sa-cloudkms.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/cloudsql.client"
+    members = ["serviceAccount:rome-cloud-run@stackguardian-nonprod.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/compute.admin"
+    members = ["serviceAccount:test-197@stackguardian-nonprod.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/compute.serviceAgent"
+    members = ["serviceAccount:service-597595105496@compute-system.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/container.defaultNodeServiceAccount"
+    members = ["serviceAccount:tf-gke-test-cluster-gc-gqeo@stackguardian-nonprod.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/container.serviceAgent"
+    members = ["serviceAccount:service-597595105496@container-engine-robot.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/containerregistry.ServiceAgent"
+    members = ["serviceAccount:service-597595105496@containerregistry.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/datacatalog.admin"
+    members = ["serviceAccount:infra2code-gcp@stackguardian-nonprod.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/dataconnectors.admin"
+    members = ["serviceAccount:infra2code-gcp@stackguardian-nonprod.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/documentaicore.serviceAgent"
+    members = ["serviceAccount:service-597595105496@gcp-sa-prod-dai-core.iam.gserviceaccount.com"]
+  },
+  {
+    role = "roles/editor"
+    members = [
+      "serviceAccount:597595105496-compute@developer.gserviceaccount.com",
+      "serviceAccount:597595105496@cloudservices.gserviceaccount.com",
+      "serviceAccount:clara-sg-test@stackguardian-nonprod.iam.gserviceaccount.com",
+    ]
+  },
+  {
+    role    = "roles/iam.securityAdmin"
+    members = ["user:arunim.chaudhary@stackguardian.io"]
+  },
+  {
+    role    = "roles/iam.serviceAccountCreator"
+    members = ["serviceAccount:clara-sg-test@stackguardian-nonprod.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/iam.serviceAccountUser"
+    members = ["serviceAccount:sg-test-gcp-clara@stackguardian-nonprod.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/iam.workloadIdentityPoolAdmin"
+    members = ["serviceAccount:clara-sg-test@stackguardian-nonprod.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/iam.workloadIdentityUser"
+    members = ["serviceAccount:clara-sg-test@stackguardian-nonprod.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/logging.serviceAgent"
+    members = ["serviceAccount:service-597595105496@gcp-sa-logging.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/monitoring.metricWriter"
+    members = ["serviceAccount:tf-gke-test-cluster-gc-gqeo@stackguardian-nonprod.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/networkmanagement.serviceAgent"
+    members = ["serviceAccount:service-597595105496@gcp-sa-networkmanagement.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/notebooks.serviceAgent"
+    members = ["serviceAccount:service-597595105496@gcp-sa-notebooks.iam.gserviceaccount.com"]
+  },
+  {
+    role = "roles/owner"
+    members = [
+      "serviceAccount:clara-sg-test@stackguardian-nonprod.iam.gserviceaccount.com",
+      "serviceAccount:demoaccount-475@stackguardian-nonprod.iam.gserviceaccount.com",
+      "serviceAccount:gcp-sg-oidc-connector-test@stackguardian-nonprod.iam.gserviceaccount.com",
+      "serviceAccount:infra2code-gcp@stackguardian-nonprod.iam.gserviceaccount.com",
+      "serviceAccount:jo-sg-account@stackguardian-nonprod.iam.gserviceaccount.com",
+      "serviceAccount:sg-prod-gcp@stackguardian-nonprod.iam.gserviceaccount.com",
+      "serviceAccount:sg-qa-account@stackguardian-nonprod.iam.gserviceaccount.com",
+      "serviceAccount:sg-service-account-clara@597595105496.iam.gserviceaccount.com",
+      "serviceAccount:sg-service-account-delete@stackguardian-nonprod.iam.gserviceaccount.com",
+      "serviceAccount:sg-service-account-jojo@597595105496.iam.gserviceaccount.com",
+      "serviceAccount:sg-service-account@597595105496.iam.gserviceaccount.com",
+      "serviceAccount:sg-test-gcp-clara@stackguardian-nonprod.iam.gserviceaccount.com",
+      "serviceAccount:sg-test-service-account-456@stackguardian-nonprod.iam.gserviceaccount.com",
+      "serviceAccount:sg-test0@stackguardian-nonprod.iam.gserviceaccount.com",
+      "serviceAccount:terraform-test@stackguardian-nonprod.iam.gserviceaccount.com",
+      "user:adis.halilovic@stackguardian.io",
+      "user:akshat.tandon@stackguardian.io",
+      "user:akshat.tandon@tandlabs.com",
+      "user:arunim.chaudhary@stackguardian.io",
+      "user:digbijayinee.clara@stackguardian.io",
+      "user:johannes.scheuerer@stackguardian.io",
+      "user:larison.carvalho@stackguardian.io",
+      "user:richard.loomis@stackguardian.io",
+      "user:shivang.tiwari@stackguardian.io",
+      "user:taher.kathanawala@stackguardian.io",
+    ]
+  },
+  {
+    role    = "roles/pubsub.serviceAgent"
+    members = ["serviceAccount:service-597595105496@gcp-sa-pubsub.iam.gserviceaccount.com"]
+  },
+  {
+    role = "roles/resourcemanager.organizationAdmin"
+    members = [
+      "serviceAccount:clara-sg-test@stackguardian-nonprod.iam.gserviceaccount.com",
+      "serviceAccount:testing-integration@stackguardian-nonprod.iam.gserviceaccount.com",
+      "user:arunim.chaudhary@stackguardian.io",
+      "user:johannes.scheuerer@stackguardian.io",
+      "user:karl.driesen@stackguardian.io",
+    ]
+  },
+  {
+    role    = "roles/run.admin"
+    members = ["serviceAccount:infra2code-gcp@stackguardian-nonprod.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/run.serviceAgent"
+    members = ["serviceAccount:service-597595105496@serverless-robot-prod.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/servicenetworking.serviceAgent"
+    members = ["serviceAccount:service-597595105496@service-networking.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/stackdriver.resourceMetadata.writer"
+    members = ["serviceAccount:tf-gke-test-cluster-gc-gqeo@stackguardian-nonprod.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/storage.admin"
+    members = ["serviceAccount:infra2code-gcp@stackguardian-nonprod.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/viewer"
+    members = ["serviceAccount:stackguardian-connector-static@stackguardian-nonprod.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/vpcaccess.admin"
+    members = ["serviceAccount:infra2code-gcp@stackguardian-nonprod.iam.gserviceaccount.com"]
+  },
+  {
+    role    = "roles/vpcaccess.serviceAgent"
+    members = ["serviceAccount:service-597595105496@gcp-sa-vpcaccess.iam.gserviceaccount.com"]
+  },
+]
