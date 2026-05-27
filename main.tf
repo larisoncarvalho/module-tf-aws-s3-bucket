@@ -22,5 +22,5 @@ module "project_organization_policy" {
 module "service_account_key" {
   source               = "./modules/service_account_key"
   for_each             = var.service_account_keys
-  service_account_keys = var.service_account_keys
+  service_account_keys = { (each.key) = each.value }
 }
