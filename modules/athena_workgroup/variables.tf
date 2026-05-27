@@ -10,12 +10,12 @@ variable "state" {
 
 variable "enforce_workgroup_configuration" {
   type        = bool
-  description = "Whether the settings for the workgroup override client-side settings"
+  description = "Boolean whether the settings for the workgroup override client-side settings"
 }
 
 variable "publish_cloudwatch_metrics_enabled" {
   type        = bool
-  description = "Whether Amazon CloudWatch metrics are enabled for the workgroup"
+  description = "Boolean whether Amazon CloudWatch metrics are enabled for the workgroup"
 }
 
 variable "requester_pays_enabled" {

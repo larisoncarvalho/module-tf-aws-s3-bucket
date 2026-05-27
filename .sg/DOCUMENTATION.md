@@ -1,39 +1,54 @@
-# athena-workgroup-primary
+# stulyze-infrastructure
 
 ## Description
 
-Manages an AWS Athena workgroup named `primary` in the `ap-southeast-1` region.
+Manages a CloudFormation stack for the Stulyze application and an Athena workgroup in ap-southeast-1.
 
-## Module Overview
+## Stack Overview
 
 | Module | Description |
 |--------|-------------|
-| `athena_workgroup` | Manages the primary Athena workgroup and its configuration |
+| `cloudformation_stack` | Manages the stulyze-app CloudFormation stack |
+| `athena_workgroup` | Manages the primary Athena workgroup |
 
-## Resources
+## Modules
 
-| Resource Type | Logical Name | Description |
-|---------------|--------------|-------------|
-| `aws_athena_workgroup` | `this` | The primary Athena workgroup |
+### cloudformation_stack (`./modules/cloudformation_stack`)
+
+Manages the `stulyze-app` AWS CloudFormation stack.
+
+**Resources:**
+- `aws_cloudformation_stack.this` — The CloudFormation stack
+
+### athena_workgroup (`./modules/athena_workgroup`)
+
+Manages the `primary` Athena workgroup with engine versioning and CloudWatch metrics configuration.
+
+**Resources:**
+- `aws_athena_workgroup.this` — The Athena workgroup
 
 ## Variables Reference
 
-| Name | Type | Default | Description |
-|------|------|---------|-------------|
-| `region` | `string` | `"ap-southeast-1"` | AWS region where resources will be managed |
-| `name` | `string` | `"primary"` | Name of the Athena workgroup |
-| `state` | `string` | `"ENABLED"` | State of the workgroup. Valid values are `DISABLED` or `ENABLED` |
-| `enforce_workgroup_configuration` | `bool` | `false` | Whether the settings for the workgroup override client-side settings |
-| `publish_cloudwatch_metrics_enabled` | `bool` | `true` | Whether Amazon CloudWatch metrics are enabled for the workgroup |
-| `requester_pays_enabled` | `bool` | `false` | Whether members can reference Amazon S3 Requester Pays buckets in queries |
-| `selected_engine_version` | `string` | `"AUTO"` | Requested engine version for the workgroup |
+| Variable | Type | Default | Description |
+|----------|------|---------|-------------|
+| `region` | `string` | `"ap-southeast-1"` | AWS region |
+| `cloudformation_stack_name` | `string` | `"stulyze-app"` | Name of the CloudFormation stack |
+| `cloudformation_stack_disable_rollback` | `bool` | `false` | Disable rollback on stack creation failure |
+| `athena_workgroup_name` | `string` | `"primary"` | Name of the Athena workgroup |
+| `athena_workgroup_state` | `string` | `"ENABLED"` | State of the workgroup (DISABLED or ENABLED) |
+| `athena_workgroup_enforce_workgroup_configuration` | `bool` | `false` | Whether workgroup settings override client-side settings |
+| `athena_workgroup_publish_cloudwatch_metrics_enabled` | `bool` | `true` | Whether CloudWatch metrics are enabled |
+| `athena_workgroup_requester_pays_enabled` | `bool` | `false` | Whether Requester Pays buckets are allowed |
+| `athena_workgroup_selected_engine_version` | `string` | `"AUTO"` | Requested Athena engine version |
 
 ## Outputs Reference
 
-| Name | Description |
-|------|-------------|
-| `athena_workgroup_arn` | ARN of the primary Athena workgroup |
-| `athena_workgroup_id` | ID (name) of the primary Athena workgroup |
+| Output | Description |
+|--------|-------------|
+| `cloudformation_stack_name` | Name of the CloudFormation stack |
+| `cloudformation_stack_id` | Unique identifier of the CloudFormation stack |
+| `athena_workgroup_name` | Name of the Athena workgroup |
+| `athena_workgroup_arn` | ARN of the Athena workgroup |
 
 ## Usage Instructions
 
@@ -46,6 +61,7 @@ terraform init
 ### 2. Import existing resources
 
 ```sh
+chmod +x imports.sh
 ./imports.sh terraform
 # or for OpenTofu:
 ./imports.sh tofu
