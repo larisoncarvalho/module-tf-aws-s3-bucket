@@ -4,21 +4,12 @@ variable "project" {
 }
 
 variable "service" {
-  description = "The service to apply audit logging for (e.g. allServices)"
+  description = "The service for which audit logging is configured"
   type        = string
 }
 
-variable "audit_log_config_admin_read" {
-  description = "Log type for admin read audit logs"
-  type        = string
-}
-
-variable "audit_log_config_data_read" {
-  description = "Log type for data read audit logs"
-  type        = string
-}
-
-variable "audit_log_config_data_write" {
-  description = "Log type for data write audit logs"
-  type        = string
+variable "audit_log_configs" {
+  description = "List of audit log config blocks specifying log types"
+  type        = list(object({ log_type = string }))
+  default     = []
 }

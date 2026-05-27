@@ -9,32 +9,22 @@ variable "project" {
 }
 
 variable "policy_data" {
-  description = "The IAM policy data (JSON) containing all role bindings"
+  description = "The policy data JSON string containing all IAM bindings"
   type        = string
 }
 
 variable "audit_config_service" {
-  description = "The service to apply audit logging for"
+  description = "The service for which audit logging is configured"
   type        = string
 }
 
-variable "audit_log_config_admin_read" {
-  description = "Log type for admin read audit logs"
-  type        = string
-}
-
-variable "audit_log_config_data_read" {
-  description = "Log type for data read audit logs"
-  type        = string
-}
-
-variable "audit_log_config_data_write" {
-  description = "Log type for data write audit logs"
-  type        = string
+variable "audit_log_configs" {
+  description = "List of audit log config blocks specifying log types"
+  type        = list(object({ log_type = string }))
 }
 
 variable "org_policy_constraint" {
-  description = "The organization policy constraint identifier"
+  description = "The constraint identifier for the organization policy"
   type        = string
 }
 
@@ -44,5 +34,4 @@ variable "service_account_keys" {
     service_account_id = string
     key_algorithm      = string
   }))
-  default = {}
 }

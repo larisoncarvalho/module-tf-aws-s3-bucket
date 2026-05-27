@@ -50,11 +50,15 @@ policy_data = <<EOT
 }
 EOT
 
-audit_config_service        = "allServices"
-audit_log_config_admin_read = "ADMIN_READ"
-audit_log_config_data_read  = "DATA_READ"
-audit_log_config_data_write = "DATA_WRITE"
-org_policy_constraint       = "iam.managed.disableServiceAccountApiKeyCreation"
+audit_config_service = "allServices"
+
+audit_log_configs = [
+  { log_type = "ADMIN_READ" },
+  { log_type = "DATA_READ" },
+  { log_type = "DATA_WRITE" },
+]
+
+org_policy_constraint = "iam.managed.disableServiceAccountApiKeyCreation"
 
 service_account_keys = {
   service_account_key_1 = {
