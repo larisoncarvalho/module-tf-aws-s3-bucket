@@ -1,9 +1,14 @@
-output "athena_workgroup_arn" {
-  description = "ARN of the primary Athena workgroup"
-  value       = module.athena_workgroup.arn
+output "project_iam_policy_etag" {
+  description = "The etag of the project IAM policy"
+  value       = module.project_iam_policy.etag
 }
 
-output "athena_workgroup_id" {
-  description = "ID (name) of the primary Athena workgroup"
-  value       = module.athena_workgroup.id
+output "project_iam_audit_config_service" {
+  description = "The service for which audit logging is configured"
+  value       = module.project_iam_audit_config.service
+}
+
+output "project_organization_policy_etag" {
+  description = "The etag of the organization policy"
+  value       = module.project_organization_policy.etag
 }

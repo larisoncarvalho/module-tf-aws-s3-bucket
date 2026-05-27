@@ -1,39 +1,39 @@
-# athena-workgroup-primary
+# gcp-project-iam-stack
 
 ## Description
 
-Manages an AWS Athena workgroup named `primary` in the `ap-southeast-1` region.
+Manages GCP project IAM policy, audit config, organization policy, and service account keys for project 597595105496.
 
 ## Module Overview
 
 | Module | Description |
 |--------|-------------|
-| `athena_workgroup` | Manages the primary Athena workgroup and its configuration |
-
-## Resources
-
-| Resource Type | Logical Name | Description |
-|---------------|--------------|-------------|
-| `aws_athena_workgroup` | `this` | The primary Athena workgroup |
+| `project_iam_policy` | Manages the project-level IAM policy bindings for GCP project 597595105496 |
+| `project_iam_audit_config` | Manages the project-level IAM audit configuration for all services |
+| `project_organization_policy` | Manages the organization policy constraint for disabling service account API key creation |
+| `service_account_key` | Manages system-managed service account keys |
 
 ## Variables Reference
 
-| Name | Type | Default | Description |
-|------|------|---------|-------------|
-| `region` | `string` | `"ap-southeast-1"` | AWS region where resources will be managed |
-| `name` | `string` | `"primary"` | Name of the Athena workgroup |
-| `state` | `string` | `"ENABLED"` | State of the workgroup. Valid values are `DISABLED` or `ENABLED` |
-| `enforce_workgroup_configuration` | `bool` | `false` | Whether the settings for the workgroup override client-side settings |
-| `publish_cloudwatch_metrics_enabled` | `bool` | `true` | Whether Amazon CloudWatch metrics are enabled for the workgroup |
-| `requester_pays_enabled` | `bool` | `false` | Whether members can reference Amazon S3 Requester Pays buckets in queries |
-| `selected_engine_version` | `string` | `"AUTO"` | Requested engine version for the workgroup |
+| Variable | Type | Description |
+|----------|------|-------------|
+| `region` | `string` | The region for the stack |
+| `project` | `string` | The GCP project ID |
+| `policy_data` | `string` | The IAM policy data (JSON) containing all role bindings |
+| `audit_config_service` | `string` | The service to apply audit logging for |
+| `audit_log_config_admin_read` | `string` | Log type for admin read audit logs |
+| `audit_log_config_data_read` | `string` | Log type for data read audit logs |
+| `audit_log_config_data_write` | `string` | Log type for data write audit logs |
+| `org_policy_constraint` | `string` | The organization policy constraint identifier |
+| `service_account_keys` | `map(object({...}))` | Map of service account keys to manage |
 
 ## Outputs Reference
 
-| Name | Description |
-|------|-------------|
-| `athena_workgroup_arn` | ARN of the primary Athena workgroup |
-| `athena_workgroup_id` | ID (name) of the primary Athena workgroup |
+| Output | Description |
+|--------|-------------|
+| `project_iam_policy_etag` | The etag of the project IAM policy |
+| `project_iam_audit_config_service` | The service for which audit logging is configured |
+| `project_organization_policy_etag` | The etag of the organization policy |
 
 ## Usage Instructions
 
@@ -46,9 +46,8 @@ terraform init
 ### 2. Import existing resources
 
 ```sh
+chmod +x imports.sh
 ./imports.sh terraform
-# or for OpenTofu:
-./imports.sh tofu
 ```
 
 ### 3. Plan
