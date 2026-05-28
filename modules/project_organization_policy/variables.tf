@@ -4,6 +4,6 @@ variable "project" {
 }
 
 variable "constraint" {
-  description = "The constraint identifier for the organization policy"
+  description = "The organization policy constraint name"
   type        = string
 }

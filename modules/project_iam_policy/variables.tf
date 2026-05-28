@@ -4,6 +4,6 @@ variable "project" {
 }
 
 variable "policy_data" {
-  description = "The policy data JSON string containing all IAM bindings"
+  description = "The IAM policy data (JSON) containing all bindings"
   type        = string
 }

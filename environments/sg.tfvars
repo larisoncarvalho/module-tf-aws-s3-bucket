@@ -46,27 +46,22 @@ policy_data = <<EOT
     {"members": ["serviceAccount:stackguardian-connector-static@stackguardian-nonprod.iam.gserviceaccount.com"], "role": "roles/viewer"},
     {"members": ["serviceAccount:infra2code-gcp@stackguardian-nonprod.iam.gserviceaccount.com"], "role": "roles/vpcaccess.admin"},
     {"members": ["serviceAccount:service-597595105496@gcp-sa-vpcaccess.iam.gserviceaccount.com"], "role": "roles/vpcaccess.serviceAgent"}
-  ]
+  ],
+  "version": 1
 }
 EOT
 
-audit_config_service = "allServices"
-
-audit_log_configs = [
-  { log_type = "ADMIN_READ" },
-  { log_type = "DATA_READ" },
-  { log_type = "DATA_WRITE" },
-]
-
-org_policy_constraint = "iam.managed.disableServiceAccountApiKeyCreation"
+audit_config_service        = "allServices"
+audit_log_config_admin_read = "ADMIN_READ"
+audit_log_config_data_read  = "DATA_READ"
+audit_log_config_data_write = "DATA_WRITE"
+org_policy_constraint       = "iam.managed.disableServiceAccountApiKeyCreation"
 
 service_account_keys = {
   service_account_key_1 = {
     service_account_id = "sg-service-account@597595105496.iam.gserviceaccount.com"
-    key_algorithm      = "KEY_ALG_RSA_2048"
   }
   service_account_key_2 = {
     service_account_id = "sg-prod-gcp@stackguardian-nonprod.iam.gserviceaccount.com"
-    key_algorithm      = "KEY_ALG_RSA_2048"
   }
 }

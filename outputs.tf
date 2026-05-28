@@ -9,11 +9,6 @@ output "audit_config_service" {
 }
 
 output "org_policy_etag" {
-  description = "The etag of the project organization policy"
+  description = "The etag of the organization policy"
   value       = module.project_organization_policy.etag
-}
-
-output "service_account_key_ids" {
-  description = "Map of service account key IDs"
-  value       = { for k, v in module.service_account_key : k => v.key_ids[k] }
 }

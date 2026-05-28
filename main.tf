@@ -5,10 +5,12 @@ module "project_iam_policy" {
 }
 
 module "project_iam_audit_config" {
-  source            = "./modules/project_iam_audit_config"
-  project           = var.project
-  service           = var.audit_config_service
-  audit_log_configs = var.audit_log_configs
+  source                      = "./modules/project_iam_audit_config"
+  project                     = var.project
+  service                     = var.audit_config_service
+  audit_log_config_admin_read = var.audit_log_config_admin_read
+  audit_log_config_data_read  = var.audit_log_config_data_read
+  audit_log_config_data_write = var.audit_log_config_data_write
 }
 
 module "project_organization_policy" {
@@ -18,7 +20,7 @@ module "project_organization_policy" {
 }
 
 module "service_account_key" {
-  source               = "./modules/service_account_key"
   for_each             = var.service_account_keys
-  service_account_keys = { (each.key) = each.value }
+  source               = "./modules/service_account_key"
+  service_account_keys = each.value
 }
