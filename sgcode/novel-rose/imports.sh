@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e
+
+"$1" import -var-file environments/sg.tfvars 'module.vpc.aws_vpc.this[0]' 'vpc-01c46493e7453ae92'
+"$1" import -var-file environments/sg.tfvars 'module.vpc.aws_subnet.public[0]' 'subnet-0fc87aabee1ef78fb'
+"$1" import -var-file environments/sg.tfvars 'module.vpc.aws_subnet.public[1]' 'subnet-059a62da98248d718'
+"$1" import -var-file environments/sg.tfvars 'module.vpc.aws_subnet.private[0]' 'subnet-0506c5aa45bd6913a'
+"$1" import -var-file environments/sg.tfvars 'module.vpc.aws_subnet.private[1]' 'subnet-0037a4dede84a0a2c'
+"$1" import -var-file environments/sg.tfvars 'module.vpc.aws_route_table.public[0]' 'rtb-012be8f4341adc367'
+"$1" import -var-file environments/sg.tfvars 'module.vpc.aws_route_table.private[0]' 'rtb-03a0a579a2bd57c48'
+"$1" import -var-file environments/sg.tfvars 'module.vpc.aws_route_table.private[1]' 'rtb-0653811c0b5d23f55'
+"$1" import -var-file environments/sg.tfvars 'module.vpc.aws_default_route_table.default[0]' 'rtb-03fb2b0fe60a2835b'
+"$1" import -var-file environments/sg.tfvars 'module.vpc.aws_internet_gateway.this[0]' 'igw-05cf08cf82003d21e'
+"$1" import -var-file environments/sg.tfvars 'module.vpc.aws_default_security_group.this[0]' 'sg-08fb424c5472fe990'
+"$1" import -var-file environments/sg.tfvars 'module.vpc.aws_default_network_acl.this[0]' 'acl-05bb9539d3da0d9ee'
+"$1" import -var-file environments/sg.tfvars 'module.vpc.aws_route_table_association.public[0]' 'rtbassoc-08bf14625c9822619'
+"$1" import -var-file environments/sg.tfvars 'module.vpc.aws_route_table_association.public[1]' 'rtbassoc-0cd527592cfdc4867'
+"$1" import -var-file environments/sg.tfvars 'module.vpc.aws_route_table_association.private[0]' 'rtbassoc-071e9ffe65cafc16e'
+"$1" import -var-file environments/sg.tfvars 'module.vpc.aws_route_table_association.private[1]' 'rtbassoc-08a7a964cdcca6a11'
+"$1" import -var-file environments/sg.tfvars 'module.vpc.aws_route.public_internet_gateway[0]' 'rtb-012be8f4341adc367_0.0.0.0/0'
