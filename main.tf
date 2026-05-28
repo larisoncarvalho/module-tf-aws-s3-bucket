@@ -1,10 +1,26 @@
-module "athena_workgroup" {
-  source = "./modules/athena_workgroup"
+module "project_iam_policy" {
+  source      = "./modules/project_iam_policy"
+  project     = var.project
+  policy_data = var.policy_data
+}
 
-  name                               = var.name
-  state                              = var.state
-  enforce_workgroup_configuration    = var.enforce_workgroup_configuration
-  publish_cloudwatch_metrics_enabled = var.publish_cloudwatch_metrics_enabled
-  requester_pays_enabled             = var.requester_pays_enabled
-  selected_engine_version            = var.selected_engine_version
+module "project_iam_audit_config" {
+  source                      = "./modules/project_iam_audit_config"
+  project                     = var.project
+  service                     = var.audit_config_service
+  audit_log_config_admin_read = var.audit_log_config_admin_read
+  audit_log_config_data_read  = var.audit_log_config_data_read
+  audit_log_config_data_write = var.audit_log_config_data_write
+}
+
+module "project_organization_policy" {
+  source     = "./modules/project_organization_policy"
+  project    = var.project
+  constraint = var.org_policy_constraint
+}
+
+module "service_account_key" {
+  for_each             = var.service_account_keys
+  source               = "./modules/service_account_key"
+  service_account_keys = each.value
 }

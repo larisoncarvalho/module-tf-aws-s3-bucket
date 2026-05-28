@@ -1,3 +1,4 @@
-provider "aws" {
-  region = var.region
+provider "google" {
+  region  = var.region
+  project = var.project
 }
