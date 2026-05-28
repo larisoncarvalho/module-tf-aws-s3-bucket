@@ -1,6 +1,4 @@
 region                                             = "ap-southeast-1"
-cloudformation_stack_name                          = "stulyze-app"
-cloudformation_stack_disable_rollback              = false
 athena_workgroup_name                              = "primary"
 athena_workgroup_state                             = "ENABLED"
 athena_workgroup_enforce_workgroup_configuration   = false

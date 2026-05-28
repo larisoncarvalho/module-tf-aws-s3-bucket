@@ -1,9 +1,3 @@
-module "cloudformation_stack" {
-  source           = "./modules/cloudformation_stack"
-  name             = var.cloudformation_stack_name
-  disable_rollback = var.cloudformation_stack_disable_rollback
-}
-
 module "athena_workgroup" {
   source                             = "./modules/athena_workgroup"
   name                               = var.athena_workgroup_name
