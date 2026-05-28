@@ -1,34 +1,34 @@
 variable "region" {
   type        = string
-  description = "AWS region where resources will be managed"
+  description = "AWS region"
 }
 
-variable "name" {
+variable "athena_workgroup_name" {
   type        = string
   description = "Name of the Athena workgroup"
 }
 
-variable "state" {
+variable "athena_workgroup_state" {
   type        = string
   description = "State of the workgroup. Valid values are DISABLED or ENABLED"
 }
 
-variable "enforce_workgroup_configuration" {
+variable "athena_workgroup_enforce_workgroup_configuration" {
   type        = bool
-  description = "Whether the settings for the workgroup override client-side settings"
+  description = "Boolean whether the settings for the workgroup override client-side settings"
 }
 
-variable "publish_cloudwatch_metrics_enabled" {
+variable "athena_workgroup_publish_cloudwatch_metrics_enabled" {
   type        = bool
-  description = "Whether Amazon CloudWatch metrics are enabled for the workgroup"
+  description = "Boolean whether Amazon CloudWatch metrics are enabled for the workgroup"
 }
 
-variable "requester_pays_enabled" {
+variable "athena_workgroup_requester_pays_enabled" {
   type        = bool
   description = "Whether members can reference Amazon S3 Requester Pays buckets in queries"
 }
 
-variable "selected_engine_version" {
+variable "athena_workgroup_selected_engine_version" {
   type        = string
   description = "Requested engine version for the workgroup"
 }
