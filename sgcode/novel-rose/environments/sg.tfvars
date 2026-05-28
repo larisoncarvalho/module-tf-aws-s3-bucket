@@ -1,0 +1,15 @@
+region                        = "eu-central-1"
+vpc_name                      = "tf-ansible-vpc"
+vpc_cidr                      = "10.0.0.0/16"
+vpc_instance_tenancy          = "default"
+azs                           = ["eu-central-1a", "eu-central-1b"]
+public_subnets                = ["10.0.1.0/24", "10.0.2.0/24"]
+private_subnets               = ["10.0.110.0/24", "10.0.120.0/24"]
+map_public_ip_on_launch       = true
+create_igw                    = true
+create_egress_only_igw        = false
+enable_nat_gateway            = false
+manage_default_security_group = true
+manage_default_network_acl    = true
+manage_default_route_table    = true
+create_vpc                    = true
