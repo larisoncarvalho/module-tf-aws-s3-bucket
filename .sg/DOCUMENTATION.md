@@ -1,39 +1,34 @@
-# athena-workgroup-primary
+# key-vault-administrator-role-definition
 
 ## Description
 
-Manages an AWS Athena workgroup named `primary` in the `ap-southeast-1` region.
+Manages the Key Vault Administrator custom role definition scoped to the subscription, granting all data plane operations on key vaults and their objects.
 
 ## Module Overview
 
 | Module | Description |
 |--------|-------------|
-| `athena_workgroup` | Manages the primary Athena workgroup and its configuration |
-
-## Resources
-
-| Resource Type | Logical Name | Description |
-|---------------|--------------|-------------|
-| `aws_athena_workgroup` | `this` | The primary Athena workgroup |
+| `role_definition` | Manages the Key Vault Administrator Azure role definition |
 
 ## Variables Reference
 
-| Name | Type | Default | Description |
-|------|------|---------|-------------|
-| `region` | `string` | `"ap-southeast-1"` | AWS region where resources will be managed |
-| `name` | `string` | `"primary"` | Name of the Athena workgroup |
-| `state` | `string` | `"ENABLED"` | State of the workgroup. Valid values are `DISABLED` or `ENABLED` |
-| `enforce_workgroup_configuration` | `bool` | `false` | Whether the settings for the workgroup override client-side settings |
-| `publish_cloudwatch_metrics_enabled` | `bool` | `true` | Whether Amazon CloudWatch metrics are enabled for the workgroup |
-| `requester_pays_enabled` | `bool` | `false` | Whether members can reference Amazon S3 Requester Pays buckets in queries |
-| `selected_engine_version` | `string` | `"AUTO"` | Requested engine version for the workgroup |
+| Name | Type | Description |
+|------|------|-------------|
+| `role_definition_id` | `string` | The unique UUID/GUID identifying this role definition. |
+| `name` | `string` | The name of the Role Definition. |
+| `scope` | `string` | The scope at which the Role Definition applies. |
+| `description` | `string` | A description of the Role Definition. |
+| `assignable_scopes` | `list(string)` | One or more assignable scopes for this Role Definition. |
+| `permissions_actions` | `list(string)` | Allowed actions for the permissions block. |
+| `permissions_data_actions` | `list(string)` | Allowed data actions for the permissions block. |
 
 ## Outputs Reference
 
 | Name | Description |
 |------|-------------|
-| `athena_workgroup_arn` | ARN of the primary Athena workgroup |
-| `athena_workgroup_id` | ID (name) of the primary Athena workgroup |
+| `id` | The Terraform-specific ID of the role definition (format: `{roleDefinitionId}\|{scope}`). |
+| `role_definition_id` | The Role Definition ID. |
+| `role_definition_resource_id` | The Azure Resource Manager ID for the resource. |
 
 ## Usage Instructions
 
@@ -43,9 +38,10 @@ Manages an AWS Athena workgroup named `primary` in the `ap-southeast-1` region.
 terraform init
 ```
 
-### 2. Import existing resources
+### 2. Import Existing Resources
 
 ```sh
+chmod +x imports.sh
 ./imports.sh terraform
 # or for OpenTofu:
 ./imports.sh tofu
@@ -62,3 +58,9 @@ terraform plan -var-file environments/sg.tfvars
 ```sh
 terraform apply -var-file environments/sg.tfvars
 ```
+
+## Notes
+
+- The `scope` value is automatically included in `assignable_scopes` by the provider if no other values are supplied.
+- The Terraform resource ID is of the format `{roleDefinitionId}|{scope}`.
+- This role definition grants full data plane access to Azure Key Vaults using the Azure RBAC permission model.

@@ -1,9 +1,14 @@
-output "athena_workgroup_arn" {
-  description = "ARN of the primary Athena workgroup"
-  value       = module.athena_workgroup.arn
+output "role_definition_id" {
+  description = "The Role Definition ID."
+  value       = module.role_definition.role_definition_id
 }
 
-output "athena_workgroup_id" {
-  description = "ID (name) of the primary Athena workgroup"
-  value       = module.athena_workgroup.id
+output "role_definition_resource_id" {
+  description = "The Azure Resource Manager ID for the resource."
+  value       = module.role_definition.role_definition_resource_id
+}
+
+output "id" {
+  description = "The Terraform-specific ID of the role definition."
+  value       = module.role_definition.id
 }
