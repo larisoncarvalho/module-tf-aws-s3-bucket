@@ -1,0 +1,59 @@
+region              = "eastus"
+resource_group_name = "test-taher"
+location            = "eastus"
+
+public_ip_name              = "taher-ubuntu-runner-ip"
+public_ip_allocation_method = "Static"
+public_ip_sku               = "Standard"
+public_ip_ip_version        = "IPv4"
+public_ip_zones             = ["1"]
+
+nsg_name                                     = "taher-ubuntu-runner-nsg"
+nsg_security_rule_name                       = "SSH"
+nsg_security_rule_protocol                   = "Tcp"
+nsg_security_rule_source_port_range          = "*"
+nsg_security_rule_destination_port_range     = "22"
+nsg_security_rule_source_address_prefix      = "*"
+nsg_security_rule_destination_address_prefix = "*"
+nsg_security_rule_access                     = "Allow"
+nsg_security_rule_priority                   = 300
+nsg_security_rule_direction                  = "Inbound"
+
+nic_name                           = "taher-ubuntu-runner918_z1"
+nic_accelerated_networking_enabled = true
+nic_ip_forwarding_enabled          = false
+nic_ip_config_name                 = "ipconfig1"
+nic_subnet_id                      = "/subscriptions/a97621d8-9158-4681-81b6-38b1222afba4/resourceGroups/test-taher/providers/Microsoft.Network/virtualNetworks/test-taher-vnet/subnets/default"
+nic_private_ip_address_allocation  = "Dynamic"
+nic_private_ip_address_version     = "IPv4"
+nic_ip_config_primary              = true
+
+managed_disk_name                 = "taher-ubuntu-runner_OsDisk_1_4b77dbd64c3641f7b5b4dd4f3c7e8e1b"
+managed_disk_storage_account_type = "Premium_LRS"
+managed_disk_create_option        = "FromImage"
+managed_disk_size_gb              = 30
+managed_disk_os_type              = "Linux"
+managed_disk_zone                 = "1"
+managed_disk_hyper_v_generation   = "V2"
+managed_disk_image_reference_id   = "/Subscriptions/a97621d8-9158-4681-81b6-38b1222afba4/Providers/Microsoft.Compute/Locations/eastus/Publishers/canonical/ArtifactTypes/VMImage/Offers/ubuntu-24_04-lts/Skus/server/Versions/24.04.202512181"
+managed_disk_trusted_launch_enabled = true
+
+vm_name                         = "taher-ubuntu-runner"
+vm_size                         = "Standard_D2s_v3"
+vm_zones                        = ["1"]
+vm_os_disk_name                 = "taher-ubuntu-runner_OsDisk_1_4b77dbd64c3641f7b5b4dd4f3c7e8e1b"
+vm_os_disk_create_option        = "FromImage"
+vm_os_disk_caching              = "ReadWrite"
+vm_os_disk_managed_disk_type    = "Premium_LRS"
+vm_os_type                      = "Linux"
+vm_image_publisher              = "canonical"
+vm_image_offer                  = "ubuntu-24_04-lts"
+vm_image_sku                    = "server"
+vm_image_version                = "latest"
+vm_computer_name                = "taher-ubuntu-runner"
+vm_admin_username               = "azureuser"
+vm_disable_password_authentication = true
+vm_ssh_key_path                 = "/home/azureuser/.ssh/authorized_keys"
+vm_ssh_key_data                 = "generated-by-azure"
+vm_boot_diagnostics_enabled     = true
+vm_boot_diagnostics_storage_uri = ""
