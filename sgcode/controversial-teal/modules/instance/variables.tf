@@ -1,3 +1,7 @@
+# Instance inputs wait
+# type, AMI, subnet named—
+# compute takes its shape
+
 variable "ami" {
   type        = string
   description = "AMI ID to use for the instance"

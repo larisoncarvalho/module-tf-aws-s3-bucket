@@ -1,3 +1,7 @@
+# Instance speaks back
+# ID and interface emerge—
+# callers find their node
+
 output "instance_id" {
   description = "ID of the EC2 instance"
   value       = aws_instance.this.id

@@ -1,3 +1,7 @@
+# Modules wire together
+# key, instance, volume, net—
+# infrastructure blooms
+
 module "key_pair" {
   source = "./modules/key_pair"
 

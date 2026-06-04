@@ -1,3 +1,7 @@
+# Outputs surface truth
+# IDs emerge from the cloud—
+# caller finds the path
+
 output "instance_id" {
   description = "ID of the EC2 instance"
   value       = module.instance.instance_id

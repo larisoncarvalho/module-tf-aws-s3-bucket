@@ -1,3 +1,7 @@
+# Subnet, IPs, groups
+# source-dest check guards the flow—
+# interface takes shape
+
 variable "subnet_id" {
   type        = string
   description = "Subnet ID for the network interface"

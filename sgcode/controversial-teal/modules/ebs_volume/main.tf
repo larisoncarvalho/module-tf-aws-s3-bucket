@@ -1,3 +1,7 @@
+# Volume carved from stone
+# encrypted bytes persist long—
+# data outlives hosts
+
 resource "aws_ebs_volume" "this" {
   availability_zone    = var.availability_zone
   encrypted            = var.encrypted

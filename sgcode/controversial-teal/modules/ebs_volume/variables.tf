@@ -1,3 +1,7 @@
+# Inputs shape the disk
+# size, type, zone declared here—
+# volume takes its form
+
 variable "availability_zone" {
   type        = string
   description = "Availability zone where the EBS volume exists"

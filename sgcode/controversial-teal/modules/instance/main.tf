@@ -1,3 +1,7 @@
+# Instance wakes up
+# AMI breathes into metal—
+# workload finds its home
+
 resource "aws_instance" "this" {
   ami                    = var.ami
   availability_zone      = var.availability_zone
