@@ -1,0 +1,22 @@
+region                                  = "eu-central-1"
+ami                                     = "ami-01b5c3cf789dbf1fb"
+instance_type                           = "t3.micro"
+availability_zone                       = "eu-central-1a"
+key_name                                = "ec2-key-k3ehbblq"
+subnet_id                               = "subnet-0b77c0d76befaf70d"
+vpc_security_group_ids                  = ["sg-0373ac5706eeaf25d"]
+source_dest_check                       = true
+ebs_optimized                           = false
+monitoring                              = false
+tenancy                                 = "default"
+capacity_reservation_preference         = "open"
+metadata_http_endpoint                  = "enabled"
+metadata_http_protocol_ipv6             = "disabled"
+metadata_http_put_response_hop_limit    = 1
+metadata_http_tokens                    = "optional"
+metadata_instance_metadata_tags         = "disabled"
+enclave_options_enabled                 = false
+root_block_device_delete_on_termination = true
+tags = {
+  "drifttest" = "true"
+}
