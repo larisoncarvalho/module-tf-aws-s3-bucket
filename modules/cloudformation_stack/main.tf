@@ -1,5 +1,4 @@
-module "cloudformation_stack" {
-  source             = "./modules/cloudformation_stack"
+resource "aws_cloudformation_stack" "this" {
   name               = var.name
   template_body      = var.template_body
   disable_rollback   = var.disable_rollback
