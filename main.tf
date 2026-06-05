@@ -1,10 +1,12 @@
-module "athena_workgroup" {
-  source = "./modules/athena_workgroup"
+module "iam_role" {
+  source   = "./modules/iam_role"
+  for_each = var.iam_roles
 
-  name                               = var.name
-  state                              = var.state
-  enforce_workgroup_configuration    = var.enforce_workgroup_configuration
-  publish_cloudwatch_metrics_enabled = var.publish_cloudwatch_metrics_enabled
-  requester_pays_enabled             = var.requester_pays_enabled
-  selected_engine_version            = var.selected_engine_version
+  assume_role_policy    = each.value.assume_role_policy
+  force_detach_policies = each.value.force_detach_policies
+  inline_policy         = each.value.inline_policy
+  managed_policy_arns   = each.value.managed_policy_arns
+  max_session_duration  = each.value.max_session_duration
+  name                  = each.value.name
+  path                  = each.value.path
 }
