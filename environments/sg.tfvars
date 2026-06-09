@@ -1,7 +1,4 @@
-region                             = "ap-southeast-1"
-name                               = "primary"
-state                              = "ENABLED"
-enforce_workgroup_configuration    = false
-publish_cloudwatch_metrics_enabled = true
-requester_pays_enabled             = false
-selected_engine_version            = "AUTO"
+region                                = "ap-southeast-1"
+cloudformation_stack_name             = "stulyze-app"
+cloudformation_stack_disable_rollback = false
+internet_gateway_vpc_id               = "vpc-05fed6e9ac0f64a6e"
