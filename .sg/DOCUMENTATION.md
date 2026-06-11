@@ -1,39 +1,42 @@
-# athena-workgroup-primary
+# ap-southeast-1-infrastructure
 
 ## Description
 
-Manages an AWS Athena workgroup named `primary` in the `ap-southeast-1` region.
+Athena workgroup, CloudFormation stack, and Internet Gateway infrastructure in ap-southeast-1.
 
 ## Module Overview
 
-| Module | Description |
-|--------|-------------|
-| `athena_workgroup` | Manages the primary Athena workgroup and its configuration |
-
-## Resources
-
-| Resource Type | Logical Name | Description |
-|---------------|--------------|-------------|
-| `aws_athena_workgroup` | `this` | The primary Athena workgroup |
+| Module | Description | Resource Type |
+|--------|-------------|---------------|
+| `athena_workgroup` | Manages the primary Athena workgroup | `aws_athena_workgroup` |
+| `cloudformation_stack` | Manages the stulyze-app CloudFormation stack | `aws_cloudformation_stack` |
+| `internet_gateway` | Manages the Internet Gateway attached to a VPC | `aws_internet_gateway` |
 
 ## Variables Reference
 
-| Name | Type | Default | Description |
-|------|------|---------|-------------|
-| `region` | `string` | `"ap-southeast-1"` | AWS region where resources will be managed |
-| `name` | `string` | `"primary"` | Name of the Athena workgroup |
-| `state` | `string` | `"ENABLED"` | State of the workgroup. Valid values are `DISABLED` or `ENABLED` |
-| `enforce_workgroup_configuration` | `bool` | `false` | Whether the settings for the workgroup override client-side settings |
-| `publish_cloudwatch_metrics_enabled` | `bool` | `true` | Whether Amazon CloudWatch metrics are enabled for the workgroup |
-| `requester_pays_enabled` | `bool` | `false` | Whether members can reference Amazon S3 Requester Pays buckets in queries |
-| `selected_engine_version` | `string` | `"AUTO"` | Requested engine version for the workgroup |
+| Variable | Type | Description | Default |
+|----------|------|-------------|---------|
+| `region` | `string` | AWS region for the provider | `"ap-southeast-1"` |
+| `athena_workgroup_name` | `string` | Name of the Athena workgroup | `"primary"` |
+| `athena_workgroup_state` | `string` | State of the Athena workgroup (ENABLED or DISABLED) | `"ENABLED"` |
+| `athena_workgroup_enforce_workgroup_configuration` | `bool` | Whether workgroup settings override client-side settings | `false` |
+| `athena_workgroup_publish_cloudwatch_metrics_enabled` | `bool` | Whether CloudWatch metrics are enabled for the Athena workgroup | `true` |
+| `athena_workgroup_requester_pays_enabled` | `bool` | Whether members can query Requester Pays S3 buckets | `false` |
+| `athena_workgroup_selected_engine_version` | `string` | Requested Athena engine version | `"AUTO"` |
+| `cloudformation_stack_name` | `string` | Name of the CloudFormation stack | `"stulyze-app"` |
+| `cloudformation_stack_disable_rollback` | `bool` | Whether to disable rollback on stack creation failure | `false` |
+| `internet_gateway_vpc_id` | `string` | The VPC ID to attach the Internet Gateway to | `"vpc-05fed6e9ac0f64a6e"` |
 
 ## Outputs Reference
 
-| Name | Description |
-|------|-------------|
-| `athena_workgroup_arn` | ARN of the primary Athena workgroup |
-| `athena_workgroup_id` | ID (name) of the primary Athena workgroup |
+| Output | Description |
+|--------|-------------|
+| `athena_workgroup_arn` | ARN of the Athena workgroup |
+| `athena_workgroup_id` | ID of the Athena workgroup |
+| `cloudformation_stack_id` | Unique identifier of the CloudFormation stack |
+| `cloudformation_stack_outputs` | Map of outputs from the CloudFormation stack |
+| `internet_gateway_id` | The ID of the Internet Gateway |
+| `internet_gateway_arn` | The ARN of the Internet Gateway |
 
 ## Usage Instructions
 
@@ -43,12 +46,10 @@ Manages an AWS Athena workgroup named `primary` in the `ap-southeast-1` region.
 terraform init
 ```
 
-### 2. Import existing resources
+### 2. Import Existing Resources
 
 ```sh
 ./imports.sh terraform
-# or for OpenTofu:
-./imports.sh tofu
 ```
 
 ### 3. Plan
