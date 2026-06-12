@@ -1,11 +1,11 @@
 variable "name" {
   type        = string
-  description = "Name of the Athena workgroup"
+  description = "Name of the workgroup"
 }
 
 variable "state" {
   type        = string
-  description = "State of the workgroup. Valid values are DISABLED or ENABLED"
+  description = "State of the workgroup (ENABLED or DISABLED)"
 }
 
 variable "enforce_workgroup_configuration" {
@@ -25,5 +25,5 @@ variable "requester_pays_enabled" {
 
 variable "selected_engine_version" {
   type        = string
-  description = "Requested engine version for the workgroup"
+  description = "Requested engine version"
 }

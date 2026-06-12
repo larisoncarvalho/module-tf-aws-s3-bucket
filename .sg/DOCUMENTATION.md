@@ -1,64 +1,92 @@
-# athena-workgroup-primary
+# ap-southeast-1-infrastructure
 
-## Description
+Infrastructure stack containing Athena workgroup, CloudFormation stack, and Internet Gateway
 
-Manages an AWS Athena workgroup named `primary` in the `ap-southeast-1` region.
+## Overview
 
-## Module Overview
+This Terraform stack manages infrastructure resources in the ap-southeast-1 region:
 
-| Module | Description |
-|--------|-------------|
-| `athena_workgroup` | Manages the primary Athena workgroup and its configuration |
+- **Athena Workgroup**: Manages the primary Athena workgroup with configurable engine version and CloudWatch metrics
+- **CloudFormation Stack**: Manages the stulyze-app CloudFormation stack
+- **Internet Gateway**: Manages an Internet Gateway attached to a VPC
 
-## Resources
+## Modules
 
-| Resource Type | Logical Name | Description |
-|---------------|--------------|-------------|
-| `aws_athena_workgroup` | `this` | The primary Athena workgroup |
+### athena_workgroup
 
-## Variables Reference
+Manages Athena workgroup configuration with support for workgroup settings, CloudWatch metrics, and engine versioning.
 
-| Name | Type | Default | Description |
-|------|------|---------|-------------|
-| `region` | `string` | `"ap-southeast-1"` | AWS region where resources will be managed |
-| `name` | `string` | `"primary"` | Name of the Athena workgroup |
-| `state` | `string` | `"ENABLED"` | State of the workgroup. Valid values are `DISABLED` or `ENABLED` |
-| `enforce_workgroup_configuration` | `bool` | `false` | Whether the settings for the workgroup override client-side settings |
-| `publish_cloudwatch_metrics_enabled` | `bool` | `true` | Whether Amazon CloudWatch metrics are enabled for the workgroup |
-| `requester_pays_enabled` | `bool` | `false` | Whether members can reference Amazon S3 Requester Pays buckets in queries |
-| `selected_engine_version` | `string` | `"AUTO"` | Requested engine version for the workgroup |
+### cloudformation_stack
 
-## Outputs Reference
+Manages CloudFormation stack resources with rollback configuration.
+
+### internet_gateway
+
+Manages Internet Gateway and VPC attachment.
+
+## Variables
+
+| Name | Type | Description | Default |
+|------|------|-------------|---------|
+| region | string | AWS region | ap-southeast-1 |
+| primary_workgroup_name | string | Name of the primary Athena workgroup | primary |
+| primary_workgroup_state | string | State of the primary Athena workgroup | ENABLED |
+| primary_workgroup_enforce_workgroup_configuration | bool | Whether the settings for the primary workgroup override client-side settings | false |
+| primary_workgroup_publish_cloudwatch_metrics_enabled | bool | Whether Amazon CloudWatch metrics are enabled for the primary workgroup | true |
+| primary_workgroup_requester_pays_enabled | bool | Whether members can reference Amazon S3 Requester Pays buckets in queries for the primary workgroup | false |
+| primary_workgroup_selected_engine_version | string | Requested engine version for the primary workgroup | AUTO |
+| stulyze_app_stack_name | string | Name of the stulyze-app CloudFormation stack | stulyze-app |
+| stulyze_app_stack_disable_rollback | bool | Set to true to disable rollback of the stulyze-app stack if stack creation failed | false |
+| stulyze_app_stack_template_body | string | Template body for the stulyze-app CloudFormation stack | |
+| igw_02aec4b4978ee2879_vpc_id | string | VPC ID for Internet Gateway igw-02aec4b4978ee2879 | vpc-05fed6e9ac0f64a6e |
+
+## Outputs
 
 | Name | Description |
 |------|-------------|
-| `athena_workgroup_arn` | ARN of the primary Athena workgroup |
-| `athena_workgroup_id` | ID (name) of the primary Athena workgroup |
+| primary_workgroup_name | Name of the primary Athena workgroup |
+| primary_workgroup_arn | ARN of the primary Athena workgroup |
+| stulyze_app_stack_id | ID of the stulyze-app CloudFormation stack |
+| stulyze_app_stack_outputs | Outputs from the stulyze-app CloudFormation stack |
+| internet_gateway_id | ID of the Internet Gateway |
+| internet_gateway_arn | ARN of the Internet Gateway |
 
-## Usage Instructions
+## Usage
 
-### 1. Initialize
+### Initialize
 
-```sh
+```bash
 terraform init
 ```
 
-### 2. Import existing resources
+### Import Existing Resources
 
-```sh
+```bash
+chmod +x imports.sh
 ./imports.sh terraform
-# or for OpenTofu:
+```
+
+Or for OpenTofu:
+
+```bash
 ./imports.sh tofu
 ```
 
-### 3. Plan
+### Plan
 
-```sh
-terraform plan -var-file environments/sg.tfvars
+```bash
+terraform plan -var-file=environments/sg.tfvars
 ```
 
-### 4. Apply
+### Apply
 
-```sh
-terraform apply -var-file environments/sg.tfvars
+```bash
+terraform apply -var-file=environments/sg.tfvars
 ```
+
+## Notes
+
+- This stack imports existing AWS resources. Run the import script before planning or applying
+- The Internet Gateway is attached to VPC vpc-05fed6e9ac0f64a6e
+- The primary Athena workgroup uses AUTO engine versioning
+- CloudWatch metrics are enabled for the Athena workgroup
