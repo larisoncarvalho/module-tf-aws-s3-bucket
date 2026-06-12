@@ -1,6 +1,6 @@
 variable "name" {
   type        = string
-  description = "Name of the Athena workgroup"
+  description = "Name of the workgroup"
 }
 
 variable "state" {
@@ -10,20 +10,20 @@ variable "state" {
 
 variable "enforce_workgroup_configuration" {
   type        = bool
-  description = "Whether workgroup settings override client-side settings"
+  description = "Whether the settings for the workgroup override client-side settings"
 }
 
 variable "publish_cloudwatch_metrics_enabled" {
   type        = bool
-  description = "Whether CloudWatch metrics are enabled for the workgroup"
+  description = "Whether Amazon CloudWatch metrics are enabled for the workgroup"
 }
 
 variable "requester_pays_enabled" {
   type        = bool
-  description = "Whether members can query Requester Pays S3 buckets"
+  description = "Whether members can reference Amazon S3 Requester Pays buckets in queries"
 }
 
 variable "selected_engine_version" {
   type        = string
-  description = "Requested Athena engine version"
+  description = "Requested engine version"
 }

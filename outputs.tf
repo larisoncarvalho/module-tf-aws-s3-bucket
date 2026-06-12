@@ -1,29 +1,29 @@
-output "athena_workgroup_arn" {
-  description = "ARN of the Athena workgroup"
-  value       = module.athena_workgroup.arn
+output "primary_workgroup_name" {
+  description = "Name of the primary Athena workgroup"
+  value       = module.primary_workgroup.workgroup_name
 }
 
-output "athena_workgroup_id" {
-  description = "ID of the Athena workgroup"
-  value       = module.athena_workgroup.id
+output "primary_workgroup_arn" {
+  description = "ARN of the primary Athena workgroup"
+  value       = module.primary_workgroup.workgroup_arn
 }
 
-output "cloudformation_stack_id" {
-  description = "Unique identifier of the CloudFormation stack"
-  value       = module.cloudformation_stack.id
+output "stulyze_app_stack_id" {
+  description = "ID of the stulyze-app CloudFormation stack"
+  value       = module.stulyze_app_stack.stack_id
 }
 
-output "cloudformation_stack_outputs" {
-  description = "Map of outputs from the CloudFormation stack"
-  value       = module.cloudformation_stack.outputs
+output "stulyze_app_stack_outputs" {
+  description = "Outputs from the stulyze-app CloudFormation stack"
+  value       = module.stulyze_app_stack.stack_outputs
 }
 
 output "internet_gateway_id" {
-  description = "The ID of the Internet Gateway"
-  value       = module.internet_gateway.id
+  description = "ID of the Internet Gateway"
+  value       = module.igw_02aec4b4978ee2879.internet_gateway_id
 }
 
 output "internet_gateway_arn" {
-  description = "The ARN of the Internet Gateway"
-  value       = module.internet_gateway.arn
+  description = "ARN of the Internet Gateway"
+  value       = module.igw_02aec4b4978ee2879.internet_gateway_arn
 }

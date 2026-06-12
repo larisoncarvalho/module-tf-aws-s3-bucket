@@ -1,49 +1,54 @@
 variable "region" {
   type        = string
-  description = "AWS region for the provider"
+  description = "AWS region"
 }
 
-variable "athena_workgroup_name" {
+variable "primary_workgroup_name" {
   type        = string
-  description = "Name of the Athena workgroup"
+  description = "Name of the primary Athena workgroup"
 }
 
-variable "athena_workgroup_state" {
+variable "primary_workgroup_state" {
   type        = string
-  description = "State of the Athena workgroup (ENABLED or DISABLED)"
+  description = "State of the primary Athena workgroup"
 }
 
-variable "athena_workgroup_enforce_workgroup_configuration" {
+variable "primary_workgroup_enforce_workgroup_configuration" {
   type        = bool
-  description = "Whether workgroup settings override client-side settings"
+  description = "Whether the settings for the primary workgroup override client-side settings"
 }
 
-variable "athena_workgroup_publish_cloudwatch_metrics_enabled" {
+variable "primary_workgroup_publish_cloudwatch_metrics_enabled" {
   type        = bool
-  description = "Whether CloudWatch metrics are enabled for the Athena workgroup"
+  description = "Whether Amazon CloudWatch metrics are enabled for the primary workgroup"
 }
 
-variable "athena_workgroup_requester_pays_enabled" {
+variable "primary_workgroup_requester_pays_enabled" {
   type        = bool
-  description = "Whether members can query Requester Pays S3 buckets"
+  description = "Whether members can reference Amazon S3 Requester Pays buckets in queries for the primary workgroup"
 }
 
-variable "athena_workgroup_selected_engine_version" {
+variable "primary_workgroup_selected_engine_version" {
   type        = string
-  description = "Requested Athena engine version"
+  description = "Requested engine version for the primary workgroup"
 }
 
-variable "cloudformation_stack_name" {
+variable "stulyze_app_stack_name" {
   type        = string
-  description = "Name of the CloudFormation stack"
+  description = "Name of the stulyze-app CloudFormation stack"
 }
 
-variable "cloudformation_stack_disable_rollback" {
+variable "stulyze_app_stack_disable_rollback" {
   type        = bool
-  description = "Whether to disable rollback on stack creation failure"
+  description = "Set to true to disable rollback of the stulyze-app stack if stack creation failed"
 }
 
-variable "internet_gateway_vpc_id" {
+variable "stulyze_app_stack_template_body" {
   type        = string
-  description = "The VPC ID to attach the Internet Gateway to"
+  description = "Template body for the stulyze-app CloudFormation stack"
+}
+
+variable "igw_02aec4b4978ee2879_vpc_id" {
+  type        = string
+  description = "VPC ID for Internet Gateway igw-02aec4b4978ee2879"
 }
