@@ -1,10 +1,10 @@
-module "athena_workgroup" {
-  source = "./modules/athena_workgroup"
+module "cloudformation_stack" {
+  source           = "./modules/cloudformation_stack"
+  name             = var.cloudformation_stack_name
+  disable_rollback = var.cloudformation_stack_disable_rollback
+}
 
-  name                               = var.name
-  state                              = var.state
-  enforce_workgroup_configuration    = var.enforce_workgroup_configuration
-  publish_cloudwatch_metrics_enabled = var.publish_cloudwatch_metrics_enabled
-  requester_pays_enabled             = var.requester_pays_enabled
-  selected_engine_version            = var.selected_engine_version
+module "internet_gateway" {
+  source = "./modules/internet_gateway"
+  vpc_id = var.internet_gateway_vpc_id
 }
