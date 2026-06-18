@@ -25,5 +25,5 @@ variable "requester_pays_enabled" {
 
 variable "selected_engine_version" {
   type        = string
-  description = "Requested engine version for the workgroup"
+  description = "Requested Athena engine version"
 }
