@@ -1,4 +1,4 @@
-module "key_pair" {
+ "key_pair" {
   source   = "./modules/key_pair"
   for_each = var.key_pairs
 
