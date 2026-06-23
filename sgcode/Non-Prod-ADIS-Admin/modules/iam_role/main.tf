@@ -1,4 +1,4 @@
-# IAM Role — primary resource representing a single AWS IAM role
+# IAM ROLE — PRIMARY RESOURCE REPRESENTING A SINGLE AWS IAM ROLE
 resource "aws_iam_role" "this" {
   name                 = var.name
   path                 = var.path
@@ -7,7 +7,7 @@ resource "aws_iam_role" "this" {
   tags                 = var.tags
 }
 
-# IAM Role Policy Attachments — one attachment per managed policy ARN
+# IAM ROLE POLICY ATTACHMENTS — ONE ATTACHMENT PER MANAGED POLICY ARN
 resource "aws_iam_role_policy_attachment" "this" {
   for_each = toset(var.attached_policy_arns)
 

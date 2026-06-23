@@ -1,4 +1,4 @@
-# Environment variable values for the discovered IAM roles
+# ENVIRONMENT VARIABLE VALUES FOR THE DISCOVERED IAM ROLES
 
 iam_roles = {
   non_prod_adis_us_west_2_admin_task_execution_role = {

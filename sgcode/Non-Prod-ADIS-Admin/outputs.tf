@@ -1,2 +1,2 @@
-# Root outputs — no for_each map outputs to avoid stale-null trap.
-# Add singleton/scalar passthroughs here if needed.
+# ROOT OUTPUTS — NO FOR_EACH MAP OUTPUTS TO AVOID STALE-NULL TRAP.
+# ADD SINGLETON/SCALAR PASSTHROUGHS HERE IF NEEDED.

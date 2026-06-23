@@ -1,4 +1,4 @@
-# Module outputs — expose the role name and ARN for cross-module wiring
+# MODULE OUTPUTS — EXPOSE THE ROLE NAME AND ARN FOR CROSS-MODULE WIRING
 
 output "role_name" {
   description = "The name of the IAM role."

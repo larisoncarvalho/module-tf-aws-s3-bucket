@@ -1,4 +1,4 @@
-# Variables for the iam_role module — one per configurable attribute
+# VARIABLES FOR THE IAM_ROLE MODULE — ONE PER CONFIGURABLE ATTRIBUTE
 
 variable "name" {
   description = "The name of the IAM role."

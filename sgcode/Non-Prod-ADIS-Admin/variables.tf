@@ -1,4 +1,4 @@
-# Root input variables — forwarded to the iam_role module
+# ROOT INPUT VARIABLES — FORWARDED TO THE IAM_ROLE MODULE
 
 variable "iam_roles" {
   description = "Map of IAM role instances to manage, keyed by a stable snake_case identifier."
