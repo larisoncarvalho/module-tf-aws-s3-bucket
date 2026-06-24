@@ -1,14 +1,13 @@
-# ROOT INPUT VARIABLES — FORWARDED TO THE IAM_ROLE MODULE
-
+# Root variable: map of IAM role instances keyed by sanitized role name
 variable "iam_roles" {
-  description = "Map of IAM role instances to manage, keyed by a stable snake_case identifier."
+  description = "Map of IAM role configurations keyed by a stable snake_case name."
   type = map(object({
     name                 = string
     path                 = optional(string, "/")
-    assume_role_policy   = string
+    description          = optional(string, null)
     max_session_duration = optional(number, 3600)
+    assume_role_policy   = string
     attached_policy_arns = optional(list(string), [])
     tags                 = optional(map(string), {})
   }))
-  default = {}
 }

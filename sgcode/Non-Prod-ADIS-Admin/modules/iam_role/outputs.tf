@@ -1,11 +1,19 @@
-# MODULE OUTPUTS — EXPOSE THE ROLE NAME AND ARN FOR CROSS-MODULE WIRING
+# Outputs exposed by the iam_role module
 
-output "role_name" {
+# The name of the created IAM role
+output "name" {
   description = "The name of the IAM role."
   value       = aws_iam_role.this.name
 }
 
-output "role_arn" {
+# The ARN of the created IAM role
+output "arn" {
   description = "The ARN of the IAM role."
   value       = aws_iam_role.this.arn
+}
+
+# The unique role ID assigned by AWS
+output "role_id" {
+  description = "The unique ID of the IAM role."
+  value       = aws_iam_role.this.unique_id
 }
