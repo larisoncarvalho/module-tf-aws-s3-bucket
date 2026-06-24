@@ -1,238 +1,234 @@
-# Infrastructure Documentation: global-settings
+# Terraform Infrastructure Documentation
 
 ## 1. Overview
 
-This Terraform codebase manages cloud infrastructure in AWS region `ap-southeast-1` (Singapore). The infrastructure was discovered from two existing cloud resources, code was generated to represent them, and the code was then imported into state until `terraform plan` showed **0 to add, 0 to change, 0 to destroy** — meaning the configuration precisely matches the live infrastructure.
+This Terraform/OpenTofu configuration manages **2 AWS resources** across a single region (ap-southeast-1):
 
-**Managed services:**
-- **AWS Athena Workgroup** (primary workgroup for SQL query execution)
-- **AWS CloudFormation Stack** (stulyze-app application stack containing a DynamoDB table)
+1. **AWS CloudFormation Stack** (`stulyze-app`) — Created on 2023-07-28, contains a DynamoDB table exported as `StulyzeResourceTableName`.
+2. **AWS Athena Workgroup** (`primary`) — The default workgroup configured with Athena engine version 3 (AUTO), publishing CloudWatch metrics enabled.
+
+**How this code was generated:**
+- Infrastructure resources were discovered via cloud scanning (SG Infra2Code).
+- Terraform code was auto-generated from the discovered resources.
+- All resources were imported into state using `imports.sh`.
+- State was reconciled (terraform plan showed **0 to add, 0 to change, 0 to destroy**) — no further changes needed.
 
 ## 2. Resources
 
 | Terraform Address | Provider | Real-World Name/ID | Purpose |
 |---|---|---|---|
-| `module.athena_workgroup["primary"].aws_athena_workgroup.this` | `aws` | `primary` | Athena workgroup for federated SQL queries with CloudWatch metrics publishing enabled |
-| `module.cloudformation_stack["stulyze_app"].aws_cloudformation_stack.this` | `aws` | `stulyze-app` (ARN: `arn:aws:cloudformation:ap-southeast-1:714114208215:stack/stulyze-app/0fc6fa90-2d31-11ee-94b5-062fa483a518`) | CloudFormation stack managing the Stulyze application, which provisions a DynamoDB table (`stulyze-app-StulyzeResourceTable-N5SV2SEDRNMG`) |
+| `module.aws_cloudformation_stack["stulyze_app"].aws_cloudformation_stack.this` | `aws` | `arn:aws:cloudformation:ap-southeast-1:714114208215:stack/stulyze-app/0fc6fa90-2d31-11ee-94b5-062fa483a518` | CloudFormation stack managing nested infrastructure including DynamoDB table |
+| `module.aws_athena_workgroup["primary"].aws_athena_workgroup.this` | `aws` | `primary` | Athena query workgroup for running SQL analytics against S3 data |
 
 ## 3. Module Structure
 
-### `modules/athena_workgroup/`
-Manages a single `aws_athena_workgroup` resource.
+The code uses two internal modules, both in `./modules/`:
 
-**Files:**
-- `main.tf` — declares `aws_athena_workgroup.this` with configuration block for engine version and metrics
-- `variables.tf` — input parameters: `name`, `description`, `enforce_workgroup_configuration`, `publish_cloudwatch_metrics_enabled`, `requester_pays_enabled`, `selected_engine_version`, `state`
-- `outputs.tf` — exports `id` (workgroup name) and `arn`
+### `modules/aws_cloudformation_stack`
+- **Resources:** `aws_cloudformation_stack.this` — wraps AWS CloudFormation stack creation
+- **Source:** Local module at `./modules/aws_cloudformation_stack`
+- **Call style:** `for_each = var.aws_cloudformation_stacks` from root
+- **Inputs:** 
+  - `name` (required): Stack name
+  - `disable_rollback` (optional, default: `false`): Rollback behavior
+  - `notification_arns` (optional, default: `[]`): SNS topic ARNs for notifications
+  - `tags` (optional, default: `{}`): Tags
+- **Outputs:** 
+  - `id`: Stack ARN
+  - `outputs`: CloudFormation stack outputs (exported values)
 
-**Call pattern:** `for_each` over `var.athena_workgroups` (map of objects)
+### `modules/aws_athena_workgroup`
+- **Resources:** `aws_athena_workgroup.this` — creates Athena workgroup with configuration and engine version
+- **Source:** Local module at `./modules/aws_athena_workgroup`
+- **Call style:** `for_each = var.aws_athena_workgroups` from root
+- **Inputs:** 
+  - `name` (required): Workgroup name
+  - `description` (optional, default: `""`): Workgroup description
+  - `enforce_workgroup_configuration` (optional, default: `true`): Enforce settings on clients
+  - `publish_cloudwatch_metrics` (optional, default: `true`): Emit CloudWatch metrics
+  - `requester_pays_enabled` (optional, default: `false`): Allow requester to pay query costs
+  - `selected_engine_version` (optional, default: `"AUTO"`): Athena engine version
+  - `tags` (optional, default: `{}`): Tags
+- **Outputs:** 
+  - `id`: Workgroup name/ID
 
-### `modules/cloudformation_stack/`
-Manages a single `aws_cloudformation_stack` resource.
-
-**Files:**
-- `main.tf` — declares `aws_cloudformation_stack.this` with lifecycle rule to ignore template/parameter changes (see section 8)
-- `variables.tf` — input parameters: `name`, `disable_rollback`, `enable_termination_protection`, `notification_arns`, `tags`
-- `outputs.tf` — exports `id` (stack ARN) and `outputs` (CloudFormation outputs map)
-
-**Call pattern:** `for_each` over `var.cloudformation_stacks` (map of objects)
-
-### Root Configuration
-- `versions.tf` — requires `hashicorp/aws` provider (no version constraint)
-- `providers.tf` — configures `aws` provider for region `ap-southeast-1`
-- `main.tf` — instantiates both modules with `for_each` loops
-- `variables.tf` — declares `athena_workgroups` and `cloudformation_stacks` input variables
-- `outputs.tf` — no scalar outputs; module outputs are accessible via `module.athena_workgroup[key]` and `module.cloudformation_stack[key]`
+**No external git:: modules used.** All code is local.
 
 ## 4. How Import Works
 
-The file `imports.sh` contains two import commands that were run once to populate the Terraform state from discovered resources:
+The `imports.sh` script maps each resource to its cloud ID and imports it into state:
 
 ```bash
-terraform import -var-file environments/sg.tfvars 'module.athena_workgroup["primary"].aws_athena_workgroup.this' 'primary'
-terraform import -var-file environments/sg.tfvars 'module.cloudformation_stack["stulyze_app"].aws_cloudformation_stack.this' 'arn:aws:cloudformation:ap-southeast-1:714114208215:stack/stulyze-app/0fc6fa90-2d31-11ee-94b5-062fa483a518'
+#!/bin/sh
+set -e
+"$1" import -var-file environments/sg.tfvars 'module.aws_athena_workgroup["primary"].aws_athena_workgroup.this' 'primary'
+"$1" import -var-file environments/sg.tfvars 'module.aws_cloudformation_stack["stulyze_app"].aws_cloudformation_stack.this' 'arn:aws:cloudformation:ap-southeast-1:714114208215:stack/stulyze-app/0fc6fa90-2d31-11ee-94b5-062fa483a518'
 ```
 
 **How it works:**
-1. Each import command maps a Terraform address (module-qualified) to a cloud resource ID (name or ARN)
-2. The Terraform state file (`terraform.tfstate`) is populated with the discovered resource attributes
-3. Subsequent `plan` and `apply` commands compare this state against the HCL configuration
+1. The script was run once to populate Terraform state from AWS cloud resources.
+2. Each `terraform import` command adds the real resource into state under the specified address.
+3. **The script need not be re-run** unless state is lost.
 
-**To re-import a single resource** (if state is lost):
+**To re-import a single resource if state is lost:**
 ```bash
-# For Athena workgroup:
-terraform import -var-file environments/sg.tfvars 'module.athena_workgroup["primary"].aws_athena_workgroup.this' 'primary'
+# Re-import the primary Athena workgroup
+terraform import -var-file environments/sg.tfvars \
+  'module.aws_athena_workgroup["primary"].aws_athena_workgroup.this' \
+  'primary'
 
-# For CloudFormation stack:
-terraform import -var-file environments/sg.tfvars 'module.cloudformation_stack["stulyze_app"].aws_cloudformation_stack.this' 'arn:aws:cloudformation:ap-southeast-1:714114208215:stack/stulyze-app/0fc6fa90-2d31-11ee-94b5-062fa483a518'
+# Re-import the stulyze-app CloudFormation stack
+terraform import -var-file environments/sg.tfvars \
+  'module.aws_cloudformation_stack["stulyze_app"].aws_cloudformation_stack.this' \
+  'arn:aws:cloudformation:ap-southeast-1:714114208215:stack/stulyze-app/0fc6fa90-2d31-11ee-94b5-062fa483a518'
 ```
-
-(Note: The import scripts have already been run; they are not needed for normal plan/apply workflows.)
 
 ## 5. How to Use the Code
 
-### Initialize the working directory
+### Initialize Terraform
+
 ```bash
 terraform init
 ```
-This downloads the AWS provider and initializes the backend (default: local state in `.terraform/`).
 
-### Plan with the shipped configuration
+### Plan Changes
+
+To preview changes with the default sg.tfvars:
 ```bash
 terraform plan -var-file=environments/sg.tfvars
 ```
-This compares the current state against the HCL configuration using variables from `environments/sg.tfvars`. Expected output: **0 to add, 0 to change, 0 to destroy** (infrastructure matches code).
 
-### Apply changes (if any)
+### Apply Changes
+
+To apply the configuration:
 ```bash
 terraform apply -var-file=environments/sg.tfvars
 ```
-This would execute planned changes (create, update, destroy). Since the infrastructure is already in sync, no changes will occur.
 
-### Target another environment
-To manage infrastructure in a different environment (e.g., prod instead of sg):
+### Targeting Another Environment
 
-1. **Copy and edit the variables file:**
+To manage a different environment (e.g., dev instead of sg):
+
+1. **Copy the tfvars file:**
    ```bash
-   cp environments/sg.tfvars environments/prod.tfvars
+   cp environments/sg.tfvars environments/dev.tfvars
    ```
 
-2. **Edit the new file** to change values (e.g., workgroup names, stack names, tags):
+2. **Edit the new file** with environment-specific values:
    ```bash
-   # Edit environments/prod.tfvars
-   # Example: change workgroup description, stack parameters, etc.
+   # Edit environments/dev.tfvars
+   # Change resource names, disable_rollback, tags, etc.
    ```
 
-3. **Plan and apply using the new variables:**
+3. **Plan and apply with the new file** (no `.tf` edits needed):
    ```bash
-   terraform plan -var-file=environments/prod.tfvars
-   terraform apply -var-file=environments/prod.tfvars
+   terraform plan -var-file=environments/dev.tfvars
+   terraform apply -var-file=environments/dev.tfvars
    ```
-
-**No `.tf` edits required** — all environment-specific configuration is in `.tfvars` files.
 
 ## 6. Variables
 
-### Input Variables
+### Root Module Variables
 
-#### `var.athena_workgroups`
+#### `aws_cloudformation_stacks`
 - **Type:** `map(object({...}))`
-- **Description:** Map of Athena workgroups to manage; each key is the workgroup identifier, and the value is a configuration object.
-- **Schema:**
-  - `name` (required, string) — workgroup name in AWS
-  - `description` (optional, string, default: `""`) — workgroup description
-  - `enforce_workgroup_configuration` (optional, bool, default: `true`) — enforce workgroup settings
-  - `publish_cloudwatch_metrics_enabled` (optional, bool, default: `true`) — send metrics to CloudWatch
-  - `requester_pays_enabled` (optional, bool, default: `false`) — enable requester pays
-  - `selected_engine_version` (optional, string, default: `"AUTO"`) — Athena engine version
-  - `state` (optional, string, default: `"ENABLED"`) — workgroup state (`ENABLED` or `DISABLED`)
-- **Current value (from `environments/sg.tfvars`):**
+- **Description:** Map of CloudFormation stacks to manage
+- **Default:** `{}`
+- **Example:**
   ```hcl
-  athena_workgroups = {
-    primary = {
-      name                               = "primary"
-      description                        = ""
-      enforce_workgroup_configuration    = false
-      publish_cloudwatch_metrics_enabled = true
-      requester_pays_enabled             = false
-      selected_engine_version            = "AUTO"
-      state                              = "ENABLED"
-    }
-  }
-  ```
-
-#### `var.cloudformation_stacks`
-- **Type:** `map(object({...}))`
-- **Description:** Map of CloudFormation stacks to manage; each key is the stack identifier, and the value is a configuration object.
-- **Schema:**
-  - `name` (required, string) — CloudFormation stack name in AWS
-  - `disable_rollback` (optional, bool, default: `false`) — disable rollback on creation failure
-  - `enable_termination_protection` (optional, bool, default: `false`) — enable termination protection
-  - `notification_arns` (optional, list(string), default: `[]`) — SNS notification ARNs
-  - `tags` (optional, map(string), default: `{}`) — tags to apply to the stack
-- **Current value (from `environments/sg.tfvars`):**
-  ```hcl
-  cloudformation_stacks = {
+  aws_cloudformation_stacks = {
     stulyze_app = {
-      name                          = "stulyze-app"
-      disable_rollback              = false
-      enable_termination_protection = false
-      notification_arns             = []
-      tags                          = {}
+      name             = "stulyze-app"
+      disable_rollback = false
+      notification_arns = []
+      tags = {}
     }
   }
   ```
+- **Object fields:**
+  - `name` (required): Stack name
+  - `disable_rollback` (optional, default: `false`): Disable rollback on failure
+  - `notification_arns` (optional, default: `[]`): SNS notification ARNs
+  - `tags` (optional, default: `{}`): Resource tags
+
+#### `aws_athena_workgroups`
+- **Type:** `map(object({...}))`
+- **Description:** Map of Athena workgroups to manage
+- **Default:** `{}`
+- **Example:**
+  ```hcl
+  aws_athena_workgroups = {
+    primary = {
+      name                            = "primary"
+      description                     = ""
+      enforce_workgroup_configuration = false
+      publish_cloudwatch_metrics      = true
+      requester_pays_enabled          = false
+      selected_engine_version         = "AUTO"
+      tags = {}
+    }
+  }
+  ```
+- **Object fields:**
+  - `name` (required): Workgroup name
+  - `description` (optional, default: `""`): Description
+  - `enforce_workgroup_configuration` (optional, default: `true`): Enforce settings on clients
+  - `publish_cloudwatch_metrics` (optional, default: `true`): Publish CloudWatch metrics
+  - `requester_pays_enabled` (optional, default: `false`): Enable requester pays
+  - `selected_engine_version` (optional, default: `"AUTO"`): Engine version
+  - `tags` (optional, default: `{}`): Resource tags
 
 ### Sensitive Variables
-**None** — no sensitive credentials or secrets are required. All attribute values are supplied via `.tfvars` files or passed on the command line.
+
+**No sensitive variables are defined in this stack.** The discovered resources contained no credentials or secret values, so no `secrets.auto.tfvars` file is needed.
 
 ## 7. Infrastructure Graph
 
 ```
 root
-├── module.athena_workgroup["primary"]
-│   └── aws_athena_workgroup.this (primary)
-│       └── [outputs: id, arn]
+├── module.aws_cloudformation_stack["stulyze_app"]
+│   └── aws_cloudformation_stack.this
+│       │ name: "stulyze-app"
+│       │ outputs: { "StulyzeResourceTableName": "stulyze-app-StulyzeResourceTable-N5SV2SEDRNMG" }
+│       └── (manages CloudFormation stack with nested DynamoDB table)
 │
-└── module.cloudformation_stack["stulyze_app"]
-    └── aws_cloudformation_stack.this (stulyze-app)
-        ├── [outputs: id, outputs]
-        └── [managed CloudFormation resources: DynamoDB table]
+└── module.aws_athena_workgroup["primary"]
+    └── aws_athena_workgroup.this
+        │ name: "primary"
+        │ state: "ENABLED"
+        │ engine_version.selected_engine_version: "AUTO"
+        │ configuration.publish_cloudwatch_metrics_enabled: true
+        │ configuration.enforce_workgroup_configuration: false
+        │ configuration.requester_pays_enabled: false
+        └── (query workgroup for Athena analytics)
 ```
-
-**Dependency notes:**
-- No explicit dependencies between the two modules (both are independent)
-- The CloudFormation stack's internal resources (DynamoDB table) are managed by CloudFormation, not directly by Terraform
-- Both modules use `for_each` and are keyed by their map keys (`"primary"` and `"stulyze_app"`)
 
 ## 8. Notable Decisions & Caveats
 
-### CloudFormation Stack Template Management
+### Provider Limitation: CloudFormation Stack Termination Protection
+- The `enable_termination_protection` attribute is **not supported** in the installed AWS provider version (v6.52.0) for `aws_cloudformation_stack`.
+- It was discovered in the cloud resource but **intentionally omitted** from the Terraform code.
+- If termination protection needs to be managed, upgrade the provider or manage it via the AWS Console/CLI.
 
-The `aws_cloudformation_stack.this` resource includes the following lifecycle rule:
+### Computed Attributes Omitted
+- `aws_athena_workgroup` `state` field is a **computed attribute** managed by AWS (not configurable).
+- It is **omitted from the configuration** — the provider always sets `state = "ENABLED"` in code, but reads the actual state from AWS.
 
-```hcl
-lifecycle {
-  ignore_changes = [
-    template_body,
-    template_url,
-    parameters,
-    capabilities,
-    policy_body,
-    policy_url,
-  ]
-}
-```
+### Empty Defaults Omitted from Variables File
+- `description = ""` (empty string) and `tags = {}` (empty map) are default values defined in the module.
+- They are **not explicitly set in `sg.tfvars`** to keep the file concise.
+- They can be overridden in `.tfvars` files if needed.
 
-**Rationale:** The `stulyze-app` CloudFormation stack was originally deployed via AWS CLI with `sam package` and `cloudformation deploy` (external tooling). The template and parameters are managed outside Terraform and must not be overwritten during Terraform plan/apply cycles. This `ignore_changes` directive ensures that:
-- Manual stack updates via the AWS Console or CLI do not trigger Terraform changes
-- Terraform focuses only on the stack's existence and lifecycle (name, tags, termination protection, notifications)
-- The stack's template and resources remain under external (non-Terraform) management
+### No Lifecycle Ignore Changes
+- Neither resource type requires `lifecycle { ignore_changes }` blocks.
+- All attributes are either user-configurable (in `.tfvars`) or computed (managed by AWS).
 
-**Implication:** If you need to update the CloudFormation template, do so via AWS CLI or Console; do not edit Terraform configuration to change `template_body` or `template_url`.
+### Reconciliation Status
+- **First import: Clean** — No changes needed after import.
+- **Final plan result:** 0 to add, 0 to change, 0 to destroy.
+- All resources are now tracked in Terraform state and match the cloud configuration.
 
-### Skipped Terraform Attributes
-
-The following CloudFormation stack attributes are **not** managed by Terraform and are omitted from the HCL:
-- `enable_termination_protection` — not a settable parameter in the discovered resource attributes; the variable exists for future use
-- Stack outputs — derived from the CloudFormation template and automatically available in state; no manual input required
-
-### Athena Workgroup Configuration
-
-The `primary` workgroup is configured with:
-- Engine version set to `AUTO` (use latest compatible version)
-- `enforce_workgroup_configuration = false` — allows per-query overrides
-- `publish_cloudwatch_metrics_enabled = true` — metrics sent to CloudWatch for monitoring
-- No output location or encryption configured (uses defaults)
-
-These settings match the discovered live configuration exactly.
-
-### Remaining Drift
-
-**None.** The final reconciliation showed **0 to add, 0 to change, 0 to destroy**. The Terraform state precisely matches the live infrastructure.
-
-### Module Naming Conventions
-
-- Module keys use snake_case: `primary`, `stulyze_app`
-- Terraform resource addresses follow the pattern: `module.<module_name>[<key>].<resource_type>.this`
-- Variable names use snake_case: `athena_workgroups`, `cloudformation_stacks`
+### Region Pinned to ap-southeast-1
+- The AWS provider is configured for the `ap-southeast-1` region only (see `providers.tf`).
+- All resources are created and managed in this region.
+- To manage resources in other regions, modify `providers.tf` or create a provider alias.

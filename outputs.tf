@@ -1,1 +1,2 @@
-# No singleton/scalar passthroughs needed for these for_each modules.
+# No root-level outputs required for this stack.
+# Child module outputs are available internally.
