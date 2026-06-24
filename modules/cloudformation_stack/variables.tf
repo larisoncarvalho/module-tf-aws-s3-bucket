@@ -9,8 +9,14 @@ variable "disable_rollback" {
   default     = false
 }
 
+variable "enable_termination_protection" {
+  description = "Whether termination protection is enabled"
+  type        = bool
+  default     = false
+}
+
 variable "notification_arns" {
-  description = "List of SNS topic ARNs for stack notifications"
+  description = "List of SNS notification ARNs"
   type        = list(string)
   default     = []
 }

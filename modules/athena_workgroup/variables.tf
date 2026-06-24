@@ -4,7 +4,7 @@ variable "name" {
 }
 
 variable "description" {
-  description = "Description of the Athena workgroup"
+  description = "Description of the workgroup"
   type        = string
   default     = ""
 }
@@ -27,8 +27,14 @@ variable "requester_pays_enabled" {
   default     = false
 }
 
-variable "tags" {
-  description = "Tags to apply to the workgroup"
-  type        = map(string)
-  default     = {}
+variable "selected_engine_version" {
+  description = "Selected engine version"
+  type        = string
+  default     = "AUTO"
+}
+
+variable "state" {
+  description = "State of the workgroup"
+  type        = string
+  default     = "ENABLED"
 }

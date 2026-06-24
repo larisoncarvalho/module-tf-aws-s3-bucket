@@ -1,2 +1,1 @@
-# Root outputs - singleton/scalar passthroughs only.
-# No for_each enumeration to avoid stale-null trap.
+# No singleton/scalar passthroughs needed for these for_each modules.

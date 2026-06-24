@@ -4,6 +4,6 @@ output "id" {
 }
 
 output "outputs" {
-  description = "The outputs of the CloudFormation stack"
+  description = "Map of outputs from the CloudFormation stack"
   value       = aws_cloudformation_stack.this.outputs
 }
