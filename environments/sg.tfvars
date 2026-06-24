@@ -1,16 +1,19 @@
-aws_cloudformation_stacks = {
+cloudformation_stacks = {
   stulyze_app = {
-    name             = "stulyze-app"
-    disable_rollback = false
+    name              = "stulyze-app"
+    disable_rollback  = false
+    notification_arns = []
+    tags              = {}
   }
 }
 
-aws_athena_workgroups = {
+athena_workgroups = {
   primary = {
-    name                            = "primary"
-    enforce_workgroup_configuration = false
-    publish_cloudwatch_metrics      = true
-    requester_pays_enabled          = false
-    selected_engine_version         = "AUTO"
+    name                               = "primary"
+    description                        = ""
+    state                              = "ENABLED"
+    enforce_workgroup_configuration    = false
+    publish_cloudwatch_metrics_enabled = true
+    tags                               = {}
   }
 }

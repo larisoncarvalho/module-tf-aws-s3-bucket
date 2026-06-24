@@ -1,28 +1,22 @@
 variable "name" {
-  description = "Name of the CloudFormation stack"
+  description = "Name of the CloudFormation stack."
   type        = string
 }
 
 variable "disable_rollback" {
-  description = "Whether to disable rollback on stack creation failure"
-  type        = bool
-  default     = false
-}
-
-variable "enable_termination_protection" {
-  description = "Whether termination protection is enabled"
+  description = "Whether to disable rollback on stack creation failure."
   type        = bool
   default     = false
 }
 
 variable "notification_arns" {
-  description = "List of SNS notification ARNs"
+  description = "List of SNS topic ARNs for stack notifications."
   type        = list(string)
   default     = []
 }
 
 variable "tags" {
-  description = "Tags to apply to the stack"
+  description = "Tags to apply to the CloudFormation stack."
   type        = map(string)
   default     = {}
 }

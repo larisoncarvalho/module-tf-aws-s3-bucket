@@ -1,9 +1,9 @@
 output "id" {
-  description = "The name of the workgroup (used as the ID)"
+  description = "The name of the Athena workgroup (used as ID)."
   value       = aws_athena_workgroup.this.id
 }
 
-output "arn" {
-  description = "ARN of the workgroup"
-  value       = aws_athena_workgroup.this.arn
+output "name" {
+  description = "The name of the Athena workgroup."
+  value       = aws_athena_workgroup.this.name
 }
