@@ -1,10 +1,21 @@
-module "athena_workgroup" {
-  source = "./modules/athena_workgroup"
+module "cloudformation_stack" {
+  source   = "./modules/cloudformation_stack"
+  for_each = var.cloudformation_stacks
 
-  name                               = var.name
-  state                              = var.state
-  enforce_workgroup_configuration    = var.enforce_workgroup_configuration
-  publish_cloudwatch_metrics_enabled = var.publish_cloudwatch_metrics_enabled
-  requester_pays_enabled             = var.requester_pays_enabled
-  selected_engine_version            = var.selected_engine_version
+  name              = each.value.name
+  disable_rollback  = each.value.disable_rollback
+  notification_arns = each.value.notification_arns
+  tags              = each.value.tags
+}
+
+module "athena_workgroup" {
+  source   = "./modules/athena_workgroup"
+  for_each = var.athena_workgroups
+
+  name                               = each.value.name
+  description                        = each.value.description
+  enforce_workgroup_configuration    = each.value.enforce_workgroup_configuration
+  publish_cloudwatch_metrics_enabled = each.value.publish_cloudwatch_metrics_enabled
+  requester_pays_enabled             = each.value.requester_pays_enabled
+  tags                               = each.value.tags
 }
