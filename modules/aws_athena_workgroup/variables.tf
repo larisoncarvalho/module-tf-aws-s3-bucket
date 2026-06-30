@@ -9,38 +9,32 @@ variable "description" {
   default     = ""
 }
 
-variable "state" {
-  description = "State of the workgroup (ENABLED or DISABLED)"
-  type        = string
-  default     = "ENABLED"
-}
-
 variable "enforce_workgroup_configuration" {
-  description = "Whether to enforce workgroup configuration for all queries"
+  description = "Whether to enforce the workgroup configuration on clients"
   type        = bool
   default     = true
 }
 
-variable "publish_cloudwatch_metrics_enabled" {
+variable "publish_cloudwatch_metrics" {
   description = "Whether to publish CloudWatch metrics for the workgroup"
   type        = bool
   default     = true
 }
 
 variable "requester_pays_enabled" {
-  description = "Whether requester pays for cross-account query access"
+  description = "Whether requester pays is enabled for the workgroup"
   type        = bool
   default     = false
 }
 
 variable "selected_engine_version" {
-  description = "Athena engine version selected for the workgroup"
+  description = "The engine version for Athena queries"
   type        = string
   default     = "AUTO"
 }
 
 variable "tags" {
-  description = "Tags to assign to the workgroup"
+  description = "Tags to apply to the workgroup"
   type        = map(string)
   default     = {}
 }
