@@ -1,4 +1,3 @@
-# CloudFormation Stacks
 module "cloudformation_stack" {
   source   = "./modules/cloudformation_stack"
   for_each = var.cloudformation_stacks
@@ -9,7 +8,6 @@ module "cloudformation_stack" {
   tags              = each.value.tags
 }
 
-# Athena Workgroups
 module "athena_workgroup" {
   source   = "./modules/athena_workgroup"
   for_each = var.athena_workgroups

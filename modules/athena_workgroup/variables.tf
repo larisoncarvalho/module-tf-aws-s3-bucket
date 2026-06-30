@@ -4,57 +4,9 @@ variable "name" {
 }
 
 variable "description" {
-  description = "Description of the Athena workgroup"
+  description = "Description of the workgroup"
   type        = string
   default     = ""
-}
-
-variable "enforce_workgroup_configuration" {
-  description = "Whether to enforce the workgroup configuration"
-  type        = bool
-  default     = true
-}
-
-variable "publish_cloudwatch_metrics_enabled" {
-  description = "Whether to publish CloudWatch metrics for queries in the workgroup"
-  type        = bool
-  default     = true
-}
-
-variable "requester_pays_enabled" {
-  description = "Whether requester pays for cross-account queries"
-  type        = bool
-  default     = false
-}
-
-variable "bytes_scanned_cutoff_per_query" {
-  description = "Integer for the upper data usage limit (cutoff) per query in bytes"
-  type        = number
-  default     = null
-}
-
-variable "output_location" {
-  description = "S3 bucket URL output location for query results"
-  type        = string
-  default     = null
-}
-
-variable "encryption_option" {
-  description = "Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used"
-  type        = string
-  default     = null
-}
-
-variable "kms_key" {
-  description = "For SSE-KMS and CSE-KMS, the KMS key ARN"
-  type        = string
-  default     = null
-}
-
-variable "selected_engine_version" {
-  description = "The engine version requested by the user"
-  type        = string
-  default     = "AUTO"
 }
 
 variable "state" {
@@ -63,8 +15,32 @@ variable "state" {
   default     = "ENABLED"
 }
 
+variable "enforce_workgroup_configuration" {
+  description = "Whether to enforce workgroup configuration for all queries"
+  type        = bool
+  default     = true
+}
+
+variable "publish_cloudwatch_metrics_enabled" {
+  description = "Whether to publish CloudWatch metrics for the workgroup"
+  type        = bool
+  default     = true
+}
+
+variable "requester_pays_enabled" {
+  description = "Whether requester pays for cross-account query access"
+  type        = bool
+  default     = false
+}
+
+variable "selected_engine_version" {
+  description = "Athena engine version selected for the workgroup"
+  type        = string
+  default     = "AUTO"
+}
+
 variable "tags" {
-  description = "Tags to apply to the workgroup"
+  description = "Tags to assign to the workgroup"
   type        = map(string)
   default     = {}
 }

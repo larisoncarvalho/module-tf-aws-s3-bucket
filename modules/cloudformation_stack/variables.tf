@@ -4,7 +4,7 @@ variable "name" {
 }
 
 variable "disable_rollback" {
-  description = "Disable rollback on stack creation failure"
+  description = "Whether to disable rollback on stack creation failure"
   type        = bool
   default     = false
 }
@@ -16,7 +16,7 @@ variable "notification_arns" {
 }
 
 variable "tags" {
-  description = "Tags to apply to the stack"
+  description = "Tags to assign to the stack"
   type        = map(string)
   default     = {}
 }

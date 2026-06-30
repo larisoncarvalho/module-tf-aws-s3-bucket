@@ -6,12 +6,10 @@ resource "aws_cloudformation_stack" "this" {
 
   lifecycle {
     ignore_changes = [
-      # template_body and parameters are write-only / managed externally
+      # Template body and parameters are managed outside of Terraform (deployed via CLI)
       template_body,
       template_url,
       parameters,
-      capabilities,
-      on_failure,
     ]
   }
 }

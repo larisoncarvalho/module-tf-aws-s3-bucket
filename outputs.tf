@@ -1,2 +1,2 @@
 # Root outputs — singleton/scalar passthroughs only.
-# Per-instance outputs for for_each module calls are omitted to avoid stale-null trap.
+# No for_each enumeration outputs to avoid stale-null trap.

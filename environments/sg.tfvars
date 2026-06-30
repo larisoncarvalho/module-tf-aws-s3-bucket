@@ -1,8 +1,7 @@
 cloudformation_stacks = {
   stulyze_app = {
-    name              = "stulyze-app"
-    disable_rollback  = false
-    notification_arns = []
+    name             = "stulyze-app"
+    disable_rollback = false
   }
 }
 
