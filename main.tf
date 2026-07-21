@@ -1,10 +1,13 @@
-module "athena_workgroup" {
-  source = "./modules/athena_workgroup"
+module "glue_catalog_table" {
+  source   = "./modules/glue_catalog_table"
+  for_each = var.glue_catalog_tables
 
-  name                               = var.name
-  state                              = var.state
-  enforce_workgroup_configuration    = var.enforce_workgroup_configuration
-  publish_cloudwatch_metrics_enabled = var.publish_cloudwatch_metrics_enabled
-  requester_pays_enabled             = var.requester_pays_enabled
-  selected_engine_version            = var.selected_engine_version
+  catalog_id    = each.value.catalog_id
+  database_name = each.value.database_name
+  name          = each.value.name
+  owner         = each.value.owner
+  table_type    = each.value.table_type
+  parameters    = each.value.parameters
+
+  storage_descriptor = each.value.storage_descriptor
 }

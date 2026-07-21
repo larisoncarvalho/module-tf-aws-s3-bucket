@@ -1,34 +1,44 @@
-variable "region" {
-  type        = string
-  description = "AWS region where resources will be managed"
-}
+variable "glue_catalog_tables" {
+  description = "Map of Glue Catalog Table configurations"
+  type = map(object({
+    catalog_id    = optional(string, null)
+    database_name = string
+    name          = string
+    owner         = optional(string, null)
+    table_type    = optional(string, null)
+    parameters    = optional(map(string), {})
 
-variable "name" {
-  type        = string
-  description = "Name of the Athena workgroup"
-}
+    storage_descriptor = optional(object({
+      location                  = optional(string, null)
+      input_format              = optional(string, null)
+      output_format             = optional(string, null)
+      compressed                = optional(bool, false)
+      number_of_buckets         = optional(number, -1)
+      stored_as_sub_directories = optional(bool, false)
 
-variable "state" {
-  type        = string
-  description = "State of the workgroup. Valid values are DISABLED or ENABLED"
-}
+      columns = optional(list(object({
+        name = string
+        type = optional(string, null)
+      })), [])
 
-variable "enforce_workgroup_configuration" {
-  type        = bool
-  description = "Whether the settings for the workgroup override client-side settings"
-}
+      ser_de_info = optional(object({
+        name                  = optional(string, null)
+        serialization_library = optional(string, null)
+        parameters            = optional(map(string), {})
+      }), null)
 
-variable "publish_cloudwatch_metrics_enabled" {
-  type        = bool
-  description = "Whether Amazon CloudWatch metrics are enabled for the workgroup"
-}
+      skewed_info = optional(object({
+        skewed_column_names               = optional(list(string), [])
+        skewed_column_value_location_maps = optional(map(string), {})
+        skewed_column_values              = optional(list(string), [])
+      }), null)
 
-variable "requester_pays_enabled" {
-  type        = bool
-  description = "Whether members can reference Amazon S3 Requester Pays buckets in queries"
-}
-
-variable "selected_engine_version" {
-  type        = string
-  description = "Requested engine version for the workgroup"
+      sort_columns = optional(list(object({
+        column     = string
+        sort_order = number
+      })), [])
+      bucket_columns = optional(list(string), [])
+    }), null)
+  }))
+  default = {}
 }
