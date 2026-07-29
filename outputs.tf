@@ -1,9 +1,1 @@
-output "athena_workgroup_arn" {
-  description = "ARN of the primary Athena workgroup"
-  value       = module.athena_workgroup.arn
-}
-
-output "athena_workgroup_id" {
-  description = "ID (name) of the primary Athena workgroup"
-  value       = module.athena_workgroup.id
-}
+# No singleton outputs exposed — for_each module map outputs omitted to avoid stale-null trap.
