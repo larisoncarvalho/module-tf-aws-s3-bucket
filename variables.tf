@@ -1,34 +1,38 @@
-variable "region" {
-  type        = string
-  description = "AWS region where resources will be managed"
-}
+variable "glue_catalog_tables" {
+  type = map(object({
+    catalog_id    = string
+    database_name = string
+    name          = string
+    table_type    = optional(string, "")
+    owner         = optional(string, null)
+    retention     = optional(number, 0)
+    partition_keys = optional(list(object({
+      name    = string
+      type    = optional(string, "")
+      comment = optional(string, null)
+    })), [])
+    parameters = optional(map(string), {})
 
-variable "name" {
-  type        = string
-  description = "Name of the Athena workgroup"
-}
+    storage_location          = string
+    input_format              = optional(string, null)
+    output_format             = optional(string, null)
+    compressed                = optional(bool, false)
+    number_of_buckets         = optional(number, -1)
+    stored_as_sub_directories = optional(bool, false)
+    columns = optional(list(object({
+      name    = string
+      type    = optional(string, "")
+      comment = optional(string, null)
+    })), [])
 
-variable "state" {
-  type        = string
-  description = "State of the workgroup. Valid values are DISABLED or ENABLED"
-}
-
-variable "enforce_workgroup_configuration" {
-  type        = bool
-  description = "Whether the settings for the workgroup override client-side settings"
-}
-
-variable "publish_cloudwatch_metrics_enabled" {
-  type        = bool
-  description = "Whether Amazon CloudWatch metrics are enabled for the workgroup"
-}
-
-variable "requester_pays_enabled" {
-  type        = bool
-  description = "Whether members can reference Amazon S3 Requester Pays buckets in queries"
-}
-
-variable "selected_engine_version" {
-  type        = string
-  description = "Requested engine version for the workgroup"
+    serde_name                        = optional(string, null)
+    serde_serialization_library       = optional(string, null)
+    serde_parameters                  = optional(map(string), {})
+    bucket_columns                    = optional(list(string), [])
+    sort_columns                      = optional(list(any), [])
+    skewed_column_names               = optional(list(string), [])
+    skewed_column_value_location_maps = optional(map(string), {})
+    skewed_column_values              = optional(list(string), [])
+  }))
+  default = {}
 }
