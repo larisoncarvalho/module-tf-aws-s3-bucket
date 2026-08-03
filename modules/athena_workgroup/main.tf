@@ -1,6 +1,7 @@
 resource "aws_athena_workgroup" "this" {
-  name  = var.name
-  state = var.state
+  name        = var.name
+  description = var.description
+  state       = var.state
 
   configuration {
     enforce_workgroup_configuration    = var.enforce_workgroup_configuration
@@ -11,4 +12,6 @@ resource "aws_athena_workgroup" "this" {
       selected_engine_version = var.selected_engine_version
     }
   }
+
+  tags = var.tags
 }
