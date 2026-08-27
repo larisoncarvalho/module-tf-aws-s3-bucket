@@ -2,7 +2,7 @@ module "instance" {
   source   = "./modules/instance"
   for_each = var.instances
 
-  ami_id                      = each.value.ami_id
+  ami_id                      = each.value.ami_idis
   instance_type               = each.value.instance_type
   key_name                    = each.value.key_name
   subnet_id                   = each.value.subnet_id
