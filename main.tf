@@ -1,10 +1,10 @@
-module "athena_workgroup" {
-  source = "./modules/athena_workgroup"
+module "role_assignment" {
+  source   = "./modules/role_assignment"
+  for_each = var.role_assignments
 
-  name                               = var.name
-  state                              = var.state
-  enforce_workgroup_configuration    = var.enforce_workgroup_configuration
-  publish_cloudwatch_metrics_enabled = var.publish_cloudwatch_metrics_enabled
-  requester_pays_enabled             = var.requester_pays_enabled
-  selected_engine_version            = var.selected_engine_version
+  scope              = each.value.scope
+  role_definition_id = each.value.role_definition_id
+  principal_id       = each.value.principal_id
+  principal_type     = each.value.principal_type
+  name               = each.value.name
 }
