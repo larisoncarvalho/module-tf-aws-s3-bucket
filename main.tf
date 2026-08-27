@@ -1,10 +1,7 @@
-module "athena_workgroup" {
-  source = "./modules/athena_workgroup"
+module "internet_gateway" {
+  source   = "./modules/internet_gateway"
+  for_each = var.internet_gateways
 
-  name                               = var.name
-  state                              = var.state
-  enforce_workgroup_configuration    = var.enforce_workgroup_configuration
-  publish_cloudwatch_metrics_enabled = var.publish_cloudwatch_metrics_enabled
-  requester_pays_enabled             = var.requester_pays_enabled
-  selected_engine_version            = var.selected_engine_version
+  vpc_id = each.value.vpc_id
+  tags   = each.value.tags
 }
