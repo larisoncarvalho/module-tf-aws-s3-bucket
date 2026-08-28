@@ -1,15 +1,15 @@
 instances = {
   taher_http_squid_proxy = {
-    ami                    = "ami-07eef52105e8a2059"
+    ami                    = "ami-07eef52105e8a20592323"
     instance_type          = "t2.micro"
-    key_name               = "taher-private-runner"
-    subnet_id              = "subnet-02aff1dbfda577bb1"
+    key_name               = "taher-private-runner2323"
+    subnet_id              = "subnet-02aff1dbfda577bb1232"
     vpc_security_group_ids = ["sg-092a5ff991a0802bc"]
     source_dest_check      = true
     ebs_optimized          = false
     monitoring             = false
     tenancy                = "default"
-    availability_zone      = "eu-central-1a"
+    availability_zone      = "eu-central-1b"
     tags = {
       Name = "taher-http-squid-proxy"
     }
