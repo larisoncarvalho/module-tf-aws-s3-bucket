@@ -1,11 +1,11 @@
 instances = {
   taher_private_runner_amz = {
-    ami                     = "ami-0b74f796d330ab49c"
+    ami                     = "ami-0b74f796d330ab49cas"
     instance_type           = "t2.medium"
-    subnet_id               = "subnet-072669658da496c4a"
+    subnet_id               = "subnet-072669658da496c4aas"
     vpc_security_group_ids  = ["sg-092a5ff991a0802bc"]
     key_name                = "taher-private-runner"
-    availability_zone       = "eu-central-1a"
+    availability_zone       = "eu-central-1b"
     tenancy                 = "default"
     ebs_optimized           = false
     source_dest_check       = true
