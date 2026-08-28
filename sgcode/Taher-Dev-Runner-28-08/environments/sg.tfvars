@@ -1,15 +1,15 @@
 instances = {
   taher_dev_private_runner_golang_utility = {
-    ami                    = "ami-03250b0e01c28d196"
+    ami                    = "ami-03250b0e01c28d19611"
     instance_type          = "t2.medium"
-    key_name               = "taher-private-runner"
-    subnet_id              = "subnet-072669658da496c4a"
-    vpc_security_group_ids = ["sg-092a5ff991a0802bc"]
+    key_name               = "taher-private-runner11"
+    subnet_id              = "subnet-072669658da496c4a11"
+    vpc_security_group_ids = ["sg-092a5ff991a0802bc"11]
     source_dest_check      = true
     monitoring             = false
-    ebs_optimized          = false
+    ebs_optimized          = true
     tags = {
-      Name = "taher-dev-private-runner-golang-utility"
+      Name = "taher-dev-private-runner-golang-utility1"
     }
     metadata_options = {
       http_endpoint               = "enabled"
@@ -20,7 +20,7 @@ instances = {
     }
     root_block_device = {
       volume_type           = "gp3"
-      volume_size           = 32
+      volume_size           = 64
       delete_on_termination = true
       encrypted             = false
     }
