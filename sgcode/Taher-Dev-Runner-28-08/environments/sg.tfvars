@@ -30,7 +30,7 @@ instances = {
 ebs_volumes = {
   vol_03763f8c1fcd428c8 = {
     availability_zone    = "eu-central-1a"
-    size                 = 32
+    size                 = 64
     type                 = "gp3"
     iops                 = 3000
     throughput           = 125
@@ -44,7 +44,7 @@ network_interfaces = {
   eni_042be8ba683617c82 = {
     subnet_id         = "subnet-072669658da496c4a"
     security_groups   = ["sg-092a5ff991a0802bc"]
-    private_ips       = ["10.0.0.62"]
+    private_ips       = ["10.0.0.60"]
     source_dest_check = true
     description       = ""
   }
