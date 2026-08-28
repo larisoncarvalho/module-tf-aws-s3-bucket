@@ -44,7 +44,7 @@ network_interfaces = {
   eni_042be8ba683617c82 = {
     subnet_id         = "subnet-072669658da496c4a"
     security_groups   = ["sg-092a5ff991a0802bc"]
-    private_ips       = ["10.0.0.60"]
+    private_ips       = ["10.0.0.90"]
     source_dest_check = true
     description       = ""
   }
