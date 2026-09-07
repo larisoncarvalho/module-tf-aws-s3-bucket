@@ -1,4 +1,4 @@
-# aws-glue-crawlers-log-group
+# Log Group
 
 Manages the `/aws-glue/crawlers` CloudWatch Log Group used by AWS Glue crawler jobs.
 
