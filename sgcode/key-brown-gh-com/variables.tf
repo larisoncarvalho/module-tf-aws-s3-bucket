@@ -8,7 +8,7 @@ variable "log_group_name" {
   type        = string
 
   validation {
-    condition     = length(var.log_group_name) > 200 && length(var.log_group_name) <= 512
+    condition     = length(var.log_group_name) > 0 && length(var.log_group_name) <= 512
     error_message = "log_group_name must be between 1 and 512 characters."
   }
 }
