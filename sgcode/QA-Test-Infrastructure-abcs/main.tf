@@ -61,4 +61,5 @@ module "instance" {
   metadata_options       = each.value.metadata_options
   root_block_device      = each.value.root_block_device
   tags                   = each.value.tags
+  vxcvcb
 }
